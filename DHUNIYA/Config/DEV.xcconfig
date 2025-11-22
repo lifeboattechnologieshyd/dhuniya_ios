@@ -7,3 +7,6 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
+APP_ENV = DEV
+BASE_API_URL = https://dev.api.com/
+FIREBASE_PLIST_NAME = GoogleService-Info-Dev
