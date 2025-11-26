@@ -15,8 +15,19 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ComingSoon " translatesAutoresizingMaskIntoConstraints="NO" id="mSS-mI-hq6">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mSS-mI-hq6" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="3BD-If-hBk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mSS-mI-hq6" secondAttribute="trailing" id="dAk-yS-sCi"/>
+                            <constraint firstItem="mSS-mI-hq6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="oJ6-LY-pmg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="mSS-mI-hq6" secondAttribute="bottom" id="x7M-Xg-ahh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0n6-Uo-dq5"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -48,7 +59,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ET" width="20.003000259399414" height="20"/>
+        <image name="ComingSoon " width="957" height="1701"/>
+        <image name="ET" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

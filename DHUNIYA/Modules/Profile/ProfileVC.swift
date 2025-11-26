@@ -11,8 +11,11 @@ class ProfileVC: UIViewController {
     
     @IBOutlet weak var TblVw: UITableView!
     
-    let titles = ["My Dhuniya", "Settings & Preferences", "My Referrals", "Become a News Reporter", "Submit Videos", "Terms of Use"]
-    let images = ["my_dhuniya", "settings", "myreferrals", "newsreporter", "submitVideos", "terms"]
+    let titles = ["My Dhuniya", "Settings & Preferences", "My Referrals",
+                  "Become a News Reporter", "Terms of Use"]
+    
+    let images = ["my_dhuniya", "settings", "myreferrals",
+                  "newsreporter", "terms"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,98 +23,211 @@ class ProfileVC: UIViewController {
         TblVw.delegate = self
         TblVw.dataSource = self
         
-        TblVw.register(UINib(nibName: "ProfileSignUpCell", bundle: nil), forCellReuseIdentifier: "ProfileSignUpCell")
-        TblVw.register(UINib(nibName: "RefferAndEarnCell", bundle: nil), forCellReuseIdentifier: "RefferAndEarnCell")
-        TblVw.register(UINib(nibName: "ProfileListCell", bundle: nil), forCellReuseIdentifier: "ProfileListCell")
-        TblVw.register(UINib(nibName: "BottomHeaderListCell", bundle: nil), forCellReuseIdentifier: "BottomHeaderListCell")
-        TblVw.register(UINib(nibName: "LogoutCell", bundle: nil), forCellReuseIdentifier: "LogoutCell")
+        TblVw.register(UINib(nibName: "ProfileSignUpCell", bundle: nil),forCellReuseIdentifier: "ProfileSignUpCell")
+        TblVw.register(UINib(nibName: "RefferAndEarnCell", bundle: nil),forCellReuseIdentifier: "RefferAndEarnCell")
+        TblVw.register(UINib(nibName: "ProfileListCell", bundle: nil),forCellReuseIdentifier: "ProfileListCell")
+        TblVw.register(UINib(nibName: "BottomHeaderListCell", bundle: nil),forCellReuseIdentifier: "BottomHeaderListCell")
+        TblVw.register(UINib(nibName: "LogoutCell", bundle: nil),forCellReuseIdentifier: "LogoutCell")
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadProfile),
+            name: Notification.Name("profile_reload"),
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(openLoginFromProfile),
+            name: Notification.Name("open_login_from_profile"),
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleLogoutClicked),
+            name: Notification.Name("logout_clicked"),
+            object: nil
+        )
+    }
+    
+    
+    @objc func reloadProfile() {
+        TblVw.reloadData()
+    }
+    
+    @objc func openLoginFromProfile() {
+        showLoginPopup()
+    }
+    
+    @objc func handleLogoutClicked() {
+        if Session.shared.isUserLoggedIn {
+            showLogoutAlert()
+        }
+    }
+    
+    
+    func showLoginPopup() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
+            loginVC.modalPresentationStyle = .overFullScreen
+            loginVC.modalTransitionStyle = .crossDissolve
+            present(loginVC, animated: true)
+        }
     }
 }
 
 extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-       return 5
+        return 5
     }
-
+    
+    //  Logout row visible only when logged in
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-       if section == 2 {
-            return titles.count
-       }
-        return 1
+        
+        if section == 4 {
+            return Session.shared.isUserLoggedIn ? 1 : 0
+        }
+        
+        return section == 2 ? titles.count : 1
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+    
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         switch indexPath.section {
             
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSignUpCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "ProfileSignUpCell",
+                for: indexPath
+            ) as! ProfileSignUpCell
+            
+            cell.configure(
+                isLoggedIn: Session.shared.isUserLoggedIn,
+                userName: Session.shared.userName,
+                phone: Session.shared.mobileNumber
+            )
+            
             return cell
             
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath)
-            return cell
+            return tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath)
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileListCell", for: indexPath) as! ProfileListCell
-            
             cell.lblText.text = titles[indexPath.row]
             cell.imgVw.image = UIImage(named: images[indexPath.row])
-            
             return cell
             
         case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BottomHeaderListCell", for: indexPath)
-            return cell
+            return tableView.dequeueReusableCell(withIdentifier: "BottomHeaderListCell", for: indexPath)
             
         case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LogoutCell", for: indexPath)
-            return cell
+            return tableView.dequeueReusableCell(withIdentifier: "LogoutCell", for: indexPath)
             
         default:
             return UITableViewCell()
         }
     }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+    
+    //FIXED: Logout height = 0 when hidden
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         switch indexPath.section {
         case 0: return 214
         case 1: return 214
         case 2: return 70
         case 3: return 100
-        case 4: return 64
+        case 4: return Session.shared.isUserLoggedIn ? 64 : 0
         default: return UITableView.automaticDimension
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        
+        //  FIXED: Logout only when logged in
+        if indexPath.section == 4 {
+            if Session.shared.isUserLoggedIn {
+                showLogoutAlert()
+            }
+            return
+        }
         
         guard indexPath.section == 2 else { return }
         
+        // BEFORE LOGIN
+        if !Session.shared.isUserLoggedIn {
+            showLoginPopup()
+            return
+        }
+        
         let title = titles[indexPath.row]
+        
+        if title == "Settings & Preferences" {
+            navigateToSettings()
+            return
+        }
         
         if title == "My Referrals" {
             navigateToReferAndEarn()
+            return
         }
-        else if title == "Become a News Reporter" {
+        
+        if title == "Become a News Reporter" {
             navigateToBecomeReporter()
+            return
         }
     }
     
     
+    func navigateToSettings() {
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as? SettingsVC {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func navigateToReferAndEarn() {
         let storyboard = UIStoryboard(name: "Refer&Earn", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "ReferAndEarnVC") as? ReferAndEarnVC {
-            self.navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
     func navigateToBecomeReporter() {
         let storyboard = UIStoryboard(name: "BecomeNewsReporter", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "BecomeNewsReporterVC") as? BecomeNewsReporterVC {
-            self.navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
+    }
+}
+
+extension ProfileVC {
+    func showLogoutAlert() {
+        let alert = UIAlertController(
+            title: "Logout",
+            message: "Are you sure you want to logout?",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: { _ in
+            
+            Session.shared.isUserLoggedIn = false
+            Session.shared.mobileNumber = ""
+            Session.shared.userName = ""
+            
+            self.TblVw.reloadData()
+        }))
+        
+        present(alert, animated: true)
     }
 }

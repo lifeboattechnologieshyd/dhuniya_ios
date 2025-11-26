@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		88851E802ED1820C0084142F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 88851E7F2ED1820C0084142F /* Kingfisher */; };
+		88B8DA9C2ED6D2B900A795FB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 88B8DA9B2ED6D2B900A795FB /* Lottie */; };
 		88FCA63F2ED04F440062B716 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA63E2ED04F440062B716 /* FirebaseAnalytics */; };
 		88FCA6412ED04F440062B716 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA6402ED04F440062B716 /* FirebaseCore */; };
 		88FCA6432ED04F440062B716 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA6422ED04F440062B716 /* FirebaseCrashlytics */; };
@@ -48,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88851E802ED1820C0084142F /* Kingfisher in Frameworks */,
+				88B8DA9C2ED6D2B900A795FB /* Lottie in Frameworks */,
 				88FCA6432ED04F440062B716 /* FirebaseCrashlytics in Frameworks */,
 				88FCA6412ED04F440062B716 /* FirebaseCore in Frameworks */,
 				88FCA6472ED04F440062B716 /* FirebaseMessaging in Frameworks */,
@@ -104,6 +106,8 @@
 				88FCA6442ED04F440062B716 /* FirebaseInstallations */,
 				88FCA6462ED04F440062B716 /* FirebaseMessaging */,
 				88851E7F2ED1820C0084142F /* Kingfisher */,
+				88B8DA9B2ED6D2B900A795FB /* Lottie */,
+				88B8DA9D2ED6D2B900A795FB /* Lottie-Dynamic */,
 			);
 			productName = DHUNIYA;
 			productReference = 889F573D2ED03E1100201CA7 /* DHUNIYA.app */;
@@ -136,6 +140,7 @@
 			packageReferences = (
 				88FCA63D2ED04F440062B716 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				88851E7E2ED1820C0084142F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 889F573E2ED03E1100201CA7 /* Products */;
@@ -174,7 +179,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ \"${CONFIGURATION}\" = \"Release\" ] || [ \"${CONFIGURATION}\" = \"Release Dev\" ]; then\n  \"${BUILD_DIR}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#if [ \"${CONFIGURATION}\" = \"Release\" ] || [ \"${CONFIGURATION}\" = \"Release Dev\" ]; then\n #\"${BUILD_DIR}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n#fi\n";
 		};
 		88FCAA2A2ED0A94B0062B716 /* Firebase Config Script
  */ = {
@@ -221,12 +226,14 @@
 				DEVELOPMENT_TEAM = TXMHM3J3JT;
 				FIREBASE_PLIST_NAME = "GoogleService-Info-Prod";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "DHUNIYA/Info.plist\n";
+				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya ";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -251,12 +258,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TXMHM3J3JT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DHUNIYA/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Dhuniya;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -325,6 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -385,6 +395,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -450,6 +461,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -472,12 +484,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TXMHM3J3JT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DHUNIYA/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya Dev";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -540,6 +554,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -562,12 +577,14 @@
 				DEVELOPMENT_TEAM = TXMHM3J3JT;
 				FIREBASE_PLIST_NAME = "GoogleService-Info-Dev";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DHUNIYA/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya Dev";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -618,6 +635,14 @@
 				minimumVersion = 8.6.2;
 			};
 		};
+		88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
 		88FCA63D2ED04F440062B716 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -633,6 +658,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 88851E7E2ED1820C0084142F /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		88B8DA9B2ED6D2B900A795FB /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		88B8DA9D2ED6D2B900A795FB /* Lottie-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = "Lottie-Dynamic";
 		};
 		88FCA63E2ED04F440062B716 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -15,8 +15,19 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ComingSoon " translatesAutoresizingMaskIntoConstraints="NO" id="Kim-Hv-dXa">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Kim-Hv-dXa" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Pbb-TY-oEa"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Kim-Hv-dXa" secondAttribute="bottom" id="Q70-eV-vE3"/>
+                            <constraint firstItem="Kim-Hv-dXa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="UnU-Db-r3O"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Kim-Hv-dXa" secondAttribute="trailing" id="wkn-Sa-smC"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="Ofe-1r-gM2"/>
@@ -30,7 +41,7 @@
         <scene sceneID="Ykb-Ky-0aR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aJ1-2z-pU0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Dhuniya" image="MyDhuniya" id="YM6-ZT-1ad"/>
+                    <tabBarItem key="tabBarItem" title="My Dhuniya" image="mydhunia" id="YM6-ZT-1ad"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7yh-LI-iiX">
@@ -48,7 +59,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="MyDhuniya" width="19.999000549316406" height="19.99799919128418"/>
+        <image name="ComingSoon " width="957" height="1701"/>
+        <image name="mydhunia" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
