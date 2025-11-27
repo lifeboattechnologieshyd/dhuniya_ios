@@ -24,7 +24,14 @@ class EnterPasswordVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.definesPresentationContext = true
+        self.modalPresentationStyle = .overCurrentContext
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        self.view.isOpaque = false
+        
         bgView.layer.cornerRadius = 20
+        bgView.clipsToBounds = true
+        bgView.backgroundColor = .white
 
         if let num = mobileNumber {
             lblUsername.text = num
@@ -40,10 +47,8 @@ class EnterPasswordVC: UIViewController {
         dismiss(animated: true)
     }
     
-    // MARK: Forgot Password → Go to OTP
     @IBAction func btnForgotPasswordTapped(_ sender: UIButton) {
-        
-        goToOtpVC()
+        goToCreatePasswordVC()
     }
     
     
@@ -68,10 +73,28 @@ class EnterPasswordVC: UIViewController {
         if let otpVC = storyboard.instantiateViewController(withIdentifier: "OtpVC") as? OtpVC {
             
             otpVC.mobileNumber = mobileNumber
-            otpVC.modalPresentationStyle = .overFullScreen
+            
+            otpVC.modalPresentationStyle = .overCurrentContext
             otpVC.modalTransitionStyle = .crossDissolve
             
             self.present(otpVC, animated: true)
+        }
+    }
+    
+    
+    //Navigate to CreatePasswordVC
+    func goToCreatePasswordVC() {
+        
+        let storyboard = UIStoryboard(name: "CreatePassword", bundle: nil)
+        
+        if let createVC = storyboard.instantiateViewController(withIdentifier: "CreatePasswordVC") as? CreatePasswordVC {
+            
+            createVC.mobileNumber = mobileNumber
+            
+            createVC.modalPresentationStyle = .overCurrentContext
+            createVC.modalTransitionStyle = .crossDissolve
+            
+            self.present(createVC, animated: true)
         }
     }
     

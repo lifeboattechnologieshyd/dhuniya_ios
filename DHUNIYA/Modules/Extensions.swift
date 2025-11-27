@@ -147,6 +147,24 @@ class Session {
     }
 }
 
+    extension UIView {
 
-    
+        //  Add soft blur
+        func applyBlur(intensity: CGFloat = 0.25) {
+            removeBlur()  // avoid stacking blurs
+
+            let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = bounds
+            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            blurView.alpha = intensity   // adjust blur amount
+            blurView.tag = 999           // identifier for removing
+            addSubview(blurView)
+        }
+
+        // Remove blur
+        func removeBlur() {
+            viewWithTag(999)?.removeFromSuperview()
+        }
+    }
 

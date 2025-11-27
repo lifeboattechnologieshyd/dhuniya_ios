@@ -54,5 +54,14 @@ class RefferAndEarnCell: UITableViewCell {
             }
         }
     }
+    @IBAction func btnEditReferralCodeTapped(_ sender: UIButton) {
+        if let parentVC = self.parentViewController() {
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "EditReferalCodeVC") as? EditReferalCodeVC {
+                parentVC.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+
 
 }

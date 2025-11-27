@@ -26,20 +26,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6p-1R-ICS">
                                         <rect key="frame" x="35.666666666666671" y="10" width="40" height="40"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mail " translatesAutoresizingMaskIntoConstraints="NO" id="KBo-Vw-LZ3">
-                                                <rect key="frame" x="10" y="10" width="20" height="20"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="Tgc-0o-A8V"/>
-                                                    <constraint firstAttribute="width" constant="20" id="eeM-Ab-CDQ"/>
-                                                </constraints>
-                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFY-YV-f8h">
+                                                <rect key="frame" x="-3" y="3" width="46" height="34"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="mail "/>
+                                                <connections>
+                                                    <action selector="contactTapped:" destination="jWC-na-wdr" eventType="touchUpInside" id="66I-b7-vkA"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="DrN-Zn-9S4"/>
-                                            <constraint firstItem="KBo-Vw-LZ3" firstAttribute="centerX" secondItem="x6p-1R-ICS" secondAttribute="centerX" id="OH4-lZ-dRB"/>
                                             <constraint firstAttribute="height" constant="40" id="dCN-gW-l1w"/>
-                                            <constraint firstItem="KBo-Vw-LZ3" firstAttribute="centerY" secondItem="x6p-1R-ICS" secondAttribute="centerY" id="hNh-kc-oUd"/>
+                                            <constraint firstItem="cFY-YV-f8h" firstAttribute="centerX" secondItem="x6p-1R-ICS" secondAttribute="centerX" id="vCU-iZ-I7U"/>
+                                            <constraint firstItem="cFY-YV-f8h" firstAttribute="centerY" secondItem="x6p-1R-ICS" secondAttribute="centerY" id="zd9-af-eMm"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -76,19 +77,20 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-mh-96W">
                                         <rect key="frame" x="35.666666666666657" y="10" width="40" height="40"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shareApp" translatesAutoresizingMaskIntoConstraints="NO" id="xnp-4X-0Md">
-                                                <rect key="frame" x="10" y="10" width="20" height="20"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="ju1-iJ-23p"/>
-                                                    <constraint firstAttribute="width" constant="20" id="sUF-pL-MK9"/>
-                                                </constraints>
-                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPN-qu-yRv">
+                                                <rect key="frame" x="0.33333333333334281" y="3.6666666666666679" width="39.333333333333336" height="33"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="shareApp"/>
+                                                <connections>
+                                                    <action selector="shareTapped:" destination="jWC-na-wdr" eventType="touchUpInside" id="MM0-zd-nhB"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="xnp-4X-0Md" firstAttribute="centerY" secondItem="gQc-mh-96W" secondAttribute="centerY" id="19n-WZ-GZW"/>
+                                            <constraint firstItem="CPN-qu-yRv" firstAttribute="centerX" secondItem="gQc-mh-96W" secondAttribute="centerX" id="1Mm-lI-fWV"/>
                                             <constraint firstAttribute="height" constant="40" id="jsG-QX-b3k"/>
-                                            <constraint firstItem="xnp-4X-0Md" firstAttribute="centerX" secondItem="gQc-mh-96W" secondAttribute="centerX" id="sha-pj-K9H"/>
+                                            <constraint firstItem="CPN-qu-yRv" firstAttribute="centerY" secondItem="gQc-mh-96W" secondAttribute="centerY" id="sKV-qR-XWj"/>
                                             <constraint firstAttribute="width" constant="40" id="syM-K8-Guh"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -126,20 +128,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-iu-Byn">
                                         <rect key="frame" x="35.666666666666686" y="10" width="40" height="40"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rateus" translatesAutoresizingMaskIntoConstraints="NO" id="1iX-lN-6aT">
-                                                <rect key="frame" x="10" y="10" width="20" height="20"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="194-nw-QjZ"/>
-                                                    <constraint firstAttribute="height" constant="20" id="eHD-p9-tdj"/>
-                                                </constraints>
-                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yco-WA-eg5">
+                                                <rect key="frame" x="0.66666666666662877" y="6.3333333333333304" width="38.333333333333336" height="27.666666666666671"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="rateus"/>
+                                                <connections>
+                                                    <action selector="rateTapped:" destination="jWC-na-wdr" eventType="touchUpInside" id="gCm-7L-OjM"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="2C7-i0-uwI"/>
                                             <constraint firstAttribute="height" constant="40" id="9vo-ND-6tb"/>
-                                            <constraint firstItem="1iX-lN-6aT" firstAttribute="centerX" secondItem="fvh-iu-Byn" secondAttribute="centerX" id="Ita-MB-LkG"/>
-                                            <constraint firstItem="1iX-lN-6aT" firstAttribute="centerY" secondItem="fvh-iu-Byn" secondAttribute="centerY" id="nfr-hI-66Q"/>
+                                            <constraint firstItem="yco-WA-eg5" firstAttribute="centerY" secondItem="fvh-iu-Byn" secondAttribute="centerY" id="aod-qu-Lf4"/>
+                                            <constraint firstItem="yco-WA-eg5" firstAttribute="centerX" secondItem="fvh-iu-Byn" secondAttribute="centerX" id="lv0-0E-nYp"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -171,7 +174,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QYm-70-trW" firstAttribute="width" secondItem="0Ak-Bh-fpP" secondAttribute="width" id="9Gq-HC-myN"/>
                             <constraint firstItem="QYm-70-trW" firstAttribute="height" secondItem="0Ak-Bh-fpP" secondAttribute="height" id="JDM-pI-piY"/>
@@ -193,6 +196,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
+                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="gZk-Re-d8F" firstAttribute="leading" secondItem="Ja7-4f-5pk" secondAttribute="leading" constant="16" id="7DE-UW-QIV"/>
                     <constraint firstItem="gZk-Re-d8F" firstAttribute="top" secondItem="Ja7-4f-5pk" secondAttribute="top" constant="6" id="ObO-AH-P00"/>
@@ -202,11 +206,17 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="NtC-Mc-8r7"/>
             <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+            <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                     <real key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="contactBtn" destination="cFY-YV-f8h" id="SKc-KH-avt"/>
+                <outlet property="rateusBtn" destination="yco-WA-eg5" id="wde-Q6-l2p"/>
+                <outlet property="shareBtn" destination="CPN-qu-yRv" id="6qX-4w-SsH"/>
+            </connections>
             <point key="canvasLocation" x="209.92366412213741" y="36.619718309859159"/>
         </tableViewCell>
     </objects>

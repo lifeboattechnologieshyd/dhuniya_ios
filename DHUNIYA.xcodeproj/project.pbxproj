@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		88851E802ED1820C0084142F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 88851E7F2ED1820C0084142F /* Kingfisher */; };
+		8893B6932ED82B7200F50211 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8893B6922ED82B7200F50211 /* IQKeyboardManagerSwift */; };
 		88B8DA9C2ED6D2B900A795FB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 88B8DA9B2ED6D2B900A795FB /* Lottie */; };
 		88FCA63F2ED04F440062B716 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA63E2ED04F440062B716 /* FirebaseAnalytics */; };
 		88FCA6412ED04F440062B716 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA6402ED04F440062B716 /* FirebaseCore */; };
@@ -15,6 +16,19 @@
 		88FCA6452ED04F440062B716 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA6442ED04F440062B716 /* FirebaseInstallations */; };
 		88FCA6472ED04F440062B716 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA6462ED04F440062B716 /* FirebaseMessaging */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		88DA9A7D2ED84AB50072C3CB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		889F573D2ED03E1100201CA7 /* DHUNIYA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DHUNIYA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88851E802ED1820C0084142F /* Kingfisher in Frameworks */,
+				8893B6932ED82B7200F50211 /* IQKeyboardManagerSwift in Frameworks */,
 				88B8DA9C2ED6D2B900A795FB /* Lottie in Frameworks */,
 				88FCA6432ED04F440062B716 /* FirebaseCrashlytics in Frameworks */,
 				88FCA6412ED04F440062B716 /* FirebaseCore in Frameworks */,
@@ -90,6 +105,7 @@
 				889F573B2ED03E1100201CA7 /* Resources */,
 				88FCAA2A2ED0A94B0062B716 /* Firebase Config Script
  */,
+				88DA9A7D2ED84AB50072C3CB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -107,7 +123,7 @@
 				88FCA6462ED04F440062B716 /* FirebaseMessaging */,
 				88851E7F2ED1820C0084142F /* Kingfisher */,
 				88B8DA9B2ED6D2B900A795FB /* Lottie */,
-				88B8DA9D2ED6D2B900A795FB /* Lottie-Dynamic */,
+				8893B6922ED82B7200F50211 /* IQKeyboardManagerSwift */,
 			);
 			productName = DHUNIYA;
 			productReference = 889F573D2ED03E1100201CA7 /* DHUNIYA.app */;
@@ -141,6 +157,7 @@
 				88FCA63D2ED04F440062B716 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				88851E7E2ED1820C0084142F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				8893B6912ED82B7200F50211 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 889F573E2ED03E1100201CA7 /* Products */;
@@ -635,6 +652,14 @@
 				minimumVersion = 8.6.2;
 			};
 		};
+		8893B6912ED82B7200F50211 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.1;
+			};
+		};
 		88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -659,15 +684,15 @@
 			package = 88851E7E2ED1820C0084142F /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
+		8893B6922ED82B7200F50211 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8893B6912ED82B7200F50211 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		88B8DA9B2ED6D2B900A795FB /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		88B8DA9D2ED6D2B900A795FB /* Lottie-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = "Lottie-Dynamic";
 		};
 		88FCA63E2ED04F440062B716 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

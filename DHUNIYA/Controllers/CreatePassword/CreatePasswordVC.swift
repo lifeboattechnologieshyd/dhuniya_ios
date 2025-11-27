@@ -6,14 +6,18 @@
 //
 
 import UIKit
+
 class CreatePasswordVC: UIViewController {
     
+    var mobileNumber: String?
+
     @IBOutlet weak var passwordRulesLbl: UILabel!
     @IBOutlet weak var passwordMismatchLbl: UILabel!
     @IBOutlet weak var proceedButton: UIButton!
     @IBOutlet weak var alphabetLbl: UILabel!
     @IBOutlet weak var charactercheckImage: UIImageView!
     @IBOutlet weak var charactersLbl: UILabel!
+    @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var passwordRulesView: UIView!
     @IBOutlet weak var numberLbl: UILabel!
     @IBOutlet weak var alphabetcheckImage: UIImageView!
@@ -31,7 +35,28 @@ class CreatePasswordVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+    }
+
+    @IBAction func proceedButtonTapped(_ sender: UIButton) {
+        goToOtpVC()
+    }
+
+    func goToOtpVC() {
+        let storyboard = UIStoryboard(name: "OTP", bundle: nil)
+
+        if let otpVC = storyboard.instantiateViewController(withIdentifier: "OtpVC") as? OtpVC {
+            
+            otpVC.mobileNumber = mobileNumber    // pass mobile
+            
+            otpVC.modalPresentationStyle = .overCurrentContext
+            otpVC.modalTransitionStyle = .crossDissolve
+            
+            self.present(otpVC, animated: true)
+        }
+    }
+    @IBAction func goBackTapped(_ sender: UIButton) {
+        dismiss(animated: true)
     }
 }
+
+

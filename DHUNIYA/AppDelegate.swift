@@ -4,12 +4,14 @@
 //
 //  Created by Lifeboat on 21/11/25.
 //
-
 import UIKit
 import FirebaseCore
 import FirebaseMessaging
 import FirebaseCrashlytics
 import UserNotifications
+import IQKeyboardManagerSwift
+import Kingfisher
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,8 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UNUserNotificationCenter.current().delegate = self
         Messaging.messaging().delegate = self
+        
+        // Enable IQKeyboardManager
+        IQKeyboardManager.shared.isEnabled = true
+        IQKeyboardManager.shared.resignOnTouchOutside = true
 
-     
+        // IQKeyboardToolbarManager does not exist in IQKeyboardManagerSwift 8.0.1
+        // IQKeyboardToolbarManager.shared.isEnabled = true // <-- Remove or comment out to fix compile error
+        
         return true
     }
 
@@ -64,4 +72,3 @@ extension AppDelegate: MessagingDelegate {
         print("🔥 FCM Token:", fcmToken ?? "")
     }
 }
-

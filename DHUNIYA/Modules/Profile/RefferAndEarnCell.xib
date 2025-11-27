@@ -21,7 +21,7 @@
                         <rect key="frame" x="16" y="12" width="503" height="177"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIn-eN-k8U">
-                                <rect key="frame" x="12" y="12" width="224.66666666666666" height="20"/>
+                                <rect key="frame" x="12" y="11.999999999999998" width="247" height="21.333333333333329"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Refer &amp; Earn ₹100 per person">
                                         <attributes>
@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OKm-hi-U05">
-                                <rect key="frame" x="391" y="12" width="100" height="20"/>
+                                <rect key="frame" x="391" y="12.666666666666668" width="100" height="20.000000000000004"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="0pT-mf-Eki"/>
                                     <constraint firstAttribute="height" constant="20" id="0qg-tC-fKK"/>
@@ -53,7 +53,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lX5-4W-Sng">
-                                <rect key="frame" x="12" y="40" width="102" height="16.333333333333329"/>
+                                <rect key="frame" x="12.000000000000007" y="41.333333333333336" width="107.66666666666669" height="17.666666666666664"/>
                                 <attributedString key="attributedText">
                                     <fragment content="My referral code">
                                         <attributes>
@@ -64,7 +64,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rr-2C-Dg2">
-                                <rect key="frame" x="12" y="64.333333333333329" width="260" height="40"/>
+                                <rect key="frame" x="12" y="67" width="260" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhr-Nt-f7T">
                                         <rect key="frame" x="197" y="8" width="1" height="24"/>
@@ -92,6 +92,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="editcode"/>
+                                        <connections>
+                                            <action selector="btnEditReferralCodeTapped:" destination="SDt-Il-Fk3" eventType="touchUpInside" id="07E-ly-SvY"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXXXXXXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcf-8B-HIl">
                                         <rect key="frame" x="2" y="8" width="169" height="24"/>
@@ -125,7 +128,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9S-yZ-oX4">
-                                <rect key="frame" x="14" y="124.33333333333334" width="82" height="32"/>
+                                <rect key="frame" x="14" y="127" width="114" height="32"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharing" translatesAutoresizingMaskIntoConstraints="NO" id="K90-Ie-UMI">
                                         <rect key="frame" x="8" y="8" width="16" height="16"/>
@@ -134,15 +137,24 @@
                                             <constraint firstAttribute="width" constant="16" id="e7k-Ct-vgx"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMW-Os-nOo">
-                                        <rect key="frame" x="32" y="6.3333333333333144" width="42" height="19.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMW-Os-nOo">
+                                        <rect key="frame" x="32" y="7.3333333333333446" width="74" height="17.666666666666671"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Share App">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="Lexend-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Qv-Ga-2We">
-                                        <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="114" height="32"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" red="0.041692741220000003" green="0.50025725359999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -163,12 +175,13 @@
                                     <constraint firstItem="qMW-Os-nOo" firstAttribute="leading" secondItem="K90-Ie-UMI" secondAttribute="trailing" constant="8" id="ZcO-nR-HH0"/>
                                     <constraint firstItem="0Qv-Ga-2We" firstAttribute="top" secondItem="c9S-yZ-oX4" secondAttribute="top" id="bBx-qG-ldU"/>
                                     <constraint firstAttribute="trailing" secondItem="qMW-Os-nOo" secondAttribute="trailing" constant="8" id="bKQ-YI-qMK"/>
+                                    <constraint firstAttribute="width" constant="114" id="dy6-yL-Ef5"/>
                                     <constraint firstItem="qMW-Os-nOo" firstAttribute="centerY" secondItem="K90-Ie-UMI" secondAttribute="centerY" id="kLp-RF-xYA"/>
                                     <constraint firstAttribute="height" constant="32" id="tKp-Bh-P04"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0p-u7-pEq">
-                                <rect key="frame" x="449" y="124.33333333333334" width="32" height="32"/>
+                                <rect key="frame" x="449" y="127" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="Dio-Ok-PqN"/>
                                     <constraint firstAttribute="height" constant="32" id="Ltf-Bf-Equ"/>
@@ -177,17 +190,17 @@
                                 <state key="normal" title="Button" image="insta"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUb-ZQ-4o7">
-                                <rect key="frame" x="405" y="124.33333333333334" width="32" height="32"/>
+                                <rect key="frame" x="405" y="127" width="32" height="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="fb"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBD-33-zZn">
-                                <rect key="frame" x="361" y="124.33333333333334" width="32" height="32"/>
+                                <rect key="frame" x="361" y="127" width="32" height="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="telegram"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbE-vG-NDp">
-                                <rect key="frame" x="317" y="124.33333333333334" width="32" height="32"/>
+                                <rect key="frame" x="317" y="127" width="32" height="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="whatsappshare"/>
                             </button>
@@ -272,10 +285,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

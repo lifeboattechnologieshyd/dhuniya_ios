@@ -36,21 +36,28 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 💥 FIX POPUP BLINKING
+        self.definesPresentationContext = true
+        self.modalPresentationStyle = .overCurrentContext
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.45)
+        self.view.isOpaque = false
+        otpVw.backgroundColor = .white
+        otpVw.layer.cornerRadius = 22
+        otpVw.clipsToBounds = true
+        
         mobilenumberLbl.text = "+91 \(mobileNumber ?? "")"
 
-        // FIRST 29 SECONDS → hide resend button
         resendButton.isHidden = true
         resendotpLbl.isHidden = false
         
         startResendTimer()
         setupOTPFields()
 
-        // PLAY ANIMATION
         playAnimation()
     }
     
     
-    // ADDED — Lottie animation function
+    // Lottie Animation
     func playAnimation() {
         lottieView?.removeFromSuperview()
         
@@ -94,7 +101,7 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     }
     
     func updateNotReceiveText() {
-        notreceiveotpLbl.text = "Didn't receive OTP? 00:\(String(format: "%02d", remainingSeconds))"
+        resendotpLbl.text = "Resend OTP ? 00:\(String(format: "%02d", remainingSeconds))"
     }
     
     
@@ -170,7 +177,6 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             return
         }
         
-        // LOGIN SUCCESS
         Session.shared.isUserLoggedIn = true
         Session.shared.mobileNumber = mobileNumber ?? ""
         Session.shared.userName = "User \(mobileNumber ?? "")"
