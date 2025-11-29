@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIView {
-
+    
     // Corner Radius
     @IBInspectable var cornerRadius: CGFloat {
         get { return layer.cornerRadius }
@@ -17,13 +17,13 @@ extension UIView {
             layer.masksToBounds = newValue > 0
         }
     }
-
+    
     // Border Width
     @IBInspectable var borderWidth: CGFloat {
         get { return layer.borderWidth }
         set { layer.borderWidth = newValue }
     }
-
+    
     // Border Color
     @IBInspectable var borderColor: UIColor? {
         get {
@@ -34,7 +34,7 @@ extension UIView {
         }
         set { layer.borderColor = newValue?.cgColor }
     }
-
+    
     // Shadow Color
     @IBInspectable var shadowColor: UIColor? {
         get {
@@ -45,28 +45,25 @@ extension UIView {
         }
         set { layer.shadowColor = newValue?.cgColor }
     }
-
+    
     // Shadow Opacity
     @IBInspectable var shadowOpacity: Float {
         get { return layer.shadowOpacity }
         set { layer.shadowOpacity = newValue }
     }
-
+    
     // Shadow Radius
     @IBInspectable var shadowRadius: CGFloat {
         get { return layer.shadowRadius }
         set { layer.shadowRadius = newValue }
     }
-
+    
     // Shadow Offset
     @IBInspectable var shadowOffset: CGSize {
         get { return layer.shadowOffset }
         set { layer.shadowOffset = newValue }
     }
-}
-import UIKit
-
-extension UIView {
+    
     func addDottedBorder(color: UIColor = .lightGray, cornerRadius: CGFloat = 10) {
         
         // Remove old dotted layers to avoid duplicates
@@ -89,9 +86,6 @@ extension UIView {
         
         layer.addSublayer(shapeLayer)
     }
-}
-extension UIView {
-    
     func addBottomShadow(color: UIColor = .black,
                          opacity: Float = 0.15,
                          radius: CGFloat = 6,
@@ -111,12 +105,6 @@ extension UIView {
             height: shadowHeight
         )).cgPath
     }
-}
-        extension Notification.Name {
-            static let dismiss_login_popups = Notification.Name("dismiss_login_popups")
-        }
-
-extension UIView {
     func parentViewController() -> UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
@@ -127,44 +115,63 @@ extension UIView {
         }
         return nil
     }
+    
+    //  Add soft blur
+    func applyBlur(intensity: CGFloat = 0.25) {
+        removeBlur()  // avoid stacking blurs
+        
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurView.alpha = intensity   // adjust blur amount
+        blurView.tag = 999           // identifier for removing
+        addSubview(blurView)
+    }
+    
+    // Remove blur
+    func removeBlur() {
+        viewWithTag(999)?.removeFromSuperview()
+    }
 }
-class Session {
-    static let shared = Session()
-    
-    var isUserLoggedIn: Bool {
-        get { UserDefaults.standard.bool(forKey: "isUserLoggedIn") }
-        set { UserDefaults.standard.set(newValue, forKey: "isUserLoggedIn") }
-    }
-    
-    var mobileNumber: String {
-        get { UserDefaults.standard.string(forKey: "mobileNumber") ?? "" }
-        set { UserDefaults.standard.set(newValue, forKey: "mobileNumber") }
-    }
-    
-    var userName: String {
-        get { UserDefaults.standard.string(forKey: "userName") ?? "" }
-        set { UserDefaults.standard.set(newValue, forKey: "userName") }
+
+
+
+
+ 
+
+extension UIViewController {
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
+    
+extension Date {
+    func timeAgo() -> String {
+        let secondsAgo = Int(Date().timeIntervalSince(self))
 
-    extension UIView {
+        let minute = 60
+        let hour = 3600
+        let day = 86400
+        let week = 604800
 
-        //  Add soft blur
-        func applyBlur(intensity: CGFloat = 0.25) {
-            removeBlur()  // avoid stacking blurs
-
-            let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight)
-            let blurView = UIVisualEffectView(effect: blurEffect)
-            blurView.frame = bounds
-            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            blurView.alpha = intensity   // adjust blur amount
-            blurView.tag = 999           // identifier for removing
-            addSubview(blurView)
+        if secondsAgo < minute {
+            return "\(secondsAgo) sec ago"
+        } else if secondsAgo < hour {
+            return "\(secondsAgo / minute) min ago"
+        } else if secondsAgo < day {
+            return "\(secondsAgo / hour) hours ago"
+        } else if secondsAgo < week {
+            return "\(secondsAgo / day) days ago"
         }
 
-        // Remove blur
-        func removeBlur() {
-            viewWithTag(999)?.removeFromSuperview()
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy"
+        return formatter.string(from: self)
     }
+}
+
+
 

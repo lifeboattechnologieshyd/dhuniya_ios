@@ -24,7 +24,7 @@ class LoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         self.view.isOpaque = false
         self.modalPresentationStyle = .overCurrentContext
@@ -40,6 +40,36 @@ class LoginVC: UIViewController {
         btnCheckBox.setImage(UIImage(named: "Unchecked_box"), for: .normal)
 
         updateProceedButtonState()
+        
+    }
+    
+    func sendOtp() {
+        let payload: [String:Any] = [
+            "mobile" : self.textFieldPhoneNumber.text ?? ""
+        ]
+        NetworkManager.shared.request(urlString: API.SENDOTP,method: .POST, parameters: payload) { (result: Result<APIResponse<CheckUserMobileResponse>, NetworkError>)  in
+            switch result {
+            case .success(let response):
+                if response.success {
+                    if let data = response.info {
+                        DispatchQueue.main.async {
+                            if data.isLoginWithPassword  {
+                                self.navigateToEnterPasswordVC()
+                            }else{
+                                // otp screen
+                            }
+                        }
+                    }
+                }else {
+                    self.showAlert(message: response.description)
+                }
+            case .failure(let error):
+                print(error)
+                self.showAlert(message: error.localizedDescription)
+            }
+            
+        }
+        
     }
 
     @IBAction func onTapBtnCheckBox(_ sender: UIButton) {
@@ -69,36 +99,30 @@ class LoginVC: UIViewController {
     }
 
     @IBAction func btnProceedTapped(_ sender: UIButton) {
-
+        
         guard let number = textFieldPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               !number.isEmpty else {
             showAlert(message: "Please enter your phone number")
             return
         }
-
+        
         if number.count != 10 || !number.allSatisfy({ $0.isNumber }) {
             showAlert(message: "Please provide a valid 10-digit number")
             return
         }
-
-        navigateToEnterPasswordVC(with: number)
+        
+        self.sendOtp()
+        
     }
 
-    func showAlert(message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
-    }
+  
 
-    func navigateToEnterPasswordVC(with number: String) {
+    func navigateToEnterPasswordVC() {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
-
         if let vc = storyboard.instantiateViewController(withIdentifier: "EnterPasswordVC") as? EnterPasswordVC {
-            vc.mobileNumber = number
-
+            vc.mobileNumber = self.textFieldPhoneNumber.text ?? ""
             vc.modalPresentationStyle = .overCurrentContext
             vc.modalTransitionStyle = .crossDissolve
-
             self.present(vc, animated: true)
         }
     }

@@ -171,15 +171,12 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     @IBAction func proceedButtonTapped(_ sender: UIButton) {
         
         let otp = "\(otfTf1.text ?? "")\(otpTf2.text ?? "")\(otpTf3.text ?? "")\(otpTf4.text ?? "")"
-        
         if otp.count != 4 {
             showAlert("Please enter 4 digit OTP")
             return
         }
         
-        Session.shared.isUserLoggedIn = true
-        Session.shared.mobileNumber = mobileNumber ?? ""
-        Session.shared.userName = "User \(mobileNumber ?? "")"
+       
         
         NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
         
@@ -189,11 +186,9 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     
     func navigateToProfileVC() {
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {
-            
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let window = windowScene.windows.first,
                let nav = window.rootViewController as? UINavigationController {
-                
                 nav.popToRootViewController(animated: false)
             }
         })

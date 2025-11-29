@@ -8,5 +8,5 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 APP_ENV = PROD
-BASE_API_URL = https://prod.api.com/
+server_url = https:/$()/api.dhuniya.in/
 FIREBASE_PLIST_NAME = GoogleService-Info-Prod

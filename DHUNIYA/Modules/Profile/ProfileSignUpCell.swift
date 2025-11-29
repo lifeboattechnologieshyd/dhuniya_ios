@@ -26,6 +26,7 @@ class ProfileSignUpCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        configure()
     }
     
     
@@ -54,38 +55,22 @@ class ProfileSignUpCell: UITableViewCell {
     }
     
     
-    func configure(isLoggedIn: Bool, userName: String?, phone: String?) {
-        
-        if isLoggedIn {
-            btnSignUp.isHidden = true
-            userVw.isHidden = false
-            
-            lblMyEarnings.isHidden = false
-            withdrawBtn.isHidden = false
-            withdrawVw.isHidden = false
-            
-            // remove blur when logged in
+    func configure() {
+        btnSignUp.isHidden = Session.shared.isUserLoggedIn
+        userVw.isHidden = !Session.shared.isUserLoggedIn
+        lblMyEarnings.isHidden = !Session.shared.isUserLoggedIn
+        withdrawBtn.isHidden = !Session.shared.isUserLoggedIn
+        withdrawVw.isHidden = !Session.shared.isUserLoggedIn
+        lblUserName.text = Session.shared.userName
+        lblPhoneNumber.text = Session.shared.mobileNumber
+        if Session.shared.isUserLoggedIn {
             lblMyEarnings.removeBlur()
             withdrawBtn.removeBlur()
             withdrawVw.removeBlur()
-            
-            lblUserName.text = userName ?? "User"
-            lblPhoneNumber.text = phone ?? ""
-            
         } else {
-            btnSignUp.isHidden = false
-            userVw.isHidden = true
-            
-            lblMyEarnings.isHidden = false
-            withdrawBtn.isHidden = false
-            withdrawVw.isHidden = false
-            
-            // apply blur when NOT logged in
             lblMyEarnings.applyBlur(intensity: 0.98)
             withdrawBtn.applyBlur(intensity: 0.98)
             withdrawVw.applyBlur(intensity: 0.98)
-
         }
-        
     }
 }

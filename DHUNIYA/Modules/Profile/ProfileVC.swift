@@ -103,25 +103,17 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSignUpCell", for: indexPath) as! ProfileSignUpCell
-            cell.configure(
-                isLoggedIn: Session.shared.isUserLoggedIn,
-                userName: Session.shared.userName,
-                phone: Session.shared.mobileNumber
-            )
+            cell.configure()
             return cell
-            
         case 1:
             return tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath)
-            
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileListCell", for: indexPath) as! ProfileListCell
             cell.lblText.text = titles[indexPath.row]
             cell.imgVw.image = UIImage(named: images[indexPath.row])
             return cell
-            
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BottomHeaderListCell", for: indexPath) as! BottomHeaderListCell
-            
             cell.contactUs = { [weak self] in
                 guard let self = self else { return }
                 if !Session.shared.isUserLoggedIn { self.showLoginPopup(); return }

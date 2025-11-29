@@ -9,7 +9,7 @@ import UIKit
 class EnterPasswordVC: UIViewController {
     
     var mobileNumber: String?
-
+    
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var btnGoBack: UIButton!
@@ -36,6 +36,7 @@ class EnterPasswordVC: UIViewController {
         if let num = mobileNumber {
             lblUsername.text = num
         }
+        
     }
     
     
@@ -48,21 +49,18 @@ class EnterPasswordVC: UIViewController {
     }
     
     @IBAction func btnForgotPasswordTapped(_ sender: UIButton) {
-        goToCreatePasswordVC()
+        goToOtpVC()
     }
     
     
     // MARK: Proceed → Go to OTP VC
     @IBAction func btnProceedTapped(_ sender: UIButton) {
-        
         let password = txtFieldPassword.text ?? ""
-        
         if password.isEmpty {
             showAlert(message: "Please enter your password")
             return
         }
-
-        goToOtpVC()
+        checkLogin()
     }
     
     
@@ -81,27 +79,47 @@ class EnterPasswordVC: UIViewController {
         }
     }
     
-    
-    //Navigate to CreatePasswordVC
-    func goToCreatePasswordVC() {
-        
-        let storyboard = UIStoryboard(name: "CreatePassword", bundle: nil)
-        
-        if let createVC = storyboard.instantiateViewController(withIdentifier: "CreatePasswordVC") as? CreatePasswordVC {
+    func checkLogin() {
+        let payload: [String:Any] = [
+            "mobile" : self.mobileNumber,
+            "password" : self.txtFieldPassword.text ?? ""
+        ]
+        NetworkManager.shared.request(urlString: API.LOGIN,method: .POST, parameters: payload) { (result: Result<APIResponse<LoginResponse>, NetworkError>)  in
+            switch result {
+            case .success(let response):
+                
+                if response.success {
+                    if let data = response.info {
+                        Session.shared.isUserLoggedIn = true
+                        Session.shared.mobileNumber = self.mobileNumber ?? ""
+                        Session.shared.userName = data.profileDetails.username
+                        Session.shared.accesstoken = data.accessToken
+                        Session.shared.refreshtoken = data.refreshToken
+                        Session.shared.userroles = data.profileDetails.userRole
+                        DispatchQueue.main.async {
+                            self.navigateToProfileVC()
+                            NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
+                        }
+                    }
+                  
+                }else {
+                    self.showAlert(message: response.description)
+                }
+            case .failure(let error):
+                print(error)
+            }
             
-            createVC.mobileNumber = mobileNumber
-            
-            createVC.modalPresentationStyle = .overCurrentContext
-            createVC.modalTransitionStyle = .crossDissolve
-            
-            self.present(createVC, animated: true)
         }
+        
     }
     
-    
-    func showAlert(message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+    func navigateToProfileVC() {
+        self.view.window?.rootViewController?.dismiss(animated: false, completion: {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first,
+               let nav = window.rootViewController as? UINavigationController {
+                nav.popToRootViewController(animated: false)
+            }
+        })
     }
 }
