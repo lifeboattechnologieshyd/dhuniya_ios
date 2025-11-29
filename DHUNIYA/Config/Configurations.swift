@@ -51,5 +51,9 @@ struct API {
     
     
     static let NEWS_COMMENTS = BASE_URL + "news/posts/comments"
+    static let NEWS_LIKE = BASE_URL + "news/posts/like"
+    static let NEWS_DISLIKE = BASE_URL + "news/posts/dislike"
+
+
     
 }

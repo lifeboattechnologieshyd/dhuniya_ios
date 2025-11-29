@@ -156,7 +156,7 @@ extension NewsVC {
         let payload: [String: Any] = ["news_id": newsId]
         
         NetworkManager.shared.request(
-            urlString: "https://dev-api.dhuniya.in/news/posts/like",
+            urlString: API.NEWS_LIKE,
             method: .POST,
             parameters: payload
         ) { (result: Result<APIResponse<LikeInfo>, NetworkError>) in
@@ -174,7 +174,7 @@ extension NewsVC {
         let payload: [String: Any] = ["news_id": newsId]
         
         NetworkManager.shared.request(
-            urlString: "https://dev-api.dhuniya.in/news/posts/dislike",
+            urlString: API.NEWS_DISLIKE,
             method: .POST,
             parameters: payload
         ) { (result: Result<APIResponse<DislikeInfo>, NetworkError>) in
@@ -196,7 +196,7 @@ extension NewsVC {
             "comment": comment
         ]
         
-        NetworkManager.shared.request(urlString: "https://dev-api.dhuniya.in/news/posts/comments",method: .POST,parameters: payload) { (result:Result<APIResponse<CommentResponse>, NetworkError>) in
+        NetworkManager.shared.request(urlString:API.NEWS_COMMENTS ,method: .POST,parameters: payload) { (result:Result<APIResponse<CommentResponse>, NetworkError>) in
             
             switch result {
             case .success(let response):
