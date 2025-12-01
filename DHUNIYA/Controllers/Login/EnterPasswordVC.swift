@@ -6,6 +6,7 @@
 //
 import UIKit
 
+
 class EnterPasswordVC: UIViewController {
     
     var mobileNumber: String?
@@ -39,7 +40,6 @@ class EnterPasswordVC: UIViewController {
         
     }
     
-    
     @IBAction func btnCloseTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -48,10 +48,12 @@ class EnterPasswordVC: UIViewController {
         dismiss(animated: true)
     }
     
+    // ✅ Forgot Password Button
     @IBAction func btnForgotPasswordTapped(_ sender: UIButton) {
-        goToOtpVC()
+        // Mark this as forgot password flow
+        Session.shared.isForgotPasswordFlow = true
+        requestForgotPassword() // Call API to send OTP
     }
-    
     
     // MARK: Proceed → Go to OTP VC
     @IBAction func btnProceedTapped(_ sender: UIButton) {
@@ -63,31 +65,56 @@ class EnterPasswordVC: UIViewController {
         checkLogin()
     }
     
-    
+    // Navigate to OTP screen
     func goToOtpVC() {
-        
         let storyboard = UIStoryboard(name: "OTP", bundle: nil)
-        
         if let otpVC = storyboard.instantiateViewController(withIdentifier: "OtpVC") as? OtpVC {
-            
             otpVC.mobileNumber = mobileNumber
-            
             otpVC.modalPresentationStyle = .overCurrentContext
             otpVC.modalTransitionStyle = .crossDissolve
-            
             self.present(otpVC, animated: true)
         }
     }
     
-    func checkLogin() {
-        let payload: [String:Any] = [
-            "mobile" : self.mobileNumber,
-            "password" : self.txtFieldPassword.text ?? ""
+    // ✅ Forgot Password API Request
+    func requestForgotPassword() {
+        let params = [
+            "mobile": mobileNumber ?? ""
         ]
-        NetworkManager.shared.request(urlString: API.LOGIN,method: .POST, parameters: payload) { (result: Result<APIResponse<LoginResponse>, NetworkError>)  in
+        
+        NetworkManager.shared.request(urlString: API.FORGOT_PASSWORD,
+                                      method: .POST,
+                                      parameters: params) { (result: Result<APIResponse<EmptyResponse>, NetworkError>) in
             switch result {
             case .success(let response):
-                
+                if response.success {
+                    DispatchQueue.main.async {
+                        self.goToOtpVC() // Navigate to OTP VC after OTP sent
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showAlert(message: response.description)
+                    }
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.showAlert(message: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    // ✅ Check Login API
+    func checkLogin() {
+        let payload: [String:Any] = [
+            "mobile" : self.mobileNumber ?? "",
+            "password" : self.txtFieldPassword.text ?? ""
+        ]
+        NetworkManager.shared.request(urlString: API.LOGIN,
+                                      method: .POST,
+                                      parameters: payload) { (result: Result<APIResponse<LoginResponse>, NetworkError>)  in
+            switch result {
+            case .success(let response):
                 if response.success {
                     if let data = response.info {
                         Session.shared.isUserLoggedIn = true
@@ -101,18 +128,18 @@ class EnterPasswordVC: UIViewController {
                             NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
                         }
                     }
-                  
-                }else {
-                    self.showAlert(message: response.description)
+                } else {
+                    DispatchQueue.main.async {
+                        self.showAlert(message: response.description)
+                    }
                 }
             case .failure(let error):
                 print(error)
             }
-            
         }
-        
     }
     
+    // Navigate to Profile VC
     func navigateToProfileVC() {
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

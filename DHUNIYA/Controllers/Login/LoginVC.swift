@@ -30,55 +30,72 @@ class LoginVC: UIViewController {
         self.modalPresentationStyle = .overCurrentContext
 
         loginView.backgroundColor = .white
-        loginView.layer.cornerRadius = 20       // popup look
+        loginView.layer.cornerRadius = 20
         loginView.clipsToBounds = true
 
-        // FIX missing UI (ensures layout loads properly)
+        // Ensure layout loads properly
         self.view.layoutIfNeeded()
 
         isChecked = false
         btnCheckBox.setImage(UIImage(named: "Unchecked_box"), for: .normal)
-
         updateProceedButtonState()
-        
     }
     
     func sendOtp() {
         let payload: [String:Any] = [
             "mobile" : self.textFieldPhoneNumber.text ?? ""
         ]
-        NetworkManager.shared.request(urlString: API.SENDOTP,method: .POST, parameters: payload) { (result: Result<APIResponse<CheckUserMobileResponse>, NetworkError>)  in
-            switch result {
-            case .success(let response):
-                if response.success {
-                    if let data = response.info {
-                        DispatchQueue.main.async {
-                            if data.isLoginWithPassword  {
+        
+        NetworkManager.shared.request(urlString: API.SENDOTP, method: .POST, parameters: payload) { (result: Result<APIResponse<CheckUserMobileResponse>, NetworkError>) in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if response.success {
+                        if let info = response.info {
+                            Session.shared.mobileNumber = self.textFieldPhoneNumber.text ?? ""
+                            
+                            if info.isLoginWithPassword {
+                                // Old user → navigate to EnterPasswordVC
                                 self.navigateToEnterPasswordVC()
-                            }else{
-                                // otp screen
+                            } else {
+                                // New user → navigate to OTPVC
+                                self.navigateToOtpVC()
                             }
                         }
+                    } else {
+                        self.showAlert(message: response.description)
                     }
-                }else {
-                    self.showAlert(message: response.description)
+                    
+                case .failure(let error):
+                    self.showAlert(message: error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error)
-                self.showAlert(message: error.localizedDescription)
             }
-            
         }
-        
+    }
+
+    func navigateToEnterPasswordVC() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "EnterPasswordVC") as? EnterPasswordVC {
+            vc.mobileNumber = self.textFieldPhoneNumber.text ?? ""
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .crossDissolve
+            self.present(vc, animated: true)
+        }
+    }
+    
+    func navigateToOtpVC() {
+        let storyboard = UIStoryboard(name: "OTP", bundle: nil)
+        if let otpVC = storyboard.instantiateViewController(withIdentifier: "OtpVC") as? OtpVC {
+            otpVC.modalPresentationStyle = .overCurrentContext
+            otpVC.modalTransitionStyle = .crossDissolve
+            self.present(otpVC, animated: true)
+        }
     }
 
     @IBAction func onTapBtnCheckBox(_ sender: UIButton) {
         isChecked.toggle()
-        if isChecked {
-            btnCheckBox.setImage(UIImage(named: "checked_box"), for: .normal)
-        } else {
-            btnCheckBox.setImage(UIImage(named: "Unchecked_box"), for: .normal)
-        }
+        btnCheckBox.setImage(UIImage(named: isChecked ? "checked_box" : "Unchecked_box"), for: .normal)
         updateProceedButtonState()
     }
 
@@ -111,19 +128,11 @@ class LoginVC: UIViewController {
             return
         }
         
-        self.sendOtp()
-        
-    }
-
-  
-
-    func navigateToEnterPasswordVC() {
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "EnterPasswordVC") as? EnterPasswordVC {
-            vc.mobileNumber = self.textFieldPhoneNumber.text ?? ""
-            vc.modalPresentationStyle = .overCurrentContext
-            vc.modalTransitionStyle = .crossDissolve
-            self.present(vc, animated: true)
+        if !isChecked {
+            showAlert(message: "Please accept terms & conditions")
+            return
         }
+        
+        self.sendOtp()
     }
 }

@@ -47,7 +47,12 @@ struct API {
     
     static let VERIFY_OTP = BASE_URL + "user/authentication/mobile/verify-otp"
     static let SET_PASSWORD = BASE_URL + "user/authentication/set-password"
+    static let CREATE_PASSWORD = BASE_URL + "userservice/authentication/password"
+    static let RESET_PASSWORD = BASE_URL + "userservice/authentication/password/forgot"
+    static let FORGOT_PASSWORD =  BASE_URL + "userservice/authentication/sendotp?is_forgot_password=True"
     
+
+  
     
     
     static let NEWS_COMMENTS = BASE_URL + "news/posts/comments"

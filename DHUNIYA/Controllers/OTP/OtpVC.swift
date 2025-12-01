@@ -30,17 +30,17 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var otpsentDesc: UILabel!
     @IBOutlet weak var otpheaderLbl: UILabel!
     
-    //  ADDED — Lottie object
     var lottieView: LottieAnimationView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 💥 FIX POPUP BLINKING
+        // FIX POPUP BLINKING
         self.definesPresentationContext = true
         self.modalPresentationStyle = .overCurrentContext
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.45)
         self.view.isOpaque = false
+        
         otpVw.backgroundColor = .white
         otpVw.layer.cornerRadius = 22
         otpVw.clipsToBounds = true
@@ -52,46 +52,31 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         
         startResendTimer()
         setupOTPFields()
-
         playAnimation()
     }
     
-    
-    // Lottie Animation
     func playAnimation() {
         lottieView?.removeFromSuperview()
-        
         let animation = LottieAnimation.named("Dhunia OTP Verification")
         let animView = LottieAnimationView(animation: animation)
-        
         animView.frame = animationVw.bounds
         animView.contentMode = .scaleAspectFit
         animView.loopMode = .loop
-        
         animationVw.addSubview(animView)
         animView.play()
-        
         lottieView = animView
     }
     
-    
-    // MARK: TIMER
     func startResendTimer() {
         remainingSeconds = 29
-        
         resendButton.isHidden = true
         resendotpLbl.isHidden = false
-        
         updateNotReceiveText()
-        
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {
-            [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
-            
             self.remainingSeconds -= 1
             self.updateNotReceiveText()
-            
             if self.remainingSeconds <= 0 {
                 self.timer?.invalidate()
                 self.resendButton.isHidden = false
@@ -104,28 +89,44 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         resendotpLbl.text = "Resend OTP ? 00:\(String(format: "%02d", remainingSeconds))"
     }
     
-    
     @IBAction func resendButtonTapped(_ sender: UIButton) {
         startResendTimer()
+        resendOtp()
     }
     
+    func resendOtp() {
+        guard let mobile = mobileNumber else { return }
+        let params: [String: Any] = ["mobile": mobile]
+        
+        NetworkManager.shared.request(urlString: API.SENDOTP, method: .POST, parameters: params) { (result: Result<APIResponse<SendOtpInfo>, NetworkError>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if response.success {
+                        print("OTP resent successfully")
+                    } else {
+                        self.showAlert(response.description)
+                    }
+                case .failure(let error):
+                    self.showAlert(error.localizedDescription)
+                }
+            }
+        }
+    }
     
-    // MARK: OTP FIELD SETUP
+    //  OTP FIELD SETUP
     func setupOTPFields() {
         let fields = [otfTf1, otpTf2, otpTf3, otpTf4]
-        
         for tf in fields {
             tf?.delegate = self
             tf?.keyboardType = .numberPad
             tf?.textAlignment = .center
             tf?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
-        
         proceedButton.isEnabled = false
         proceedButton.alpha = 0.5
         otfTf1.becomeFirstResponder()
     }
-    
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
@@ -156,34 +157,63 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     func validateOTP() {
         let otp = "\(otfTf1.text ?? "")\(otpTf2.text ?? "")\(otpTf3.text ?? "")\(otpTf4.text ?? "")"
-        
         let valid = otp.count == 4
-        
         proceedButton.isEnabled = valid
         proceedButton.alpha = valid ? 1 : 0.5
     }
     
-    
-    // MARK: PROCEED → SAVE LOGIN → GO TO PROFILE VC
+    //  PROCEED → VERIFY OTP API
     @IBAction func proceedButtonTapped(_ sender: UIButton) {
-        
         let otp = "\(otfTf1.text ?? "")\(otpTf2.text ?? "")\(otpTf3.text ?? "")\(otpTf4.text ?? "")"
         if otp.count != 4 {
             showAlert("Please enter 4 digit OTP")
             return
         }
+        guard let mobile = mobileNumber else {
+            showAlert("Mobile number missing")
+            return
+        }
         
-       
+        let params: [String: String] = [
+            "mobile": mobile,
+            "otp": otp
+        ]
         
-        NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
-        
-        navigateToProfileVC()
+        NetworkManager.shared.request(urlString: API.LOGIN, method: .POST, parameters: params) { (result: Result<APIResponse<VerifyInfo>, NetworkError>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if response.success, let info = response.info {
+                        self.otpVw.isHidden = true
+                        
+                        // Save tokens to Session
+                        Session.shared.accesstoken = info.access_token
+                        Session.shared.refreshtoken = info.refresh_token
+                        
+                        if info.is_set_password {
+                            // Navigate to Profile/Home
+                            self.navigateToProfileVC()
+                        } else {
+                            // Navigate to CreatePasswordVC
+                            let storyboard = UIStoryboard(name: "CreatePassword", bundle: nil)
+                            if let createPasswordVC = storyboard.instantiateViewController(withIdentifier: "CreatePasswordVC") as? CreatePasswordVC {
+                                createPasswordVC.modalPresentationStyle = .overFullScreen
+                                self.present(createPasswordVC, animated: true)
+                            }
+                        }
+                    } else {
+                        self.showAlert(response.description)
+                    }
+                case .failure(let error):
+                    self.showAlert(error.localizedDescription)
+                }
+            }
+        }
     }
     
-    
+    //  NAVIGATION
     func navigateToProfileVC() {
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -194,18 +224,15 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         })
     }
     
-    
     func showAlert(_ message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
     
-    
     @IBAction func closeTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
-    
     
     @IBAction func goBackTapped(_ sender: UIButton) {
         dismiss(animated: true)

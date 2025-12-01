@@ -157,3 +157,51 @@ struct CommentModel: Codable {
 struct CommentResponse: Codable {
     let message: String?
 }
+struct SendOtpResponse: Codable {
+    let success: Bool
+    let errorCode: Int
+    let description: String
+    let total: Int?
+    let info: SendOtpInfo?
+}
+
+struct SendOtpInfo: Codable {
+    let message: String?
+    let isLoginWithPassword: Bool?
+    let profileImage: String?
+    let username: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case message
+        case isLoginWithPassword = "is_login_with_password"
+        case profileImage = "profile_image"
+        case username
+    }
+}
+struct VerifyInfo: Codable {
+    var access_token = ""
+    var refresh_token = ""
+    var is_set_password = false
+    
+    init(json: [String: Any]) {
+        if let token = json["access_token"] as? String { self.access_token = token }
+        if let token = json["refresh_token"] as? String { self.refresh_token = token }
+        if let isSet = json["is_set_password"] as? Bool { self.is_set_password = isSet }
+    }
+}
+struct ForgotPasswordResponse: Codable {
+    let success: Bool
+    let description: String?
+    let info: ProfileDetails?
+}
+var isForgotPasswordFlow = false
+
+struct CreatePasswordResponse: Codable {
+    let success: Bool
+    let description: String?
+    let info: ProfileDetails?
+}
+extension Notification.Name {
+    static let login = Notification.Name("login")
+    static let dismissLoginPopups = Notification.Name("dismiss_login_popups")
+}

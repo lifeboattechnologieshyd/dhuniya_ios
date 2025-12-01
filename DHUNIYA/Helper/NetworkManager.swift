@@ -115,10 +115,27 @@ struct APIResponse<T: Decodable>: Decodable {
 
 
 
+import Foundation
+
 class Session {
     static let shared = Session()
     
-    
+    var userDetails: ProfileDetails? {
+        get {
+            if let data = UserDefaults.standard.data(forKey: "userDetails") {
+                return try? JSONDecoder().decode(ProfileDetails.self, from: data)
+            }
+            return nil
+        }
+        set {
+            if let value = newValue, let data = try? JSONEncoder().encode(value) {
+                UserDefaults.standard.set(data, forKey: "userDetails")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "userDetails")
+            }
+        }
+    }
+
     var isUserLoggedIn: Bool {
         get { UserDefaults.standard.bool(forKey: "isUserLoggedIn") }
         set { UserDefaults.standard.set(newValue, forKey: "isUserLoggedIn") }
@@ -138,12 +155,20 @@ class Session {
         get { UserDefaults.standard.string(forKey: "accesstoken") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "accesstoken") }
     }
+    
     var refreshtoken: String {
         get { UserDefaults.standard.string(forKey: "refreshtoken") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "refreshtoken") }
     }
+    
     var userroles : [String] {
-        get { UserDefaults.standard.value(forKey: "userroles") as! [String] }
+        get { UserDefaults.standard.array(forKey: "userroles") as? [String] ?? [] }
         set { UserDefaults.standard.set(newValue, forKey: "userroles") }
     }
+    
+    // Added
+    var isForgotPasswordFlow: Bool = false
 }
+
+  
+struct EmptyResponse: Codable {}
