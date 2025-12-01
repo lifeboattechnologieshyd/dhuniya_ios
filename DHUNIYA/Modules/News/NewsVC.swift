@@ -80,21 +80,8 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
             cell.uploadedTime.text = news.created_date
         }
         
-        if let firstImage = news.image?.first, !firstImage.isEmpty, let imageUrl = URL(string: firstImage) {
-            URLSession.shared.dataTask(with: imageUrl) { data, _, _ in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        cell.NewsImg.image = UIImage(data: data)
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        cell.NewsImg.image = UIImage(named: "news_placeholder")
-                    }
-                }
-            }.resume()
-        } else {
-            cell.NewsImg.image = UIImage(named: "news_placeholder")
-        }
+        cell.NewsImg.setKFImage(news.image?.first)
+
         
         // Like button action
         cell.likeButton.tag = indexPath.row

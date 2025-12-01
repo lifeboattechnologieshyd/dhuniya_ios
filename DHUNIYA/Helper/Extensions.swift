@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 
 extension UIView {
     
@@ -172,6 +174,28 @@ extension Date {
         return formatter.string(from: self)
     }
 }
+extension UIImageView {
+    func setKFImage(_ urlString: String?,
+                    placeholder: UIImage? = UIImage(named: "news_placeholder")) {
+        
+        guard let urlString = urlString,
+              let url = URL(string: urlString) else {
+            self.image = placeholder
+            return
+        }
+        
+        self.kf.setImage(
+            with: url,
+            placeholder: placeholder,
+            options: [
+                .transition(.fade(0.3)),
+                .cacheOriginalImage
+            ]
+        )
+    }
+}
+
+
 
 
 
