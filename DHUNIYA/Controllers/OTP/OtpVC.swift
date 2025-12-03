@@ -8,12 +8,12 @@ import UIKit
 import Lottie
 
 class OtpVC: UIViewController, UITextFieldDelegate {
-    
+
     var mobileNumber: String?
 
     var timer: Timer?
     var remainingSeconds = 29
-    
+
     @IBOutlet weak var animationVw: UIView!
     @IBOutlet weak var otpTf3: UITextField!
     @IBOutlet weak var otpTf2: UITextField!
@@ -29,32 +29,31 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var proceedButton: UIButton!
     @IBOutlet weak var otpsentDesc: UILabel!
     @IBOutlet weak var otpheaderLbl: UILabel!
-    
+
     var lottieView: LottieAnimationView?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // FIX POPUP BLINKING
         self.definesPresentationContext = true
         self.modalPresentationStyle = .overCurrentContext
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.45)
         self.view.isOpaque = false
-        
+
         otpVw.backgroundColor = .white
         otpVw.layer.cornerRadius = 22
         otpVw.clipsToBounds = true
-        
+
         mobilenumberLbl.text = "+91 \(mobileNumber ?? "")"
 
         resendButton.isHidden = true
         resendotpLbl.isHidden = false
-        
+
         startResendTimer()
         setupOTPFields()
         playAnimation()
     }
-    
+
     func playAnimation() {
         lottieView?.removeFromSuperview()
         let animation = LottieAnimation.named("Dhunia OTP Verification")
@@ -66,7 +65,7 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         animView.play()
         lottieView = animView
     }
-    
+
     func startResendTimer() {
         remainingSeconds = 29
         resendButton.isHidden = true
@@ -84,20 +83,20 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+
     func updateNotReceiveText() {
         resendotpLbl.text = "Resend OTP ? 00:\(String(format: "%02d", remainingSeconds))"
     }
-    
+
     @IBAction func resendButtonTapped(_ sender: UIButton) {
         startResendTimer()
         resendOtp()
     }
-    
+
     func resendOtp() {
         guard let mobile = mobileNumber else { return }
         let params: [String: Any] = ["mobile": mobile]
-        
+
         NetworkManager.shared.request(urlString: API.SENDOTP, method: .POST, parameters: params) { (result: Result<APIResponse<SendOtpInfo>, NetworkError>) in
             DispatchQueue.main.async {
                 switch result {
@@ -113,8 +112,8 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    //  OTP FIELD SETUP
+
+    // OTP Field Setup
     func setupOTPFields() {
         let fields = [otfTf1, otpTf2, otpTf3, otpTf4]
         for tf in fields {
@@ -127,14 +126,14 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         proceedButton.alpha = 0.5
         otfTf1.becomeFirstResponder()
     }
-    
+
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        
+
         if text.count > 1 {
             textField.text = String(text.prefix(1))
         }
-        
+
         if text.count == 1 {
             switch textField {
             case otfTf1: otpTf2.becomeFirstResponder()
@@ -146,7 +145,7 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             default: break
             }
         }
-        
+
         if text.count == 0 {
             switch textField {
             case otpTf4: otpTf3.becomeFirstResponder()
@@ -156,53 +155,32 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+
     func validateOTP() {
         let otp = "\(otfTf1.text ?? "")\(otpTf2.text ?? "")\(otpTf3.text ?? "")\(otpTf4.text ?? "")"
         let valid = otp.count == 4
         proceedButton.isEnabled = valid
         proceedButton.alpha = valid ? 1 : 0.5
     }
-    
-    //  PROCEED → VERIFY OTP API
+
+    //  Verify OTP
     @IBAction func proceedButtonTapped(_ sender: UIButton) {
         let otp = "\(otfTf1.text ?? "")\(otpTf2.text ?? "")\(otpTf3.text ?? "")\(otpTf4.text ?? "")"
-        if otp.count != 4 {
-            showAlert("Please enter 4 digit OTP")
-            return
-        }
-        guard let mobile = mobileNumber else {
-            showAlert("Mobile number missing")
-            return
-        }
-        
-        let params: [String: String] = [
-            "mobile": mobile,
-            "otp": otp
-        ]
-        
+        if otp.count != 4 { showAlert("Enter 4 digit OTP"); return }
+        guard let mobile = mobileNumber else { showAlert("Mobile missing"); return }
+
+        let params: [String: String] = ["mobile": mobile, "otp": otp]
+
         NetworkManager.shared.request(urlString: API.LOGIN, method: .POST, parameters: params) { (result: Result<APIResponse<VerifyInfo>, NetworkError>) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    if response.success, let info = response.info {
-                        self.otpVw.isHidden = true
-                        
-                        // Save tokens to Session
-                        Session.shared.accesstoken = info.access_token
-                        Session.shared.refreshtoken = info.refresh_token
-                        
-                        if info.is_set_password {
-                            // Navigate to Profile/Home
-                            self.navigateToProfileVC()
-                        } else {
-                            // Navigate to CreatePasswordVC
-                            let storyboard = UIStoryboard(name: "CreatePassword", bundle: nil)
-                            if let createPasswordVC = storyboard.instantiateViewController(withIdentifier: "CreatePasswordVC") as? CreatePasswordVC {
-                                createPasswordVC.modalPresentationStyle = .overFullScreen
-                                self.present(createPasswordVC, animated: true)
-                            }
-                        }
+                    if response.success {
+                        let info = response.info
+                        Session.shared.mobileNumber = mobile
+                        Session.shared.accesstoken = info!.access_token!
+                        Session.shared.refreshtoken = info!.refresh_token!
+                        self.navigateToCreatePassword()
                     } else {
                         self.showAlert(response.description)
                     }
@@ -212,29 +190,37 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    //  NAVIGATION
-    func navigateToProfileVC() {
-        self.view.window?.rootViewController?.dismiss(animated: false, completion: {
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let window = windowScene.windows.first,
-               let nav = window.rootViewController as? UINavigationController {
-                nav.popToRootViewController(animated: false)
-            }
-        })
+
+    func navigateToCreatePassword() {
+        let storyboard = UIStoryboard(name: "CreatePassword", bundle: nil)
+        if let createPasswordVC = storyboard.instantiateViewController(withIdentifier: "CreatePasswordVC") as? CreatePasswordVC {
+            createPasswordVC.mobileNumber = mobileNumber
+            createPasswordVC.modalPresentationStyle = .fullScreen
+            self.present(createPasswordVC, animated: true)
+        }
     }
-    
+
+    func navigateToProfile() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else { return }
+
+        // Dismiss all modals and reset root if needed
+        if let rootVC = window.rootViewController {
+            rootVC.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    @IBAction func closeTapped(_ sender: UIButton) {
+        navigateToProfile()
+    }
+
+    @IBAction func goBackTapped(_ sender: UIButton) {
+        navigateToProfile()
+    }
+
     func showAlert(_ message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
-    }
-    
-    @IBAction func closeTapped(_ sender: UIButton) {
-        dismiss(animated: true)
-    }
-    
-    @IBAction func goBackTapped(_ sender: UIButton) {
-        dismiss(animated: true)
     }
 }

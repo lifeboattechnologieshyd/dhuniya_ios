@@ -70,7 +70,7 @@ class NetworkManager {
         if let at = UserDefaults.standard.string(forKey: "accesstoken") {
             request.setValue("Bearer \(at)", forHTTPHeaderField: "Authorization")
         }
-
+        print(UserDefaults.standard.string(forKey: "accesstoken"))
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(.serverError(error.localizedDescription)))
@@ -134,6 +134,11 @@ class Session {
                 UserDefaults.standard.removeObject(forKey: "userDetails")
             }
         }
+    }
+    
+    func logout() {
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.synchronize()
     }
 
     var isUserLoggedIn: Bool {

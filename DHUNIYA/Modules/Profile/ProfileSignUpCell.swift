@@ -23,6 +23,9 @@ class ProfileSignUpCell: UITableViewCell {
     @IBOutlet weak var earningImgVw: UIView!
     @IBOutlet weak var imgViewProfie: UIImageView!
     @IBOutlet weak var userVw: UIView!
+    var signUpClicked: (() -> Void)?
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,7 +44,7 @@ class ProfileSignUpCell: UITableViewCell {
     
     
     @IBAction func signUpTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name("open_login_from_profile"), object: nil)
+        signUpClicked!()
     }
     
     
@@ -61,8 +64,10 @@ class ProfileSignUpCell: UITableViewCell {
         lblMyEarnings.isHidden = !Session.shared.isUserLoggedIn
         withdrawBtn.isHidden = !Session.shared.isUserLoggedIn
         withdrawVw.isHidden = !Session.shared.isUserLoggedIn
+        
         lblUserName.text = Session.shared.userName
         lblPhoneNumber.text = Session.shared.mobileNumber
+        
         if Session.shared.isUserLoggedIn {
             lblMyEarnings.removeBlur()
             withdrawBtn.removeBlur()

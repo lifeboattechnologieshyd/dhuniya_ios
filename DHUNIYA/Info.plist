@@ -51,3 +51,8 @@
 	<string>Light</string>
 </dict>
 </plist>
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>

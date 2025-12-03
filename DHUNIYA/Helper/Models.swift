@@ -18,18 +18,15 @@ struct NewsModel: Codable {
 }
 
 struct CheckUserMobileResponse: Codable {
-    let message: String
+    let message: String?
     let isLoginWithPassword: Bool
-    let profileImage: String?
-    let username: String
-
+    
     enum CodingKeys: String, CodingKey {
         case message
         case isLoginWithPassword = "is_login_with_password"
-        case profileImage = "profile_image"
-        case username
     }
 }
+
 
 struct LoginResponse: Codable {
     let isSetPassword: Bool
@@ -46,39 +43,21 @@ struct LoginResponse: Codable {
 }
 
 struct ProfileDetails: Codable {
-    let id: Int
-    let password: String
-    let lastLogin: String?
-    let isSuperuser: Bool
-    let fullName: String
-    let username: String
-    let profileImage: String
-    let email: String?
-    let mobile: Int64
-    let gender: String
-    let dob: String
-    let deviceId: String
-    let fcmId: String
-    let userStatus: String
-    let earnings: Double
-    let totalEarnings: Double
-    let referralCode: String
-    let canChangeReferralCode: Bool
-    let canChangeUsername: Bool
-    let userRole: [String]
-    let isActive: Bool
-    let isStaff: Bool
-    let customPermissions: [String]
-    let state: String?
-    let district: String?
-    let mandal: String?
-    let village: String?
-    let city: String?
-    let newDistrict: String?
-    let createdBy: String
-    let updatedBy: String
-    let groups: [String]
-    let userPermissions: [String]
+        let id: Int?
+        let full_name: String?
+        let username: String?
+        let referral_code: String?
+        let can_change_referral_code: Bool?
+        let profile_image: String?
+        let email: String?
+        let mobile: Int?
+        let earnings: Double?
+        let total_earnings: Double?
+        let user_role: [String]?
+        let can_change_username: Bool?
+        let dob: String?
+        let gender: String?
+    }
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -115,7 +94,7 @@ struct ProfileDetails: Codable {
         case groups
         case userPermissions = "user_permissions"
     }
-}
+
 struct LikeResponse: Codable {
     let success: Bool
     let errorCode: Int
@@ -179,29 +158,17 @@ struct SendOtpInfo: Codable {
     }
 }
 struct VerifyInfo: Codable {
-    var access_token = ""
-    var refresh_token = ""
-    var is_set_password = false
-    
-    init(json: [String: Any]) {
-        if let token = json["access_token"] as? String { self.access_token = token }
-        if let token = json["refresh_token"] as? String { self.refresh_token = token }
-        if let isSet = json["is_set_password"] as? Bool { self.is_set_password = isSet }
-    }
+    var access_token : String?
+    var refresh_token : String?
+    var is_set_password : Bool?
 }
-struct ForgotPasswordResponse: Codable {
-    let success: Bool
-    let description: String?
-    let info: ProfileDetails?
+enum UserRole: String {
+    case ENDUSER = "ENDUSER"
+    case REPORTER = "REPORTER"
+    case NEWSADMIN = "NEWS-ADMIN"
 }
-var isForgotPasswordFlow = false
 
-struct CreatePasswordResponse: Codable {
-    let success: Bool
-    let description: String?
-    let info: ProfileDetails?
-}
-extension Notification.Name {
-    static let login = Notification.Name("login")
-    static let dismissLoginPopups = Notification.Name("dismiss_login_popups")
-}
+
+
+
+

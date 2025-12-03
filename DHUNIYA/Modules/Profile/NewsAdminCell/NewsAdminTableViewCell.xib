@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="ciE-d6-Kxf" customClass="NewsAdminTableViewCell" customModule="DHUNIYA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="613" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ciE-d6-Kxf" id="Bv4-Mt-qSG">
+                <rect key="frame" x="0.0" y="0.0" width="613" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fio-xR-DCm">
+                        <rect key="frame" x="16" y="6" width="581" height="68"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News Admin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOB-fp-h9Q">
+                                <rect key="frame" x="12" y="23.666666666666671" width="95" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0078431372550000003" green="0.50196078430000002" blue="1" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKW-gx-KwG">
+                                <rect key="frame" x="539" y="26" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="7rr-9I-EaS"/>
+                                    <constraint firstAttribute="width" constant="16" id="dsQ-Ag-BPi"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="plus"/>
+                                <connections>
+                                    <action selector="onBtnClickAddNews:" destination="ciE-d6-Kxf" eventType="touchUpInside" id="a0v-K8-NUp"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lw-Br-fus">
+                                <rect key="frame" x="514" y="10" width="1" height="48"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="xYl-FU-euT"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRn-HL-hnK">
+                                <rect key="frame" x="474" y="26" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="GyQ-AV-aZ5"/>
+                                    <constraint firstAttribute="width" constant="16" id="hm1-5D-5Lx"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="quality"/>
+                                <connections>
+                                    <action selector="onBtnClickApprovedNews:" destination="ciE-d6-Kxf" eventType="touchUpInside" id="axZ-Gp-Prv"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NhX-gL-RDU">
+                                <rect key="frame" x="449" y="10" width="1" height="48"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="AUU-fK-7oA"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izC-g3-KBT">
+                                <rect key="frame" x="409" y="26" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="HSD-uu-FR1"/>
+                                    <constraint firstAttribute="width" constant="16" id="rgG-Wr-RVy"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="file"/>
+                                <connections>
+                                    <action selector="onBtnClickPendingNews:" destination="ciE-d6-Kxf" eventType="touchUpInside" id="rZf-6R-RZm"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MKD-id-164">
+                                <rect key="frame" x="384" y="10" width="1" height="48"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="GkB-Jv-5kp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="izC-g3-KBT" firstAttribute="leading" secondItem="MKD-id-164" secondAttribute="trailing" constant="24" id="3gG-Ng-lfV"/>
+                            <constraint firstItem="3lw-Br-fus" firstAttribute="centerY" secondItem="IKW-gx-KwG" secondAttribute="centerY" id="7oV-2a-1a3"/>
+                            <constraint firstItem="MKD-id-164" firstAttribute="top" secondItem="fio-xR-DCm" secondAttribute="top" constant="10" id="Cdr-bD-pvh"/>
+                            <constraint firstItem="3lw-Br-fus" firstAttribute="top" secondItem="fio-xR-DCm" secondAttribute="top" constant="10" id="E9L-wJ-tqF"/>
+                            <constraint firstAttribute="bottom" secondItem="NhX-gL-RDU" secondAttribute="bottom" constant="10" id="G9V-oe-saz"/>
+                            <constraint firstItem="FRn-HL-hnK" firstAttribute="centerY" secondItem="IKW-gx-KwG" secondAttribute="centerY" id="JIc-21-Hdp"/>
+                            <constraint firstItem="NhX-gL-RDU" firstAttribute="leading" secondItem="izC-g3-KBT" secondAttribute="trailing" constant="24" id="LSw-tb-bZp"/>
+                            <constraint firstAttribute="bottom" secondItem="3lw-Br-fus" secondAttribute="bottom" constant="10" id="M3B-au-x8U"/>
+                            <constraint firstItem="izC-g3-KBT" firstAttribute="centerY" secondItem="FRn-HL-hnK" secondAttribute="centerY" id="Mij-Z4-rsw"/>
+                            <constraint firstItem="NhX-gL-RDU" firstAttribute="top" secondItem="fio-xR-DCm" secondAttribute="top" constant="10" id="QaZ-r1-YAj"/>
+                            <constraint firstItem="3lw-Br-fus" firstAttribute="leading" secondItem="FRn-HL-hnK" secondAttribute="trailing" constant="24" id="X6T-Qc-yf7"/>
+                            <constraint firstItem="DOB-fp-h9Q" firstAttribute="leading" secondItem="fio-xR-DCm" secondAttribute="leading" constant="12" id="YZ7-7b-xDP"/>
+                            <constraint firstAttribute="trailing" secondItem="IKW-gx-KwG" secondAttribute="trailing" constant="26" id="a7n-oX-Ozw"/>
+                            <constraint firstItem="FRn-HL-hnK" firstAttribute="leading" secondItem="NhX-gL-RDU" secondAttribute="trailing" constant="24" id="d7O-in-wl3"/>
+                            <constraint firstAttribute="bottom" secondItem="MKD-id-164" secondAttribute="bottom" constant="10" id="eNE-WV-Cfc"/>
+                            <constraint firstItem="IKW-gx-KwG" firstAttribute="leading" secondItem="3lw-Br-fus" secondAttribute="trailing" constant="24" id="hjA-SO-QlC"/>
+                            <constraint firstItem="IKW-gx-KwG" firstAttribute="centerY" secondItem="DOB-fp-h9Q" secondAttribute="centerY" id="jPT-Cy-HwW"/>
+                            <constraint firstItem="DOB-fp-h9Q" firstAttribute="centerY" secondItem="fio-xR-DCm" secondAttribute="centerY" id="y6k-ff-IUt"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fio-xR-DCm" firstAttribute="top" secondItem="Bv4-Mt-qSG" secondAttribute="top" constant="6" id="9wB-aQ-nlL"/>
+                    <constraint firstAttribute="trailing" secondItem="fio-xR-DCm" secondAttribute="trailing" constant="16" id="U6u-L5-Fel"/>
+                    <constraint firstAttribute="bottom" secondItem="fio-xR-DCm" secondAttribute="bottom" constant="6" id="n3g-WH-1jv"/>
+                    <constraint firstItem="fio-xR-DCm" firstAttribute="leading" secondItem="Bv4-Mt-qSG" secondAttribute="leading" constant="16" id="yYw-n7-e0a"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="4ti-6u-hx3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="btnAddNews" destination="IKW-gx-KwG" id="VmW-Mk-qQm"/>
+                <outlet property="btnApprovedNews" destination="FRn-HL-hnK" id="7Ia-kH-zaR"/>
+                <outlet property="btnPendingNews" destination="izC-g3-KBT" id="iji-Cq-jIb"/>
+                <outlet property="lblTitle" destination="DOB-fp-h9Q" id="Vff-SF-a6X"/>
+                <outlet property="newsAdminView" destination="fio-xR-DCm" id="UjL-xK-zjh"/>
+            </connections>
+            <point key="canvasLocation" x="362.59541984732823" y="-40.845070422535215"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="file" width="16" height="16"/>
+        <image name="plus" width="16" height="16"/>
+        <image name="quality" width="16" height="16"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

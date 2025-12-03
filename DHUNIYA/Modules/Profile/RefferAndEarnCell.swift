@@ -26,7 +26,6 @@ class RefferAndEarnCell: UITableViewCell {
     @IBOutlet weak var lblRefferText: UILabel!
     @IBOutlet weak var referalCodeBlurView: UIView!
     
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         addDottedBorder()
@@ -54,6 +53,7 @@ class RefferAndEarnCell: UITableViewCell {
             }
         }
     }
+    
     @IBAction func btnEditReferralCodeTapped(_ sender: UIButton) {
         if let parentVC = self.parentViewController() {
             let storyboard = UIStoryboard(name: "Profile", bundle: nil)
@@ -62,6 +62,16 @@ class RefferAndEarnCell: UITableViewCell {
             }
         }
     }
-
-
+    
+    func configure() {
+        if let code = Session.shared.userDetails?.referral_code, !code.isEmpty {
+            lblreferalCode.text = code
+            referalCodeBlurView.isHidden = true
+        } else {
+            lblreferalCode.text = ""
+            referalCodeBlurView.isHidden = false
+        }
+        
+        btnEditReferralCode.isHidden = !(Session.shared.userDetails?.can_change_referral_code ?? false)
+    }
 }

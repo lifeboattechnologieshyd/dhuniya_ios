@@ -149,6 +149,16 @@ extension UIViewController {
         present(alert, animated: true)
     }
 }
+/// Dismiss all modals presented on top of root VC
+func dismissAllPresented(animated: Bool = false, completion: (() -> Void)? = nil) {
+    var rootVC = UIApplication.shared.windows.first { $0.isKeyWindow }?.rootViewController
+    while let presented = rootVC?.presentedViewController {
+        rootVC = presented
+    }
+    rootVC?.presentingViewController?.dismiss(animated: animated, completion: completion)
+}
+
+
     
 extension Date {
     func timeAgo() -> String {

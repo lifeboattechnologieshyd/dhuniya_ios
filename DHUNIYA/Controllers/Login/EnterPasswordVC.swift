@@ -6,7 +6,6 @@
 //
 import UIKit
 
-
 class EnterPasswordVC: UIViewController {
     
     var mobileNumber: String?
@@ -40,15 +39,24 @@ class EnterPasswordVC: UIViewController {
         
     }
     
+    // Central dismiss function
+    func dismissToProfile() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else { return }
+        
+        // Dismiss all modals
+        window.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func btnCloseTapped(_ sender: UIButton) {
-        dismiss(animated: true)
+        dismissToProfile()
     }
     
     @IBAction func btnGoBackTapped(_ sender: UIButton) {
-        dismiss(animated: true)
+        dismissToProfile()
     }
     
-    // ✅ Forgot Password Button
+    // Forgot Password Button
     @IBAction func btnForgotPasswordTapped(_ sender: UIButton) {
         // Mark this as forgot password flow
         Session.shared.isForgotPasswordFlow = true
@@ -59,7 +67,7 @@ class EnterPasswordVC: UIViewController {
     @IBAction func btnProceedTapped(_ sender: UIButton) {
         let password = txtFieldPassword.text ?? ""
         if password.isEmpty {
-            showAlert(message: "Please enter your password")
+            showCustomAlert(message: "Please enter your password")
             return
         }
         checkLogin()
@@ -76,7 +84,7 @@ class EnterPasswordVC: UIViewController {
         }
     }
     
-    // ✅ Forgot Password API Request
+    // Forgot Password API Request
     func requestForgotPassword() {
         let params = [
             "mobile": mobileNumber ?? ""
@@ -93,18 +101,18 @@ class EnterPasswordVC: UIViewController {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.showAlert(message: response.description)
+                        self.showCustomAlert(message: response.description)
                     }
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.showAlert(message: error.localizedDescription)
+                    self.showCustomAlert(message: error.localizedDescription)
                 }
             }
         }
     }
     
-    // ✅ Check Login API
+    // Check Login API
     func checkLogin() {
         let payload: [String:Any] = [
             "mobile" : self.mobileNumber ?? "",
@@ -119,18 +127,17 @@ class EnterPasswordVC: UIViewController {
                     if let data = response.info {
                         Session.shared.isUserLoggedIn = true
                         Session.shared.mobileNumber = self.mobileNumber ?? ""
-                        Session.shared.userName = data.profileDetails.username
+                        Session.shared.userName = data.profileDetails.username ?? ""
                         Session.shared.accesstoken = data.accessToken
                         Session.shared.refreshtoken = data.refreshToken
-                        Session.shared.userroles = data.profileDetails.userRole
+                        Session.shared.userroles = data.profileDetails.user_role ?? []
                         DispatchQueue.main.async {
                             self.navigateToProfileVC()
-                            NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
                         }
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.showAlert(message: response.description)
+                        self.showCustomAlert(message: response.description)
                     }
                 }
             case .failure(let error):
@@ -141,6 +148,7 @@ class EnterPasswordVC: UIViewController {
     
     // Navigate to Profile VC
     func navigateToProfileVC() {
+        NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let window = windowScene.windows.first,
@@ -149,4 +157,12 @@ class EnterPasswordVC: UIViewController {
             }
         })
     }
+    
+    // Renamed alert to avoid ambiguity
+    func showCustomAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
 }
+

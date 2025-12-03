@@ -13,12 +13,14 @@ class LogoutCell: UITableViewCell {
     @IBOutlet weak var lblLogout: UILabel!
     @IBOutlet weak var lblVersion: UILabel!
     @IBOutlet weak var viewLogout: UIView!
+    var logoutClicked: (() -> Void)?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     @IBAction func logoutTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: NSNotification.Name("logout_clicked"), object: nil)
+        logoutClicked!()
     }
 }

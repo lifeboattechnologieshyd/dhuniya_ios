@@ -36,25 +36,17 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
             name: Notification.Name("profile_reload"),
             object: nil
         )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(openLoginFromProfile),
-            name: Notification.Name("open_login_from_profile"),
-            object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleLogoutClicked),
-            name: Notification.Name("logout_clicked"),
-            object: nil
-        )
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        TblVw.reloadData()     // FIXES referral code not showing
+    }
     
     @objc func reloadProfile() {
-        TblVw.reloadData()
+        DispatchQueue.main.async { // Ensure reload on main thread
+            self.TblVw.reloadData()
+        }
     }
     
     @objc func openLoginFromProfile() {
@@ -68,19 +60,17 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func showLoginPopup() {
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
-            
-            // FIX FOR BLACK BLINKING
-            loginVC.modalPresentationStyle = .overFullScreen
-            loginVC.modalTransitionStyle = .crossDissolve
-            
-            present(loginVC, animated: true)
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
+                loginVC.modalPresentationStyle = .overFullScreen
+                loginVC.modalTransitionStyle = .crossDissolve
+                self.present(loginVC, animated: true)
+            }
         }
     }
-
     
-    func navigateToTerms(){
+    func navigateToTerms() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "WebViewViewController") as? WebViewViewController {
             self.navigationController?.pushViewController(vc, animated: true)
@@ -104,9 +94,14 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSignUpCell", for: indexPath) as! ProfileSignUpCell
             cell.configure()
+            cell.signUpClicked = { [weak self] in
+                self?.openLoginFromProfile()
+            }
             return cell
         case 1:
-            return tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath) as! RefferAndEarnCell
+            cell.configure()
+            return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileListCell", for: indexPath) as! ProfileListCell
             cell.lblText.text = titles[indexPath.row]
@@ -125,7 +120,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
                     mail.setMessageBody("Hello Team,\n\n", isHTML: false)
                     self.present(mail, animated: true)
                 } else {
-                    self.showSimpleAlert("Your device is not configured to send emails.")
+                    self.showAlert(message: "Your device is not configured to send emails.")
                 }
             }
             
@@ -148,7 +143,11 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             return cell
             
         case 4:
-            return tableView.dequeueReusableCell(withIdentifier: "LogoutCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LogoutCell", for: indexPath) as! LogoutCell
+            cell.logoutClicked = { [weak self] in
+                self?.handleLogoutClicked()
+            }
+            return cell
             
         default:
             return UITableViewCell()
@@ -178,13 +177,10 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         
         if !Session.shared.isUserLoggedIn {
             tableView.deselectRow(at: indexPath, animated: false)
-
-            DispatchQueue.main.async {
-                self.showLoginPopup()
-            }
+            DispatchQueue.main.async { self.showLoginPopup() }
             return
         }
-
+        
         let title = titles[indexPath.row]
         
         switch title {
@@ -219,13 +215,6 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ProfileVC {
-    
-    func showSimpleAlert(_ message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
     func showLogoutAlert() {
         let alert = UIAlertController(
             title: "Logout",
@@ -235,9 +224,7 @@ extension ProfileVC {
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: { _ in
-            Session.shared.isUserLoggedIn = false
-            Session.shared.mobileNumber = ""
-            Session.shared.userName = ""
+            Session.shared.logout()
             self.TblVw.reloadData()
         }))
         
@@ -257,5 +244,11 @@ extension UIViewController {
             return tab.selectedViewController?.topMostViewController() ?? tab
         }
         return self
+    }
+    
+    func CustomshowAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        topMostViewController().present(alert, animated: true)
     }
 }
