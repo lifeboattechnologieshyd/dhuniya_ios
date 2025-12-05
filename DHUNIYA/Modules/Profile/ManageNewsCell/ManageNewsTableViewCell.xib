@@ -34,6 +34,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="plus"/>
+                                <connections>
+                                    <action selector="onBtnClickAddNews:" destination="Wcx-To-0we" eventType="touchUpInside" id="5bF-Ca-4gT"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNS-tm-b4V">
                                 <rect key="frame" x="426" y="10" width="1" height="56"/>
@@ -50,6 +53,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="draft"/>
+                                <connections>
+                                    <action selector="onBtnClickDraftNews:" destination="Wcx-To-0we" eventType="touchUpInside" id="0HL-ZV-Q4Q"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOL-Ox-iLS">
                                 <rect key="frame" x="361" y="10" width="1" height="56"/>
@@ -66,6 +72,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="home-icon-silhouette"/>
+                                <connections>
+                                    <action selector="onBtnClickNewsProfile:" destination="Wcx-To-0we" eventType="touchUpInside" id="vPg-Si-aX1"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fn6-gk-T9t">
                                 <rect key="frame" x="296" y="10" width="1" height="56"/>
@@ -103,6 +112,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
+                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="jzm-S8-81Z" firstAttribute="leading" secondItem="9XD-Cp-gsa" secondAttribute="leading" constant="16" id="Biw-wg-bNN"/>
                     <constraint firstAttribute="bottom" secondItem="jzm-S8-81Z" secondAttribute="bottom" constant="6" id="cWM-Ie-lb4"/>
@@ -112,6 +122,13 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="mw4-JP-OQZ"/>
             <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+            <connections>
+                <outlet property="btnAddNews" destination="DrJ-ae-55k" id="A8X-ub-fYv"/>
+                <outlet property="btnDrafts" destination="WeG-cn-nSu" id="AyG-jd-eNe"/>
+                <outlet property="btnNewsProfile" destination="8bP-LD-WTc" id="Qlu-of-jA2"/>
+                <outlet property="lblTitle" destination="IVV-R1-rl1" id="zky-5o-Q7B"/>
+                <outlet property="manageNewsview" destination="jzm-S8-81Z" id="flP-0y-dtX"/>
+            </connections>
             <point key="canvasLocation" x="295.41984732824426" y="35.211267605633807"/>
         </tableViewCell>
     </objects>
@@ -123,7 +140,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

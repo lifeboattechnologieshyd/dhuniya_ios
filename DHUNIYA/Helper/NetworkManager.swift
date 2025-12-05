@@ -4,7 +4,7 @@
 //
 //  Created by Lifeboat on 28/11/25.
 //
-
+import UIKit
 import Foundation
 
 enum HTTPMethod: String {
@@ -140,6 +140,23 @@ class Session {
             }
         }
     }
+    var profileImage: UIImage? {
+            get {
+                if let data = UserDefaults.standard.data(forKey: "profileImageData") {
+                    return UIImage(data: data)
+                }
+                return nil
+            }
+            set {
+                if let image = newValue,
+                   let data = image.jpegData(compressionQuality: 0.8) {
+                    UserDefaults.standard.set(data, forKey: "profileImageData")
+                } else {
+                    UserDefaults.standard.removeObject(forKey: "profileImageData")
+                }
+            }
+        }
+    
     
     var isForgotPasswordFlow = false
 

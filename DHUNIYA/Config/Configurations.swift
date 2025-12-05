@@ -42,20 +42,22 @@ struct API {
     
     static let BASE_URL = PLISTVALUES.baseUrl.replacingOccurrences(of: "%2F", with: "/")
    
-        static let SENDOTP = BASE_URL + "userservice/authentication/sendotp"
-        static let LOGIN = BASE_URL + "userservice/authentication"
-        static let VERIFY_OTP = BASE_URL + "user/authentication/mobile/verify-otp"
-        static let SET_PASSWORD = BASE_URL + "user/authentication/set-password"
-        static let CREATE_PASSWORD = BASE_URL + "userservice/authentication/password"
-        static let RESET_PASSWORD = BASE_URL + "userservice/authentication/password/forgot"
-        static let FORGOT_PASSWORD =  BASE_URL + "userservice/authentication/sendotp?is_forgot_password=True"
-        static let NEWS_REPORTER_APPLY = BASE_URL + "news/reporter/apply"
-
-        static let GET_PROFILE = BASE_URL + "userservice/profile"
-        static let EDIT_PROFILE = BASE_URL + "userservice/profile"  // same URL, PUT method for edit
+    static let SENDOTP = BASE_URL + "userservice/authentication/sendotp"
+    static let LOGIN = BASE_URL + "userservice/authentication"
+    static let VERIFY_OTP = BASE_URL + "user/authentication/mobile/verify-otp"
+    static let SET_PASSWORD = BASE_URL + "user/authentication/set-password"
+    static let CREATE_PASSWORD = BASE_URL + "userservice/authentication/password"
+    static let RESET_PASSWORD = BASE_URL + "userservice/authentication/password/forgot"
+    static let FORGOT_PASSWORD =  BASE_URL + "userservice/authentication/sendotp?is_forgot_password=True"
+    static let NEWS_REPORTER_APPLY = BASE_URL + "news/reporter/apply"
     
+    static let GET_PROFILE = BASE_URL + "userservice/profile"
+    static let EDIT_PROFILE = BASE_URL + "userservice/profile"  // same URL, PUT method for edit
+    static let GET_REFERRALS = BASE_URL + "userservice/profile/referral"
+    static let UPDATE_REFERRAL_CODE = BASE_URL + "userservice/profile/referral" // POST update referral code
 
-  
+    
+    
     
     
     static let NEWS_COMMENTS = BASE_URL + "news/posts/comments"

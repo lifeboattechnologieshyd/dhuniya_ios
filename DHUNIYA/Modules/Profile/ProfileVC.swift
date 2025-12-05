@@ -25,6 +25,11 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
 
     // Dynamic UI sections
     var sections: [[ProfileCellType]] = []
+    
+    // MARK:  Referral API
+        var myReferrals: [ReferralUser] = []
+        var isLoadingReferrals = false
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +53,9 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
             name: Notification.Name("profile_reload"),
             object: nil
         )
+        
+        getReferralsAPI()
+            
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -196,8 +204,9 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
 
         case .referAndEarn:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath) as! RefferAndEarnCell
-            cell.configure()
-            return cell
+                        cell.configure()
+                        cell.referrals = myReferrals // pass referrals to cell if needed
+                        return cell
 
         case .listItem(let title, let image):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileListCell", for: indexPath) as! ProfileListCell
@@ -273,6 +282,16 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             case "Terms of Use": navigateToTerms()
             default: break
             }
+        case .manageNews:
+            let sb = UIStoryboard(name: "Reporter", bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "ReporterVC") as? ReporterVC {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case .newsAdmin:
+            let sb = UIStoryboard(name: "Admin", bundle: nil) 
+            if let vc = sb.instantiateViewController(withIdentifier: "AdminVC") as? AdminVC {
+                navigationController?.pushViewController(vc, animated: true)
+            }
         default: break
         }
     }
@@ -330,5 +349,35 @@ extension UIViewController {
             return tab.selectedViewController ?? tab
         }
         return self
+    }
+}
+extension ProfileVC {
+    func getReferralsAPI() {
+        guard !isLoadingReferrals else { return }
+        isLoadingReferrals = true
+        
+        NetworkManager.shared.request(urlString: API.GET_REFERRALS, method: .GET) { [weak self] (result: Result<APIResponse<[ReferralUser]>, NetworkError>) in
+            guard let self = self else { return }
+            self.isLoadingReferrals = false
+            
+            switch result {
+            case .success(let response):
+                print("Referral API Success:", response) // <-- Add this line
+                if response.success {
+                    if let data = response.info {  
+                        self.myReferrals = data
+                        DispatchQueue.main.async {
+                            self.TblVw.reloadData()
+                        }
+                    } else {
+                        print("Referral API returned no data")
+                    }
+                } else {
+                    print("Referral API failed: \(response.description)")
+                }
+            case .failure(let error):
+                print("Referral API error: \(error.localizedDescription)")
+            }
+        }
     }
 }

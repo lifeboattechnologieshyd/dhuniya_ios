@@ -11,7 +11,7 @@ class ReporterVC: UIViewController {
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var lblPhonenumber: UILabel!
     @IBOutlet weak var btnProfilepic: UIButton!
-    @IBOutlet weak var profilrimage: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var backbutton: UIButton!
     @IBOutlet weak var rankVw: UIView!
     @IBOutlet weak var publishVw: UIView!
@@ -35,39 +35,55 @@ class ReporterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.hidesBackButton = true
+        
         tblVw.delegate = self
-        tblVw.dataSource = self
-        
-        
-        tblVw.register(UINib(nibName: "SubmittedNewsCell", bundle: nil), forCellReuseIdentifier: "SubmittedNewsCell")
-        
-    }
-}
-        extension ReporterVC: UITableViewDelegate, UITableViewDataSource {
-            
-            func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-                return 2 
+                tblVw.dataSource = self
+                tblVw.register(UINib(nibName: "SubmittedNewsCell", bundle: nil), forCellReuseIdentifier: "SubmittedNewsCell")
+                
+                setupProfileImageObserver(imageView: profileImage)
             }
             
-            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "SubmittedNewsCell",
-                    for: indexPath
-                ) as! SubmittedNewsCell
-                
-                cell.selectionStyle = .none
-                
-                if indexPath.row == 0 {
-                    cell.newsTitleLbl.text = "First submitted news"
-                } else {
-                    cell.newsTitleLbl.text = "Second submitted news"
-                }
-                
-                return cell
-            }
-            private func tblVw(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-                return tableView.frame.size.height
+            @IBAction func backButtonTapped(_ sender: UIButton) {
+                self.navigationController?.popViewController(animated: true)
             }
         }
+extension ReporterVC: UITableViewDelegate, UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3 // each cell is its own section
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1 // 1 row per section
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SubmittedNewsCell", for: indexPath) as! SubmittedNewsCell
+        cell.selectionStyle = .none
+        
+        if indexPath.section == 0 {
+            cell.newsTitleLbl.text = "First submitted news"
+        } else {
+            cell.newsTitleLbl.text = "Second submitted news"
+        }
+        
+        
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 4// this will now be the gap between rows
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
     
+}

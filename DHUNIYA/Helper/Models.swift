@@ -45,7 +45,7 @@ struct ProfileDetails: Codable {
     let id: Int?
     let full_name: String?
     let username: String?
-    let referral_code: String?
+    var referral_code: String?
     let can_change_referral_code: Bool?
     let profile_image: String?
     let email: String?
@@ -241,3 +241,11 @@ struct FeelItem: Identifiable, Codable, Hashable {
     var isLiked: Bool
     
 }
+// ReferralUser.swift
+struct ReferralUser: Codable {
+    let id: Int
+    let username: String
+    let joinedDate: String
+}
+struct EmptyInfo: Decodable {}
+

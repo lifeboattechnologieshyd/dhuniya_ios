@@ -146,7 +146,18 @@ extension UIViewController {
         }
         rootVC?.presentingViewController?.dismiss(animated: animated, completion: completion)
     }
+    /// Call this in `viewDidLoad()` of any VC where you want the profile image to update
+    func setupProfileImageObserver(imageView: UIImageView) {
+        // Set initial image
+        imageView.image = Session.shared.profileImage
+        
+        // Listen for updates
+        NotificationCenter.default.addObserver(forName: Notification.Name("ProfileImageUpdated"), object: nil, queue: .main) { _ in
+            imageView.image = Session.shared.profileImage
+        }
+    }
 }
+
 
 // MARK: - Date extension
 extension Date {

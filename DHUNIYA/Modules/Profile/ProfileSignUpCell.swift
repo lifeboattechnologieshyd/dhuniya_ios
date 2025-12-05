@@ -31,7 +31,10 @@ class ProfileSignUpCell: UITableViewCell {
         super.awakeFromNib()
         configure()
     }
-    
+    @IBAction func btnProfilePicTapped(_ sender: UIButton) {
+        openImagePicker()
+    }
+
     
     @IBAction func withdrawBtnTapped(_ sender: UIButton) {
         if let parentVC = self.parentViewController() {
@@ -57,30 +60,66 @@ class ProfileSignUpCell: UITableViewCell {
         }
     }
     
-    
     func configure() {
-        // Show/hide views based on login status
-        let loggedIn = Session.shared.isUserLoggedIn
+            let loggedIn = Session.shared.isUserLoggedIn
+            
+            btnSignUp.isHidden = loggedIn
+            userVw.isHidden = !loggedIn
+            lblMyEarnings.isHidden = !loggedIn
+            withdrawBtn.isHidden = !loggedIn
+            withdrawVw.isHidden = !loggedIn
+            
+            lblUserName.text = Session.shared.userName
+            lblPhoneNumber.text = Session.shared.mobileNumber
+            
+            if loggedIn {
+                lblMyEarnings.removeBlur()
+                withdrawBtn.removeBlur()
+                withdrawVw.removeBlur()
+            } else {
+                lblMyEarnings.applyBlur(intensity: 0.98)
+                withdrawBtn.applyBlur(intensity: 0.98)
+                withdrawVw.applyBlur(intensity: 0.98)
+            }
+            
+            // Load profile image from Session
+            if let savedImage = Session.shared.profileImage {
+                imgViewProfie.image = savedImage
+            }
+        }
         
-        btnSignUp.isHidden = loggedIn
-        userVw.isHidden = !loggedIn
-        lblMyEarnings.isHidden = !loggedIn
-        withdrawBtn.isHidden = !loggedIn
-        withdrawVw.isHidden = !loggedIn
         
-        // Update user info
-        lblUserName.text = Session.shared.userName
-        lblPhoneNumber.text = Session.shared.mobileNumber
-        
-        // Handle blur effect
-        if loggedIn {
-            lblMyEarnings.removeBlur()
-            withdrawBtn.removeBlur()
-            withdrawVw.removeBlur()
-        } else {
-            lblMyEarnings.applyBlur(intensity: 0.98)
-            withdrawBtn.applyBlur(intensity: 0.98)
-            withdrawVw.applyBlur(intensity: 0.98)
+        @objc func updateProfileImage() {
+            imgViewProfie.image = Session.shared.profileImage
         }
     }
-}
+
+    extension ProfileSignUpCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+        func openImagePicker() {
+            guard let parentVC = self.parentViewController() else { return }
+
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            picker.sourceType = .photoLibrary
+            parentVC.present(picker, animated: true)
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+            if let selectedImage = info[.originalImage] as? UIImage {
+
+                // Set inside cell
+                self.imgViewProfie.image = selectedImage
+
+                // Save globally in Session
+                Session.shared.profileImage = selectedImage
+
+                // Notify all other screens
+                NotificationCenter.default.post(name: Notification.Name("ProfileImageUpdated"), object: nil)
+            }
+
+            picker.dismiss(animated: true)
+        }
+    }
