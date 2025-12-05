@@ -113,7 +113,6 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         }
     }
 
-    // OTP Field Setup
     func setupOTPFields() {
         let fields = [otfTf1, otpTf2, otpTf3, otpTf4]
         for tf in fields {
@@ -163,27 +162,47 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         proceedButton.alpha = valid ? 1 : 0.5
     }
 
-    //  Verify OTP
     @IBAction func proceedButtonTapped(_ sender: UIButton) {
         let otp = "\(otfTf1.text ?? "")\(otpTf2.text ?? "")\(otpTf3.text ?? "")\(otpTf4.text ?? "")"
-        if otp.count != 4 { showAlert("Enter 4 digit OTP"); return }
-        guard let mobile = mobileNumber else { showAlert("Mobile missing"); return }
+        if otp.count != 4 {
+            showAlert("Enter 4 digit OTP")
+            return
+        }
+        guard let mobile = mobileNumber else {
+            showAlert("Mobile missing")
+            return
+        }
 
         let params: [String: String] = ["mobile": mobile, "otp": otp]
 
-        NetworkManager.shared.request(urlString: API.LOGIN, method: .POST, parameters: params) { (result: Result<APIResponse<VerifyInfo>, NetworkError>) in
+        NetworkManager.shared.request(urlString: API.LOGIN, method: .POST, parameters: params) { (result: Result<APIResponse<LoginResponse>, NetworkError>) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
                     if response.success {
-                        let info = response.info
+                        // Safely unwrap optional LoginResponse
+                        guard let info = response.info else {
+                            self.showAlert("Login failed: missing profile info")
+                            return
+                        }
+
+                        // Save session tokens
                         Session.shared.mobileNumber = mobile
-                        Session.shared.accesstoken = info!.access_token!
-                        Session.shared.refreshtoken = info!.refresh_token!
+                        Session.shared.accesstoken = info.accessToken
+                        Session.shared.refreshtoken = info.refreshToken
+
+                        // Save full profile details including referral code
+                        Session.shared.userDetails = info.profileDetails
+
+                        // Notify Refer & Earn VC to reload referral code
+                        NotificationCenter.default.post(name: Notification.Name("ReferralCodeUpdated"), object: nil)
+
+                        // Go to next screen
                         self.navigateToCreatePassword()
                     } else {
                         self.showAlert(response.description)
                     }
+
                 case .failure(let error):
                     self.showAlert(error.localizedDescription)
                 }
@@ -204,7 +223,6 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }
 
-        // Dismiss all modals and reset root if needed
         if let rootVC = window.rootViewController {
             rootVC.dismiss(animated: true, completion: nil)
         }

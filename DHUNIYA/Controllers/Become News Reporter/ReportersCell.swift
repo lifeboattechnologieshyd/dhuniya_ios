@@ -8,6 +8,10 @@ import UIKit
 
 class ReportersCell: UITableViewCell {
     
+    var isChecked: Bool = false
+    var onSubmitTapped: (() -> Void)?
+    
+    
     @IBOutlet weak var tamilButton: UIButton!
     @IBOutlet weak var kannadaButton: UIButton!
     @IBOutlet weak var marathiButton: UIButton!
@@ -35,8 +39,40 @@ class ReportersCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layoutIfNeeded()          // Force correct size
+        layoutIfNeeded()
         uploadView.addDottedBorder()
     }
+    @IBAction func onTapuncheckboxButtonx(_ sender: UIButton) {
+        isChecked.toggle()
+        uncheckboxButton.setImage(UIImage(named: isChecked ? "checked_box" : "Unchecked_box"), for: .normal)
+    }
+    @IBAction func onTapSubmitButton(_ sender: UIButton) {
+        onSubmitTapped?()
+    }
+    @IBAction func tamilButtonTapped(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
+    @IBAction func kannadaButtonTapped(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    @IBAction func marathiButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
+    @IBAction func hindiButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    @IBAction func teluguButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
+    @IBAction func malayalamButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    @IBAction func englishButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
     
 }

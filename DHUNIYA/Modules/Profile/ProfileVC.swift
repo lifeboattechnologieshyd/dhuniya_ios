@@ -8,28 +8,40 @@
 import UIKit
 import MessageUI
 
+enum ProfileCellType {
+    case signup
+    case manageNews
+    case newsAdmin
+//    case listings
+    case referAndEarn
+    case listItem(title: String, image: String)
+    case bottomHeader
+    case logout
+}
+
 class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
-    
+
     @IBOutlet weak var TblVw: UITableView!
-    
-    let titles = ["My Dhuniya", "Settings & Preferences", "My Referrals",
-                  "Become a News Reporter", "Terms of Use"]
-    
-    let images = ["my_dhuniya", "settings", "myreferrals",
-                  "newsreporter", "terms"]
-    
+
+    // Dynamic UI sections
+    var sections: [[ProfileCellType]] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        TblVw.delegate = self
-        TblVw.dataSource = self
-        
+
+        TblVw.delegate = self as any UITableViewDelegate
+        TblVw.dataSource = self as any UITableViewDataSource
+
+        // Register all new cells
         TblVw.register(UINib(nibName: "ProfileSignUpCell", bundle: nil), forCellReuseIdentifier: "ProfileSignUpCell")
         TblVw.register(UINib(nibName: "RefferAndEarnCell", bundle: nil), forCellReuseIdentifier: "RefferAndEarnCell")
         TblVw.register(UINib(nibName: "ProfileListCell", bundle: nil), forCellReuseIdentifier: "ProfileListCell")
         TblVw.register(UINib(nibName: "BottomHeaderListCell", bundle: nil), forCellReuseIdentifier: "BottomHeaderListCell")
         TblVw.register(UINib(nibName: "LogoutCell", bundle: nil), forCellReuseIdentifier: "LogoutCell")
-        
+        TblVw.register(UINib(nibName: "ManageNewsTableViewCell", bundle: nil), forCellReuseIdentifier: "ManageNewsTableViewCell")
+        TblVw.register(UINib(nibName: "NewsAdminTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsAdminTableViewCell")
+        TblVw.register(UINib(nibName: "ListingsTableViewCell", bundle: nil), forCellReuseIdentifier: "ListingsTableViewCell")
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(reloadProfile),
@@ -37,28 +49,101 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
             object: nil
         )
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        TblVw.reloadData()     // FIXES referral code not showing
+        buildSections() // Role UI
+        TblVw.reloadData()
     }
-    
+
+    func buildSections() {
+        sections.removeAll()
+
+        if !Session.shared.isUserLoggedIn {
+            // Pre-login layout
+            sections = [
+                [.signup],
+                [.referAndEarn],
+                [
+                    .listItem(title: "Settings & Preferences", image: "settings"),
+                    .listItem(title: "My Referrals", image: "myreferrals"),
+                    .listItem(title: "Become a News Reporter", image: "newsreporter"),
+                    .listItem(title: "Terms of Use", image: "terms")
+                ],
+                [.bottomHeader]
+            ]
+            return
+        }
+
+        // Post-login: populate based on roles
+        if Session.shared.userDetails?.user_role?.contains(UserRole.ENDUSER.rawValue) ?? false {
+            sections = [
+                [.signup],
+                [.referAndEarn],
+                [
+//                    .listItem(title: "My Dhuniya", image: "my_dhuniya"),
+                    .listItem(title: "Settings & Preferences", image: "settings"),
+                    .listItem(title: "My Referrals", image: "myreferrals"),
+                    .listItem(title: "Become a News Reporter", image: "newsreporter"),
+                    .listItem(title: "Terms of Use", image: "terms")
+                ],
+                [.bottomHeader],
+                [.logout]
+            ]
+        }
+
+        if Session.shared.userDetails?.user_role?.contains(UserRole.REPORTER.rawValue) ?? false {
+            sections = [
+                [.signup],
+                [.manageNews],
+                [.referAndEarn],
+                [
+//                    .listItem(title: "My Dhuniya", image: "my_dhuniya"),
+                    .listItem(title: "Settings & Preferences", image: "settings"),
+                    .listItem(title: "My Referrals", image: "myreferrals"),
+                    .listItem(title: "Terms of Use", image: "terms")
+                ],
+                [.bottomHeader],
+                [.logout]
+            ]
+        }
+
+        if Session.shared.userDetails?.user_role?.contains(UserRole.NEWSADMIN.rawValue) ?? false {
+            sections = [
+                [.signup],
+                [.manageNews],
+                [.newsAdmin],
+//                [.listings],
+                [.referAndEarn],
+                [
+//                    .listItem(title: "My Dhuniya", image: "my_dhuniya"),
+                    .listItem(title: "Settings & Preferences", image: "settings"),
+                    .listItem(title: "My Referrals", image: "myreferrals"),
+                    .listItem(title: "Terms of Use", image: "terms")
+                ],
+                [.bottomHeader],
+                [.logout]
+            ]
+        }
+    }
+
     @objc func reloadProfile() {
-        DispatchQueue.main.async { // Ensure reload on main thread
+        DispatchQueue.main.async {
+            self.buildSections()
             self.TblVw.reloadData()
         }
     }
-    
+
     @objc func openLoginFromProfile() {
         showLoginPopup()
     }
-    
+
     @objc func handleLogoutClicked() {
         if Session.shared.isUserLoggedIn {
             showLogoutAlert()
         }
     }
-    
+
     func showLoginPopup() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -69,7 +154,7 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
             }
         }
     }
-    
+
     func navigateToTerms() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "WebViewViewController") as? WebViewViewController {
@@ -78,36 +163,49 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
     }
 }
 
+// MARK: UITableView Delegate & DataSource
 extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int { return 5 }
-    
+
+    func numberOfSections(in tableView: UITableView) -> Int { sections.count }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 4 { return Session.shared.isUserLoggedIn ? 1 : 0 }
-        return section == 2 ? titles.count : 1
+        sections[section].count
     }
-    
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        switch indexPath.section {
-        case 0:
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = sections[indexPath.section][indexPath.row]
+
+        switch item {
+        case .signup:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSignUpCell", for: indexPath) as! ProfileSignUpCell
             cell.configure()
-            cell.signUpClicked = { [weak self] in
-                self?.openLoginFromProfile()
-            }
+            cell.signUpClicked = { [weak self] in self?.openLoginFromProfile() }
             return cell
-        case 1:
+
+        case .manageNews:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ManageNewsTableViewCell", for: indexPath) as! ManageNewsTableViewCell
+            return cell
+
+        case .newsAdmin:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NewsAdminTableViewCell", for: indexPath) as! NewsAdminTableViewCell
+            return cell
+
+//        case .listings:
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "ListingsTableViewCell", for: indexPath) as! ListingsTableViewCell
+//            return cell
+
+        case .referAndEarn:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath) as! RefferAndEarnCell
             cell.configure()
             return cell
-        case 2:
+
+        case .listItem(let title, let image):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileListCell", for: indexPath) as! ProfileListCell
-            cell.lblText.text = titles[indexPath.row]
-            cell.imgVw.image = UIImage(named: images[indexPath.row])
+            cell.lblText.text = title
+            cell.imgVw.image = UIImage(named: image)
             return cell
-        case 3:
+
+        case .bottomHeader:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BottomHeaderListCell", for: indexPath) as! BottomHeaderListCell
             cell.contactUs = { [weak self] in
                 guard let self = self else { return }
@@ -120,10 +218,9 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
                     mail.setMessageBody("Hello Team,\n\n", isHTML: false)
                     self.present(mail, animated: true)
                 } else {
-                    self.showAlert(message: "Your device is not configured to send emails.")
+                    self.showAlert(message: "Your device cannot send emails.")
                 }
             }
-            
             cell.shareApp = { [weak self] in
                 guard let self = self else { return }
                 if !Session.shared.isUserLoggedIn { self.showLoginPopup(); return }
@@ -131,7 +228,6 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
                 let vc = UIActivityViewController(activityItems: [text], applicationActivities: nil)
                 self.present(vc, animated: true)
             }
-            
             cell.rateUs = { [weak self] in
                 guard let self = self else { return }
                 if !Session.shared.isUserLoggedIn { self.showLoginPopup(); return }
@@ -139,76 +235,65 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
                     UIApplication.shared.open(url)
                 }
             }
-            
             return cell
-            
-        case 4:
+
+        case .logout:
             let cell = tableView.dequeueReusableCell(withIdentifier: "LogoutCell", for: indexPath) as! LogoutCell
-            cell.logoutClicked = { [weak self] in
-                self?.handleLogoutClicked()
-            }
+            cell.logoutClicked = { [weak self] in self?.handleLogoutClicked() }
             return cell
-            
-        default:
-            return UITableViewCell()
         }
     }
-    
-    func tableView(_ tableView: UITableView,
-                   heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0,1: return 214
-        case 2: return 70
-        case 3: return 100
-        case 4: return Session.shared.isUserLoggedIn ? 64 : 0
-        default: return UITableView.automaticDimension
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = sections[indexPath.section][indexPath.row]
+        switch item {
+        case .signup: return 204
+        case.referAndEarn: return 200
+        case .manageNews, .newsAdmin : return 56
+        case .listItem: return 70
+        case .bottomHeader: return 100
+        case .logout: return Session.shared.isUserLoggedIn ? 64 : 0
         }
     }
-    
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 4 {
-            if Session.shared.isUserLoggedIn { showLogoutAlert() }
-            return
-        }
-        
-        guard indexPath.section == 2 else { return }
-        
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = sections[indexPath.section][indexPath.row]
+
         if !Session.shared.isUserLoggedIn {
-            tableView.deselectRow(at: indexPath, animated: false)
-            DispatchQueue.main.async { self.showLoginPopup() }
+            showLoginPopup()
             return
         }
-        
-        let title = titles[indexPath.row]
-        
-        switch title {
-        case "Settings & Preferences": navigateToSettings()
-        case "My Referrals": navigateToReferAndEarn()
-        case "Become a News Reporter": navigateToBecomeReporter()
-        case "Terms of Use": navigateToTerms()
+
+        switch item {
+        case .listItem(let title, _):
+            switch title {
+            case "Settings & Preferences": navigateToSettings()
+            case "My Referrals": navigateToReferAndEarn()
+            case "Become a News Reporter": navigateToBecomeReporter()
+            case "Terms of Use": navigateToTerms()
+            default: break
+            }
         default: break
         }
     }
-    
+
     func navigateToSettings() {
-        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as? SettingsVC {
+        let sb = UIStoryboard(name: "Settings", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "SettingsVC") as? SettingsVC {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+
     func navigateToReferAndEarn() {
-        let storyboard = UIStoryboard(name: "Refer&Earn", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "ReferAndEarnVC") as? ReferAndEarnVC {
+        let sb = UIStoryboard(name: "Refer&Earn", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "ReferAndEarnVC") as? ReferAndEarnVC {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+
     func navigateToBecomeReporter() {
-        let storyboard = UIStoryboard(name: "BecomeNewsReporter", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "BecomeNewsReporterVC") as? BecomeNewsReporterVC {
+        let sb = UIStoryboard(name: "BecomeNewsReporter", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "BecomeNewsReporterVC") as? BecomeNewsReporterVC {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -221,13 +306,14 @@ extension ProfileVC {
             message: "Are you sure you want to logout?",
             preferredStyle: .alert
         )
-        
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: { _ in
             Session.shared.logout()
+            self.buildSections()
             self.TblVw.reloadData()
         }))
-        
+
         present(alert, animated: true)
     }
 }
@@ -238,17 +324,11 @@ extension UIViewController {
             return presented.topMostViewController()
         }
         if let nav = self as? UINavigationController {
-            return nav.visibleViewController?.topMostViewController() ?? nav
+            return nav.visibleViewController ?? nav
         }
         if let tab = self as? UITabBarController {
-            return tab.selectedViewController?.topMostViewController() ?? tab
+            return tab.selectedViewController ?? tab
         }
         return self
-    }
-    
-    func CustomshowAlert(message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        topMostViewController().present(alert, animated: true)
     }
 }

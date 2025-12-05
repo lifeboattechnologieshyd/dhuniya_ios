@@ -22,11 +22,33 @@ enum NetworkError: Error {
     case serverError(String)
 }
 
+struct APIResponse<T: Decodable>: Decodable {
+    let success: Bool
+    let errorCode: Int
+    let total: Int?
+    let description: String
+    let info: T?
+
+    enum CodingKeys: String, CodingKey {
+        case success, errorCode, description, total, info
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        success = try container.decode(Bool.self, forKey: .success)
+        errorCode = try container.decode(Int.self, forKey: .errorCode)
+        description = try container.decode(String.self, forKey: .description)
+        total = try? container.decode(Int.self, forKey: .total)
+        info = try? container.decodeIfPresent(T.self, forKey: .info)
+    }
+}
+
 class NetworkManager {
+
     static let shared = NetworkManager()
-    
     private init() {}
-    /// this method will be used to connect to server and gibves us res[onse back
+
+    // Generic request function
     func request<T: Decodable>(
         urlString: String,
         method: HTTPMethod = .GET,
@@ -34,7 +56,6 @@ class NetworkManager {
         headers: [String: String]? = nil,
         completion: @escaping (Result<APIResponse<T>, NetworkError>) -> Void
     ) {
-        
         guard var urlComponents = URLComponents(string: urlString) else {
             completion(.failure(.invalidURL))
             return
@@ -45,19 +66,23 @@ class NetworkManager {
                 URLQueryItem(name: key, value: "\(value)")
             }
         }
-        
+
         guard let url = urlComponents.url else {
             completion(.failure(.invalidURL))
             return
         }
-        print(url)
+
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
+
+        // Headers
         if let headers = headers {
             for (key, value) in headers {
                 request.setValue(value, forHTTPHeaderField: key)
             }
         }
+
+        // Body for POST / PUT
         if let parameters = parameters, method == .POST || method == .PUT {
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -67,57 +92,37 @@ class NetworkManager {
                 return
             }
         }
-        if let at = UserDefaults.standard.string(forKey: "accesstoken") {
-            request.setValue("Bearer \(at)", forHTTPHeaderField: "Authorization")
+
+        // Authorization token
+        if let token = UserDefaults.standard.string(forKey: "accesstoken") {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-        print(UserDefaults.standard.string(forKey: "accesstoken"))
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(.serverError(error.localizedDescription)))
                 return
             }
+
             guard let data = data else {
                 completion(.failure(.noData))
                 return
             }
+
             do {
-                print(String.init(data: data, encoding: .utf8) ?? "-----")
-                if let httpResponse = response as? HTTPURLResponse {
-                    if (200...399).contains(httpResponse.statusCode)  {
-                        print("✅ Success: Status code is \(httpResponse.statusCode)")
-                        let decodedData = try JSONDecoder().decode(APIResponse<T>.self, from: data)
-                        completion(.success(decodedData))
-                    }else {
-                        if httpResponse.statusCode == 401 {
-                            completion(.failure(.noaccess))
-                        }else{
-                            print("❌ Error: Status code is \(httpResponse.statusCode)")
-                            completion(.failure(.noData))
-                        }
-                    }
-                }
+                let decodedData = try JSONDecoder().decode(APIResponse<T>.self, from: data)
+                completion(.success(decodedData))
             } catch {
                 completion(.failure(.decodingError(error.localizedDescription)))
             }
         }.resume()
     }
+
+   
 }
-
-
-
-struct APIResponse<T: Decodable>: Decodable {
-    let success: Bool
-    let errorCode: Int
-    let total : Int?
-    let description: String
-    let info: T?
-}
-
-
-
-import Foundation
 
 class Session {
+
     static let shared = Session()
     
     var userDetails: ProfileDetails? {
@@ -136,31 +141,34 @@ class Session {
         }
     }
     
-    func logout() {
-        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-        UserDefaults.standard.synchronize()
-    }
+    var isForgotPasswordFlow = false
 
     var isUserLoggedIn: Bool {
         get { UserDefaults.standard.bool(forKey: "isUserLoggedIn") }
         set { UserDefaults.standard.set(newValue, forKey: "isUserLoggedIn") }
     }
     
+    func logout() {
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.synchronize()
+    }
+
+
     var mobileNumber: String {
         get { UserDefaults.standard.string(forKey: "mobileNumber") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "mobileNumber") }
     }
-    
+
     var userName: String {
         get { UserDefaults.standard.string(forKey: "userName") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "userName") }
     }
-    
+
     var accesstoken: String {
         get { UserDefaults.standard.string(forKey: "accesstoken") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "accesstoken") }
     }
-    
+
     var refreshtoken: String {
         get { UserDefaults.standard.string(forKey: "refreshtoken") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "refreshtoken") }
@@ -170,10 +178,4 @@ class Session {
         get { UserDefaults.standard.array(forKey: "userroles") as? [String] ?? [] }
         set { UserDefaults.standard.set(newValue, forKey: "userroles") }
     }
-    
-    // Added
-    var isForgotPasswordFlow: Bool = false
 }
-
-  
-struct EmptyResponse: Codable {}

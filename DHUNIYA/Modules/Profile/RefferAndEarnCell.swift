@@ -26,6 +26,16 @@ class RefferAndEarnCell: UITableViewCell {
     @IBOutlet weak var lblRefferText: UILabel!
     @IBOutlet weak var referalCodeBlurView: UIView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Listen for referral code updates
+        NotificationCenter.default.addObserver(self, selector: #selector(referralCodeUpdated), name: Notification.Name("ReferralCodeUpdated"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         addDottedBorder()
@@ -64,6 +74,15 @@ class RefferAndEarnCell: UITableViewCell {
     }
     
     func configure() {
+        updateReferralCode()
+        btnEditReferralCode.isHidden = !(Session.shared.userDetails?.can_change_referral_code ?? false)
+    }
+    
+    @objc private func referralCodeUpdated() {
+        updateReferralCode()
+    }
+    
+    private func updateReferralCode() {
         if let code = Session.shared.userDetails?.referral_code, !code.isEmpty {
             lblreferalCode.text = code
             referalCodeBlurView.isHidden = true
@@ -71,7 +90,5 @@ class RefferAndEarnCell: UITableViewCell {
             lblreferalCode.text = ""
             referalCodeBlurView.isHidden = false
         }
-        
-        btnEditReferralCode.isHidden = !(Session.shared.userDetails?.can_change_referral_code ?? false)
     }
 }

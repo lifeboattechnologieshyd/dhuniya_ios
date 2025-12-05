@@ -123,7 +123,7 @@
                 <outlet property="lblTitle" destination="xs6-jG-kYg" id="Wbz-tt-SkW"/>
                 <outlet property="listingsView" destination="MLP-EY-8cP" id="NeV-fN-v6Y"/>
             </connections>
-            <point key="canvasLocation" x="232" y="-90"/>
+            <point key="canvasLocation" x="230.53435114503816" y="-90.140845070422543"/>
         </tableViewCell>
     </objects>
     <resources>

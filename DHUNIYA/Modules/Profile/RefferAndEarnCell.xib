@@ -53,7 +53,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lX5-4W-Sng">
-                                <rect key="frame" x="12.000000000000007" y="41.333333333333336" width="107.66666666666669" height="17.666666666666664"/>
+                                <rect key="frame" x="12.000000000000007" y="41.333333333333336" width="107.66666666666669" height="27.333333333333336"/>
                                 <attributedString key="attributedText">
                                     <fragment content="My referral code">
                                         <attributes>
@@ -64,7 +64,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rr-2C-Dg2">
-                                <rect key="frame" x="12" y="67" width="260" height="40"/>
+                                <rect key="frame" x="12" y="76.666666666666671" width="260" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhr-Nt-f7T">
                                         <rect key="frame" x="197" y="8" width="1" height="24"/>
@@ -74,7 +74,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7V-R5-IsA">
-                                        <rect key="frame" x="208" y="2.6666666666666714" width="50" height="35"/>
+                                        <rect key="frame" x="208" y="2.6666666666666572" width="50" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Acj-wa-zs9"/>
                                             <constraint firstAttribute="height" constant="35" id="cJv-G8-5zw"/>
@@ -128,7 +128,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9S-yZ-oX4">
-                                <rect key="frame" x="14" y="127" width="114" height="32"/>
+                                <rect key="frame" x="14" y="136.66666666666666" width="114" height="32"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharing" translatesAutoresizingMaskIntoConstraints="NO" id="K90-Ie-UMI">
                                         <rect key="frame" x="8" y="8" width="16" height="16"/>
@@ -181,7 +181,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0p-u7-pEq">
-                                <rect key="frame" x="449" y="127" width="32" height="32"/>
+                                <rect key="frame" x="451" y="136.66666666666666" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="Dio-Ok-PqN"/>
                                     <constraint firstAttribute="height" constant="32" id="Ltf-Bf-Equ"/>
@@ -190,17 +190,17 @@
                                 <state key="normal" title="Button" image="insta"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUb-ZQ-4o7">
-                                <rect key="frame" x="405" y="127" width="32" height="32"/>
+                                <rect key="frame" x="407" y="136.66666666666666" width="32" height="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="fb"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBD-33-zZn">
-                                <rect key="frame" x="361" y="127" width="32" height="32"/>
+                                <rect key="frame" x="363" y="136.66666666666666" width="32" height="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="telegram"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbE-vG-NDp">
-                                <rect key="frame" x="317" y="127" width="32" height="32"/>
+                                <rect key="frame" x="319" y="136.66666666666666" width="32" height="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="whatsappshare"/>
                             </button>
@@ -222,7 +222,7 @@
                             <constraint firstItem="nIn-eN-k8U" firstAttribute="top" secondItem="4eJ-g3-eaj" secondAttribute="top" constant="12" id="bCd-kD-mV1"/>
                             <constraint firstAttribute="trailing" secondItem="OKm-hi-U05" secondAttribute="trailing" constant="12" id="d7W-im-Zts"/>
                             <constraint firstItem="k0p-u7-pEq" firstAttribute="leading" secondItem="aUb-ZQ-4o7" secondAttribute="trailing" constant="12" id="eXG-D2-eBr"/>
-                            <constraint firstAttribute="trailing" secondItem="k0p-u7-pEq" secondAttribute="trailing" constant="22" id="gGT-H9-4wp"/>
+                            <constraint firstAttribute="trailing" secondItem="k0p-u7-pEq" secondAttribute="trailing" constant="20" id="gGT-H9-4wp"/>
                             <constraint firstItem="2rr-2C-Dg2" firstAttribute="leading" secondItem="lX5-4W-Sng" secondAttribute="leading" id="jyO-vx-jLQ"/>
                             <constraint firstItem="c9S-yZ-oX4" firstAttribute="top" secondItem="2rr-2C-Dg2" secondAttribute="bottom" constant="20" id="kpe-3Y-ijY"/>
                             <constraint firstItem="QBD-33-zZn" firstAttribute="leading" secondItem="jbE-vG-NDp" secondAttribute="trailing" constant="12" id="kt9-Xe-Q1r"/>
@@ -230,6 +230,7 @@
                             <constraint firstItem="aUb-ZQ-4o7" firstAttribute="height" secondItem="k0p-u7-pEq" secondAttribute="height" id="me8-0g-xd8"/>
                             <constraint firstItem="aUb-ZQ-4o7" firstAttribute="leading" secondItem="QBD-33-zZn" secondAttribute="trailing" constant="12" id="ptj-Rm-Lef"/>
                             <constraint firstItem="2rr-2C-Dg2" firstAttribute="top" secondItem="lX5-4W-Sng" secondAttribute="bottom" constant="8" id="tfl-pP-uac"/>
+                            <constraint firstItem="k0p-u7-pEq" firstAttribute="top" secondItem="OKm-hi-U05" secondAttribute="bottom" constant="104" id="zDf-u9-kJP"/>
                             <constraint firstItem="jbE-vG-NDp" firstAttribute="height" secondItem="QBD-33-zZn" secondAttribute="height" id="ztq-ED-Lck"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>

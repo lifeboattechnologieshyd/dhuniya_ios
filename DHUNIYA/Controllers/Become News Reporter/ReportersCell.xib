@@ -93,6 +93,9 @@
                                 <rect key="frame" x="-3.3333333333333357" y="-5.3333333333333144" width="79" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="English"/>
+                                <connections>
+                                    <action selector="englishButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jbz-wb-Bqa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -130,6 +133,9 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="teluguButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dwk-Tn-Kfd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -159,6 +165,9 @@
                                 <color key="tintColor" red="0.014184816919999999" green="0.014184816919999999" blue="0.014184816919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Hindi"/>
+                                <connections>
+                                    <action selector="hindiButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Pkk-xo-mTH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -188,6 +197,9 @@
                                 <color key="tintColor" red="0.014184816919999999" green="0.014184816919999999" blue="0.014184816919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Kannada"/>
+                                <connections>
+                                    <action selector="kannadaButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="H4Q-eE-Sta"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -217,6 +229,9 @@
                                 <color key="tintColor" red="0.014184816919999999" green="0.014184816919999999" blue="0.014184816919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Tamil"/>
+                                <connections>
+                                    <action selector="tamilButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XKg-gy-LnB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -246,6 +261,9 @@
                                 <color key="tintColor" red="0.014184816919999999" green="0.014184816919999999" blue="0.014184816919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Marathi"/>
+                                <connections>
+                                    <action selector="marathiButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tFf-Ed-hn3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -275,6 +293,9 @@
                                 <color key="tintColor" red="0.014184816919999999" green="0.014184816919999999" blue="0.014184816919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Malayalam"/>
+                                <connections>
+                                    <action selector="malayalamButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WtM-Ku-E9B"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -357,7 +378,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Size: 1 Mb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wgp-qs-zJV">
-                                <rect key="frame" x="290.33333333333331" y="7" width="70.666666666666686" height="13"/>
+                                <rect key="frame" x="283.33333333333331" y="7" width="70.666666666666686" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="13" id="JfH-OU-5KQ"/>
                                 </constraints>
@@ -366,7 +387,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TGA-Er-e0Q" firstAttribute="centerX" secondItem="9u7-LM-ply" secondAttribute="centerX" id="VAV-4f-yNa"/>
                             <constraint firstItem="TGA-Er-e0Q" firstAttribute="top" secondItem="9u7-LM-ply" secondAttribute="bottom" constant="11" id="XQc-BW-T1b"/>
@@ -374,7 +395,7 @@
                             <constraint firstItem="9u7-LM-ply" firstAttribute="leading" secondItem="W8E-1N-sgc" secondAttribute="leading" constant="122.67" id="cA3-ir-XJs"/>
                             <constraint firstItem="Wgp-qs-zJV" firstAttribute="top" secondItem="W8E-1N-sgc" secondAttribute="top" constant="7" id="rGS-XL-kmx"/>
                             <constraint firstItem="9u7-LM-ply" firstAttribute="top" secondItem="W8E-1N-sgc" secondAttribute="top" constant="14" id="v0z-xZ-XaS"/>
-                            <constraint firstAttribute="trailing" secondItem="Wgp-qs-zJV" secondAttribute="trailing" constant="5" id="zDh-OO-EbH"/>
+                            <constraint firstAttribute="trailing" secondItem="Wgp-qs-zJV" secondAttribute="trailing" constant="12" id="zDh-OO-EbH"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCD-Qn-CTP">
@@ -385,9 +406,12 @@
                         </constraints>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="Unchecked_box"/>
+                        <connections>
+                            <action selector="onTapuncheckboxButtonx:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cmb-bQ-CdT"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I hereby declare and undertake that the above information belongs to me and is true, complete &amp; correct in all aspects" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUJ-36-vRt">
-                        <rect key="frame" x="34" y="875" width="320" height="55"/>
+                        <rect key="frame" x="34" y="867" width="320" height="55"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="55" id="fjW-n5-332"/>
                         </constraints>
@@ -396,7 +420,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxY-jS-Reu">
-                        <rect key="frame" x="16" y="948" width="164" height="48"/>
+                        <rect key="frame" x="16" y="940" width="164" height="48"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="164" id="WTS-Fz-uUf"/>
                             <constraint firstAttribute="height" constant="48" id="xlU-d5-bgg"/>
@@ -417,7 +441,7 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="auT-bS-Kgu">
-                        <rect key="frame" x="218" y="948" width="164" height="48"/>
+                        <rect key="frame" x="218" y="940" width="164" height="48"/>
                         <color key="backgroundColor" systemColor="tableCellBlueTextColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="BtU-hz-paJ"/>
@@ -426,8 +450,12 @@
                         <color key="tintColor" systemColor="tableBackgroundColor"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="SUBMIT"/>
+                        <connections>
+                            <action selector="onTapSubmitButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WJe-aI-PEh"/>
+                        </connections>
                     </button>
                 </subviews>
+                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="qxY-jS-Reu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="0ML-sf-VST"/>
                     <constraint firstAttribute="trailing" secondItem="UGa-vk-UVn" secondAttribute="trailing" constant="232" id="1Uf-aB-oDs"/>
@@ -471,7 +499,7 @@
                     <constraint firstItem="npO-We-5aL" firstAttribute="leading" secondItem="OCP-ht-Oid" secondAttribute="leading" id="i8g-f1-K3C"/>
                     <constraint firstItem="W8E-1N-sgc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="iAY-Xt-Y7g"/>
                     <constraint firstItem="0NG-M7-7el" firstAttribute="leading" secondItem="eno-ws-j5K" secondAttribute="trailing" constant="16" id="jWM-vc-RXi"/>
-                    <constraint firstItem="LUJ-36-vRt" firstAttribute="top" secondItem="W8E-1N-sgc" secondAttribute="bottom" constant="28" id="l9n-wh-cDC"/>
+                    <constraint firstItem="LUJ-36-vRt" firstAttribute="top" secondItem="W8E-1N-sgc" secondAttribute="bottom" constant="20" id="l9n-wh-cDC"/>
                     <constraint firstItem="Rcx-w3-8r8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="mR0-Bq-IoX"/>
                     <constraint firstItem="qxY-jS-Reu" firstAttribute="top" secondItem="LUJ-36-vRt" secondAttribute="bottom" constant="18" id="ocL-9d-CeH"/>
                     <constraint firstItem="hPv-qT-J54" firstAttribute="top" secondItem="94x-Si-bmg" secondAttribute="bottom" constant="16" id="owG-aT-1rt"/>
@@ -487,7 +515,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
             <connections>
                 <outlet property="cancelButton" destination="qxY-jS-Reu" id="YJe-4E-OVp"/>
                 <outlet property="englishButton" destination="KC5-cY-6rC" id="8Dn-G6-eBG"/>
@@ -522,14 +550,14 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="tableBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tableCellBlueTextColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -27,12 +27,11 @@ struct CheckUserMobileResponse: Codable {
     }
 }
 
-
 struct LoginResponse: Codable {
     let isSetPassword: Bool
     let refreshToken: String
     let accessToken: String
-    let profileDetails: ProfileDetails
+    let profileDetails: ProfileDetails?
 
     enum CodingKeys: String, CodingKey {
         case isSetPassword = "is_set_password"
@@ -43,57 +42,78 @@ struct LoginResponse: Codable {
 }
 
 struct ProfileDetails: Codable {
-        let id: Int?
-        let full_name: String?
-        let username: String?
-        let referral_code: String?
-        let can_change_referral_code: Bool?
-        let profile_image: String?
-        let email: String?
-        let mobile: Int?
-        let earnings: Double?
-        let total_earnings: Double?
-        let user_role: [String]?
-        let can_change_username: Bool?
-        let dob: String?
-        let gender: String?
-    }
-
+    let id: Int?
+    let full_name: String?
+    let username: String?
+    let referral_code: String?
+    let can_change_referral_code: Bool?
+    let profile_image: String?
+    let email: String?
+    let mobile: Int?
+    let earnings: Double?
+    let total_earnings: Double?
+    let user_role: [String]?
+    let can_change_username: Bool?
+    let dob: String?
+    let gender: String?
+    
+    // Added fields from API
+    let password: String?
+    let last_login: String?
+    let is_superuser: Bool?
+    let device_id: String?
+    let fcm_id: String?
+    let user_status: String?
+    let is_active: Bool?
+    let is_staff: Bool?
+    let custom_permissions: [String]?
+    let state: String?
+    let district: String?
+    let mandal: String?
+    let village: String?
+    let city: String?
+    let new_district: String?
+    let created_by: String?
+    let updated_by: String?
+    let groups: [String]?
+    let user_permissions: [String]?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case password
-        case lastLogin = "last_login"
-        case isSuperuser = "is_superuser"
-        case fullName = "full_name"
+        case last_login
+        case is_superuser
+        case full_name
         case username
-        case profileImage = "profile_image"
+        case profile_image
         case email
         case mobile
         case gender
         case dob
-        case deviceId = "device_id"
-        case fcmId = "fcm_id"
-        case userStatus = "user_status"
+        case device_id
+        case fcm_id
+        case user_status
         case earnings
-        case totalEarnings = "total_earnings"
-        case referralCode = "referral_code"
-        case canChangeReferralCode = "can_change_referral_code"
-        case canChangeUsername = "can_change_username"
-        case userRole = "user_role"
-        case isActive = "is_active"
-        case isStaff = "is_staff"
-        case customPermissions = "custom_permissions"
+        case total_earnings
+        case referral_code
+        case can_change_referral_code
+        case can_change_username
+        case user_role
+        case is_active
+        case is_staff
+        case custom_permissions
         case state
         case district
         case mandal
         case village
         case city
-        case newDistrict = "new_district"
-        case createdBy = "created_by"
-        case updatedBy = "updated_by"
+        case new_district
+        case created_by
+        case updated_by
         case groups
-        case userPermissions = "user_permissions"
+        case user_permissions
     }
+}
 
 struct LikeResponse: Codable {
     let success: Bool
@@ -106,6 +126,7 @@ struct LikeResponse: Codable {
 struct LikeInfo: Codable {
     let message: String
 }
+
 struct DislikeResponse: Codable {
     let success: Bool
     let errorCode: Int
@@ -121,7 +142,7 @@ struct DislikeInfo: Codable {
 struct CommentModel: Codable {
     let comment_id: String
     let created_date: String
-    let updation_date: String?      
+    let updation_date: String?
     let user_master_id: String
     let username: String?
     let profile_image: String?
@@ -136,6 +157,7 @@ struct CommentModel: Codable {
 struct CommentResponse: Codable {
     let message: String?
 }
+
 struct SendOtpResponse: Codable {
     let success: Bool
     let errorCode: Int
@@ -157,18 +179,65 @@ struct SendOtpInfo: Codable {
         case username
     }
 }
+
 struct VerifyInfo: Codable {
-    var access_token : String?
-    var refresh_token : String?
-    var is_set_password : Bool?
+    var access_token: String?
+    var refresh_token: String?
+    var is_set_password: Bool?
+    var referral_code: String?    
 }
+
+
 enum UserRole: String {
     case ENDUSER = "ENDUSER"
     case REPORTER = "REPORTER"
     case NEWSADMIN = "NEWS-ADMIN"
 }
+struct EmptyResponse: Codable {}
 
+struct NewsReporterApplyInfo: Codable {
+    let message: String
+}
 
+struct NewsReporterApplyResponse: Codable {
+    let success: Bool
+    let errorCode: Int
+    let description: String
+    let total: Int
+    let info: NewsReporterApplyInfo
+}
+struct ProfileResponse: Codable {
+    let success: Bool
+    let errorCode: Int
+    let description: String
+    let total: Int
+    let info: [ProfileDetails]   // Use ProfileDetails here
+}
 
-
-
+struct ProfileInfo: Codable {
+    let id: Int
+    let username: String
+    let mobile: Int
+    let dob: String?
+    let gender: String
+}
+struct EditProfileRequest: Codable {
+    let username: String?
+    let mobile: String?
+    let dob: String?
+    let gender: String?
+}
+struct FeelItem: Identifiable, Codable, Hashable {
+    let id: String
+    let youtubeVideo: URL?
+    let title: String
+    let description: String
+    let thumbnailImage: String?
+    let likesCount: Int
+    let shareCount: Int
+    let viewsCount: Int
+    let score: Int
+    let category: String
+    var isLiked: Bool
+    
+}

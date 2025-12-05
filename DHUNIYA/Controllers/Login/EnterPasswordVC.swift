@@ -32,7 +32,7 @@ class EnterPasswordVC: UIViewController {
         bgView.layer.cornerRadius = 20
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
-
+        
         if let num = mobileNumber {
             lblUsername.text = num
         }
@@ -112,41 +112,50 @@ class EnterPasswordVC: UIViewController {
         }
     }
     
-    // Check Login API
     func checkLogin() {
         let payload: [String:Any] = [
             "mobile" : self.mobileNumber ?? "",
             "password" : self.txtFieldPassword.text ?? ""
         ]
+        
         NetworkManager.shared.request(urlString: API.LOGIN,
                                       method: .POST,
-                                      parameters: payload) { (result: Result<APIResponse<LoginResponse>, NetworkError>)  in
+                                      parameters: payload) { [weak self] (result: Result<APIResponse<LoginResponse>, NetworkError>)  in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let response):
-                if response.success {
-                    if let data = response.info {
-                        Session.shared.isUserLoggedIn = true
-                        Session.shared.mobileNumber = self.mobileNumber ?? ""
-                        Session.shared.userName = data.profileDetails.username ?? ""
-                        Session.shared.accesstoken = data.accessToken
-                        Session.shared.refreshtoken = data.refreshToken
-                        Session.shared.userroles = data.profileDetails.user_role ?? []
-                        DispatchQueue.main.async {
-                            self.navigateToProfileVC()
-                        }
+                if response.success, let data = response.info {
+                    
+                    Session.shared.isUserLoggedIn = true
+                    Session.shared.mobileNumber = self.mobileNumber ?? ""
+                    Session.shared.userName = data.profileDetails?.username ?? ""
+                    Session.shared.accesstoken = data.accessToken
+                    Session.shared.refreshtoken = data.refreshToken
+                    Session.shared.userDetails = data.profileDetails
+                    
+//                    // Convert String array to UserRole array
+//                    if let roles = data.profileDetails?.user_role {
+//                        Session.shared.userRole = roles.compactMap { UserRole(rawValue: $0) }
+//                    }
+//                    
+                    DispatchQueue.main.async {
+                        self.navigateToProfileVC()
                     }
+
                 } else {
                     DispatchQueue.main.async {
                         self.showCustomAlert(message: response.description)
                     }
                 }
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self.showCustomAlert(message: error.localizedDescription)
+                }
             }
         }
     }
     
-    // Navigate to Profile VC
     func navigateToProfileVC() {
         NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {
@@ -158,11 +167,9 @@ class EnterPasswordVC: UIViewController {
         })
     }
     
-    // Renamed alert to avoid ambiguity
     func showCustomAlert(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
     }
 }
-

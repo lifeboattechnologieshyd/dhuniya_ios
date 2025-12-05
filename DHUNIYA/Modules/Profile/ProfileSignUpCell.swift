@@ -59,16 +59,21 @@ class ProfileSignUpCell: UITableViewCell {
     
     
     func configure() {
-        btnSignUp.isHidden = Session.shared.isUserLoggedIn
-        userVw.isHidden = !Session.shared.isUserLoggedIn
-        lblMyEarnings.isHidden = !Session.shared.isUserLoggedIn
-        withdrawBtn.isHidden = !Session.shared.isUserLoggedIn
-        withdrawVw.isHidden = !Session.shared.isUserLoggedIn
+        // Show/hide views based on login status
+        let loggedIn = Session.shared.isUserLoggedIn
         
+        btnSignUp.isHidden = loggedIn
+        userVw.isHidden = !loggedIn
+        lblMyEarnings.isHidden = !loggedIn
+        withdrawBtn.isHidden = !loggedIn
+        withdrawVw.isHidden = !loggedIn
+        
+        // Update user info
         lblUserName.text = Session.shared.userName
         lblPhoneNumber.text = Session.shared.mobileNumber
         
-        if Session.shared.isUserLoggedIn {
+        // Handle blur effect
+        if loggedIn {
             lblMyEarnings.removeBlur()
             withdrawBtn.removeBlur()
             withdrawVw.removeBlur()
