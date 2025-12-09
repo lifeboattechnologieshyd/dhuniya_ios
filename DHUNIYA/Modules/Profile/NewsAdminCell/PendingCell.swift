@@ -15,6 +15,7 @@ class PendingCell: UITableViewCell {
     @IBOutlet weak var newsTitleLbl: UILabel!
     @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var updatedTime: UILabel!
     @IBOutlet weak var languageandcategoryLbl: UILabel!
     @IBOutlet weak var deletebtn: UIButton!
     

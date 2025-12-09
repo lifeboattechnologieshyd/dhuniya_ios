@@ -204,9 +204,9 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
 
         case .referAndEarn:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath) as! RefferAndEarnCell
-                        cell.configure()
-                        cell.referrals = myReferrals // pass referrals to cell if needed
-                        return cell
+            cell.referrals = myReferrals
+            cell.configure()
+            return cell
 
         case .listItem(let title, let image):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileListCell", for: indexPath) as! ProfileListCell

@@ -4,23 +4,23 @@
 //
 //  Created by Lifeboat on 05/12/25.
 //
-
 import UIKit
 
 class AdminVC: UIViewController {
-
+    
     @IBOutlet weak var newsreportersBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var topVw: UIView!
     @IBOutlet weak var tblVw: UITableView!
     @IBOutlet weak var colVw: UICollectionView!
     
-    let statusButtons = ["Approved", "Trending", "Rejected", "Deleted", "Pending"]
-    
+    let statusButtons = ["Pending","Approved", "Trending", "Rejected", "Deleted"]
     var selectedIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.hidesBackButton = true
         
         setupCollectionView()
         setupTableView()
@@ -31,19 +31,20 @@ class AdminVC: UIViewController {
     func setupCollectionView() {
         colVw.delegate = self
         colVw.dataSource = self
+        colVw.showsHorizontalScrollIndicator = false
+        colVw.register(UINib(nibName: "NewsStatusCell", bundle: nil), forCellWithReuseIdentifier: "NewsStatusCell")
         
         if let layout = colVw.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 10
         }
-        
-        colVw.showsHorizontalScrollIndicator = false
-        colVw.register(UINib(nibName: "NewsStatusCell", bundle: nil), forCellWithReuseIdentifier: "NewsStatusCell")
     }
     
     func setupTableView() {
         tblVw.delegate = self
         tblVw.dataSource = self
-        tblVw.register(UITableViewCell.self, forCellReuseIdentifier: "PendingCell")
+        tblVw.separatorStyle = .none
+        tblVw.register(UINib(nibName: "PendingCell", bundle: nil), forCellReuseIdentifier: "PendingCell")
     }
     
     @IBAction func backBtnTapped(_ sender: UIButton) {
@@ -62,46 +63,59 @@ extension AdminVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         let title = statusButtons[indexPath.item]
         cell.configure(with: title)
         
-        // Highlight selected button
-        if indexPath.item == selectedIndex {
-            cell.pendingBtn.backgroundColor = UIColor.systemBlue
-            cell.pendingBtn.setTitleColor(.white, for: .normal)
-        } else {
-            cell.pendingBtn.backgroundColor = UIColor.lightGray
-            cell.pendingBtn.setTitleColor(.black, for: .normal)
-        }
+        cell.backgroundColor = (indexPath.item == selectedIndex) ? UIColor.systemBlue : UIColor.systemGray5
+        cell.clipsToBounds = true
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        collectionView.reloadData() // Update highlight
+        collectionView.reloadData()
         
-        // TODO: Filter table view data based on selected button
-        tblVw.reloadData()
+        tblVw.reloadSections(IndexSet(0..<tblVw.numberOfSections), with: .none)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let title = statusButtons[indexPath.item]
-        let width = title.size(withAttributes: [.font: UIFont.systemFont(ofSize: 16)]).width + 20
+        let width = title.size(withAttributes: [.font: UIFont.systemFont(ofSize: 16)]).width + 30
         return CGSize(width: width, height: 40)
     }
 }
 
 extension AdminVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { 2 }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { 122 }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PendingCell", for: indexPath)
-        cell.textLabel?.text = "\(statusButtons[selectedIndex]) Row \(indexPath.row)"
-        return cell
+        tableView.dequeueReusableCell(withIdentifier: "PendingCell", for: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+    // Bottom spacing between cells
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { 10 }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView()
+        footer.backgroundColor = .clear
+        return footer
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let submitVC = storyboard?.instantiateViewController(withIdentifier: "SubmitNewsVC") as? SubmitNewsVC {
+            navigationController?.pushViewController(submitVC, animated: true)
+        }
+    }
+
+    @IBAction func newsreportersBtnTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Admin", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "ManageNewsReporterVC") as? ManageNewsReporterVC {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
 }

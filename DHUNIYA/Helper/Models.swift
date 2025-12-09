@@ -41,6 +41,7 @@ struct LoginResponse: Codable {
     }
 }
 
+
 struct ProfileDetails: Codable {
     let id: Int?
     let full_name: String?
@@ -56,6 +57,10 @@ struct ProfileDetails: Codable {
     let can_change_username: Bool?
     let dob: String?
     let gender: String?
+    let reporterId: String?
+   let reporterName: String?
+    let name: String?
+
     
     // Added fields from API
     let password: String?
@@ -112,6 +117,9 @@ struct ProfileDetails: Codable {
         case updated_by
         case groups
         case user_permissions
+         case reporterId
+        case reporterName
+        case name
     }
 }
 
@@ -248,4 +256,40 @@ struct ReferralUser: Codable {
     let joinedDate: String
 }
 struct EmptyInfo: Decodable {}
+
+
+struct NewsPayload: Codable {
+    let title: String
+    let description: String
+    let city: [String]
+    let district: [String]
+    let language: String
+    let categories: [String]
+    let image: [String]
+}
+
+    
+extension Encodable {
+    func toDictionary() -> [String: Any]? {
+        guard let data = try? JSONEncoder().encode(self) else { return nil }
+        return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
+    }
+}
+
+
+class UserSession {
+    static let shared = UserSession()
+    
+    private init() {}
+
+    var reporterId: Int?
+    var reporterName: String?
+}
+struct FileUploadResponse: Codable {
+    let success: Bool
+    let errorCode: Int
+    let description: String
+    let total: Int
+    let info: [String]
+}
 

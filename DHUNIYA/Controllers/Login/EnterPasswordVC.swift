@@ -118,9 +118,12 @@ class EnterPasswordVC: UIViewController {
             "password" : self.txtFieldPassword.text ?? ""
         ]
         
-        NetworkManager.shared.request(urlString: API.LOGIN,
-                                      method: .POST,
-                                      parameters: payload) { [weak self] (result: Result<APIResponse<LoginResponse>, NetworkError>)  in
+        NetworkManager.shared.request(
+            urlString: API.LOGIN,
+            method: .POST,
+            parameters: payload
+        ) { [weak self] (result: Result<APIResponse<LoginResponse>, NetworkError>) in
+            
             guard let self = self else { return }
             
             switch result {
@@ -134,11 +137,16 @@ class EnterPasswordVC: UIViewController {
                     Session.shared.refreshtoken = data.refreshToken
                     Session.shared.userDetails = data.profileDetails
                     
-//                    // Convert String array to UserRole array
-//                    if let roles = data.profileDetails?.user_role {
-//                        Session.shared.userRole = roles.compactMap { UserRole(rawValue: $0) }
-//                    }
-//                    
+                    // 🚀 SAVE REPORTER ID + NAME
+                    if let profile = data.profileDetails {
+                        UserSession.shared.reporterId = profile.id
+                        UserSession.shared.reporterName = profile.username ?? ""
+
+                        print("🆔 Reporter ID Saved: \(profile.id)")
+                        print("👤 Reporter Name Saved: \(profile.username ?? "")")
+                    }
+                    
+                    // Navigate
                     DispatchQueue.main.async {
                         self.navigateToProfileVC()
                     }
@@ -148,6 +156,7 @@ class EnterPasswordVC: UIViewController {
                         self.showCustomAlert(message: response.description)
                     }
                 }
+                
             case .failure(let error):
                 DispatchQueue.main.async {
                     self.showCustomAlert(message: error.localizedDescription)
@@ -155,7 +164,7 @@ class EnterPasswordVC: UIViewController {
             }
         }
     }
-    
+
     func navigateToProfileVC() {
         NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {

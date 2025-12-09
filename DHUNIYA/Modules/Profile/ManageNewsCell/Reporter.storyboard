@@ -674,9 +674,89 @@
             </objects>
             <point key="canvasLocation" x="72.51908396946564" y="-27.464788732394368"/>
         </scene>
+        <!--Add NewsVC-->
+        <scene sceneID="ewW-6i-0g3">
+            <objects>
+                <viewController storyboardIdentifier="AddNewsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PIF-eW-fbW" customClass="AddNewsVC" customModule="DHUNIYA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L3D-XS-nqa">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YuZ-MB-M1C">
+                                <rect key="frame" x="0.0" y="59" width="393" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLv-DE-Ner">
+                                        <rect key="frame" x="8" y="8" width="50" height="34.333333333333336"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="LIw-hP-cK2"/>
+                                            <constraint firstAttribute="height" constant="34.329999999999998" id="fzB-b2-tsV"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="arrow.backward" catalog="system" imagePlacement="leading"/>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="PIF-eW-fbW" eventType="touchUpInside" id="WiY-sf-vxe"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MIK-nt-SyU">
+                                        <rect key="frame" x="62" y="13.999999999999998" width="315" height="22.333333333333329"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22.329999999999998" id="AcC-lr-ElY"/>
+                                        </constraints>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Submit News">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="Lexend-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="MIK-nt-SyU" firstAttribute="leading" secondItem="TLv-DE-Ner" secondAttribute="trailing" constant="4" id="0yv-od-zoI"/>
+                                    <constraint firstAttribute="trailing" secondItem="MIK-nt-SyU" secondAttribute="trailing" constant="16" id="3Dc-Ek-K9g"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="5Rp-m7-xKe"/>
+                                    <constraint firstAttribute="height" constant="50" id="6LZ-Yn-deb"/>
+                                    <constraint firstItem="TLv-DE-Ner" firstAttribute="centerY" secondItem="YuZ-MB-M1C" secondAttribute="centerY" id="8gB-r7-qps"/>
+                                    <constraint firstItem="MIK-nt-SyU" firstAttribute="centerY" secondItem="TLv-DE-Ner" secondAttribute="centerY" id="Ekx-qj-xOr"/>
+                                    <constraint firstItem="TLv-DE-Ner" firstAttribute="leading" secondItem="YuZ-MB-M1C" secondAttribute="leading" constant="8" id="Khs-5C-jj5"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gt6-ZD-HCk">
+                                <rect key="frame" x="0.0" y="109" width="393" height="709"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7Kz-ES-bJx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Kz-ES-bJx" firstAttribute="bottom" secondItem="gt6-ZD-HCk" secondAttribute="bottom" id="1rj-5m-dif"/>
+                            <constraint firstItem="YuZ-MB-M1C" firstAttribute="leading" secondItem="7Kz-ES-bJx" secondAttribute="leading" id="2yB-eS-Mto"/>
+                            <constraint firstItem="7Kz-ES-bJx" firstAttribute="trailing" secondItem="gt6-ZD-HCk" secondAttribute="trailing" id="Ak9-BW-3pI"/>
+                            <constraint firstItem="gt6-ZD-HCk" firstAttribute="top" secondItem="YuZ-MB-M1C" secondAttribute="bottom" id="Bl2-rT-FqX"/>
+                            <constraint firstItem="YuZ-MB-M1C" firstAttribute="top" secondItem="7Kz-ES-bJx" secondAttribute="top" id="PKA-cL-3dM"/>
+                            <constraint firstItem="gt6-ZD-HCk" firstAttribute="leading" secondItem="7Kz-ES-bJx" secondAttribute="leading" id="mKC-3R-O1L"/>
+                            <constraint firstItem="YuZ-MB-M1C" firstAttribute="trailing" secondItem="7Kz-ES-bJx" secondAttribute="trailing" id="spe-9u-84v"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backBtn" destination="TLv-DE-Ner" id="uHf-k2-19S"/>
+                        <outlet property="tblVw" destination="gt6-ZD-HCk" id="ex2-4W-FPb"/>
+                        <outlet property="topVw" destination="YuZ-MB-M1C" id="QLI-vv-w6W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mBz-5I-lia" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="862" y="-27"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Close" width="16.333333969116211" height="16.333333969116211"/>
+        <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="earnings" width="23" height="23"/>
         <image name="editphoto" width="14" height="14"/>
         <image name="user_placeholder" width="64" height="64"/>

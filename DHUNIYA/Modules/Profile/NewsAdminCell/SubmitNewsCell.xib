@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SubmitNewsCell" rowHeight="1327" id="KGk-i7-Jjw" customClass="SubmitNewsCell" customModule="DHUNIYA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="423" height="1327"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="423" height="1327"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbb-fY-Fq6">
+                        <rect key="frame" x="16" y="14" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="214" id="UhN-cl-D85"/>
+                            <constraint firstAttribute="height" constant="20" id="cdq-aE-val"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="News Language">
+                                <attributes>
+                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cch-QR-lIx">
+                        <rect key="frame" x="16" y="42" width="72" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CvZ-om-5bo">
+                                <rect key="frame" x="0.6666666666666714" y="-3.6666666666666643" width="71" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="English">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CvZ-om-5bo" firstAttribute="centerX" secondItem="Cch-QR-lIx" secondAttribute="centerX" id="XBK-4N-ReR"/>
+                            <constraint firstAttribute="width" constant="72" id="f5C-Ez-obt"/>
+                            <constraint firstItem="CvZ-om-5bo" firstAttribute="centerY" secondItem="Cch-QR-lIx" secondAttribute="centerY" id="rQi-fh-krH"/>
+                            <constraint firstAttribute="height" constant="24" id="sg5-YQ-LTe"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.12594598530000001" green="0.52918487790000002" blue="0.99968713519999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rE0-Yz-dLN">
+                        <rect key="frame" x="104" y="42" width="72" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2e-XK-hFB">
+                                <rect key="frame" x="3" y="-3.6666666666666643" width="66.333333333333329" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Telugu">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="72" id="2Zf-FL-172"/>
+                            <constraint firstItem="H2e-XK-hFB" firstAttribute="centerX" secondItem="rE0-Yz-dLN" secondAttribute="centerX" id="5ER-Is-IKv"/>
+                            <constraint firstAttribute="height" constant="24" id="9Bc-wN-U3Y"/>
+                            <constraint firstItem="H2e-XK-hFB" firstAttribute="centerY" secondItem="rE0-Yz-dLN" secondAttribute="centerY" id="VpA-VE-ggX"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rxu-ha-Qmc">
+                        <rect key="frame" x="192" y="42" width="72" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgf-rp-Bl8">
+                                <rect key="frame" x="6.6666666666666536" y="-3.6666666666666643" width="58.666666666666657" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Hindi">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Rgf-rp-Bl8" firstAttribute="centerX" secondItem="Rxu-ha-Qmc" secondAttribute="centerX" id="9fJ-Zl-mxL"/>
+                            <constraint firstAttribute="height" constant="24" id="biC-b8-tE6"/>
+                            <constraint firstAttribute="width" constant="72" id="qOJ-2Z-C7b"/>
+                            <constraint firstItem="Rgf-rp-Bl8" firstAttribute="centerY" secondItem="Rxu-ha-Qmc" secondAttribute="centerY" id="tJn-JJ-ShP"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irt-iB-O0I">
+                        <rect key="frame" x="16" y="82" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="yDX-hD-1Mp"/>
+                            <constraint firstAttribute="width" constant="214" id="z93-pM-AF5"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="News Category">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yd8-k1-QPm">
+                        <rect key="frame" x="16" y="110" width="72" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fam-Y6-Coq">
+                                <rect key="frame" x="0.6666666666666714" y="-3.6666666666666714" width="71" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Politics">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fam-Y6-Coq" firstAttribute="centerX" secondItem="Yd8-k1-QPm" secondAttribute="centerX" id="2It-2T-sII"/>
+                            <constraint firstItem="fam-Y6-Coq" firstAttribute="centerY" secondItem="Yd8-k1-QPm" secondAttribute="centerY" id="Z3b-tf-r9y"/>
+                            <constraint firstAttribute="width" constant="72" id="b9v-wY-91B"/>
+                            <constraint firstAttribute="height" constant="24" id="c58-pU-Bzj"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" systemColor="tableCellBlueTextColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1RM-x4-HvY">
+                        <rect key="frame" x="104" y="110" width="72" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bm-5n-uCj">
+                                <rect key="frame" x="2.3333333333333286" y="-3.6666666666666714" width="67.666666666666671" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Sports">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1bm-5n-uCj" firstAttribute="centerY" secondItem="1RM-x4-HvY" secondAttribute="centerY" id="9xo-np-LOy"/>
+                            <constraint firstAttribute="height" constant="24" id="iDi-5I-w4F"/>
+                            <constraint firstAttribute="width" constant="72" id="sp3-rj-yJA"/>
+                            <constraint firstItem="1bm-5n-uCj" firstAttribute="centerX" secondItem="1RM-x4-HvY" secondAttribute="centerX" id="ycC-5e-TJL"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" systemColor="tableCellBlueTextColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttd-kM-4hC">
+                        <rect key="frame" x="192" y="110" width="164" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92x-Fv-y89">
+                                <rect key="frame" x="3" y="-3.6666666666666714" width="158.33333333333334" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="International Affairs">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="BvN-Q0-MDf"/>
+                            <constraint firstItem="92x-Fv-y89" firstAttribute="centerX" secondItem="ttd-kM-4hC" secondAttribute="centerX" id="JAr-iw-mQm"/>
+                            <constraint firstAttribute="width" constant="164" id="in8-Un-YtH"/>
+                            <constraint firstItem="92x-Fv-y89" firstAttribute="centerY" secondItem="ttd-kM-4hC" secondAttribute="centerY" id="yUN-r1-I5V"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXl-iA-fYN">
+                        <rect key="frame" x="16.666666666666671" y="150" width="94" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xJ-0R-Mhf">
+                                <rect key="frame" x="0.6666666666666643" y="-3.6666666666666572" width="92.333333333333343" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Telangana">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="94" id="Psl-yw-d4o"/>
+                            <constraint firstItem="9xJ-0R-Mhf" firstAttribute="centerX" secondItem="bXl-iA-fYN" secondAttribute="centerX" id="R63-f0-S21"/>
+                            <constraint firstItem="9xJ-0R-Mhf" firstAttribute="centerY" secondItem="bXl-iA-fYN" secondAttribute="centerY" id="i4M-Kz-TOR"/>
+                            <constraint firstAttribute="height" constant="24" id="we4-sG-NZr"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DEb-ca-Pta">
+                        <rect key="frame" x="126.66666666666669" y="150" width="94" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQ5-VG-iqL">
+                                <rect key="frame" x="8.9999999999999858" y="-3.6666666666666572" width="76" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Finance">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="94" id="K4c-Jf-D3S"/>
+                            <constraint firstItem="CQ5-VG-iqL" firstAttribute="centerX" secondItem="DEb-ca-Pta" secondAttribute="centerX" id="Pf1-RS-Fiw"/>
+                            <constraint firstAttribute="height" constant="24" id="SUC-16-698"/>
+                            <constraint firstItem="CQ5-VG-iqL" firstAttribute="centerY" secondItem="DEb-ca-Pta" secondAttribute="centerY" id="m8j-Tg-q4j"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L9a-fn-qn9">
+                        <rect key="frame" x="236.66666666666663" y="150" width="70" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1m-Kn-FUu">
+                                <rect key="frame" x="-0.33333333333331439" y="-3.6666666666666572" width="70.333333333333329" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Movies">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="e1m-Kn-FUu" firstAttribute="centerX" secondItem="L9a-fn-qn9" secondAttribute="centerX" id="ADQ-d8-V8r"/>
+                            <constraint firstAttribute="width" constant="70" id="COH-Su-YsK"/>
+                            <constraint firstItem="e1m-Kn-FUu" firstAttribute="centerY" secondItem="L9a-fn-qn9" secondAttribute="centerY" id="WQG-V4-2rp"/>
+                            <constraint firstAttribute="height" constant="24" id="tAr-cN-HY4"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvS-mu-2Jo">
+                        <rect key="frame" x="322.66666666666669" y="150" width="46" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYa-EO-aOy">
+                                <rect key="frame" x="0.66666666666662877" y="-3.6666666666666572" width="44.333333333333336" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Art">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dYa-EO-aOy" firstAttribute="centerX" secondItem="LvS-mu-2Jo" secondAttribute="centerX" id="1GH-q0-8fd"/>
+                            <constraint firstItem="dYa-EO-aOy" firstAttribute="centerY" secondItem="LvS-mu-2Jo" secondAttribute="centerY" id="Khb-RE-tl0"/>
+                            <constraint firstAttribute="width" constant="46" id="M07-ys-vcw"/>
+                            <constraint firstAttribute="height" constant="24" id="o9R-JA-Sym"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCI-HY-DuR">
+                        <rect key="frame" x="17.333333333333329" y="190" width="82" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBh-Qh-nKn">
+                                <rect key="frame" x="1.3333333333333357" y="-3.6666666666666572" width="79.666666666666657" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Start-up">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Kl3-tj-Kk0"/>
+                            <constraint firstAttribute="width" constant="82" id="alQ-cb-qRI"/>
+                            <constraint firstItem="zBh-Qh-nKn" firstAttribute="centerY" secondItem="nCI-HY-DuR" secondAttribute="centerY" id="hFN-HV-7q3"/>
+                            <constraint firstItem="zBh-Qh-nKn" firstAttribute="centerX" secondItem="nCI-HY-DuR" secondAttribute="centerX" id="sSB-By-AKg"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoI-3h-rZA">
+                        <rect key="frame" x="115.33333333333331" y="190" width="108" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRE-UE-kTd">
+                                <rect key="frame" x="0.6666666666666714" y="-3.6666666666666572" width="107" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Cars &amp; Bikes">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="OoZ-77-OLw"/>
+                            <constraint firstAttribute="width" constant="108" id="Oui-Y0-d8J"/>
+                            <constraint firstItem="PRE-UE-kTd" firstAttribute="centerY" secondItem="eoI-3h-rZA" secondAttribute="centerY" id="TRQ-en-Esx"/>
+                            <constraint firstItem="PRE-UE-kTd" firstAttribute="centerX" secondItem="eoI-3h-rZA" secondAttribute="centerX" id="grj-CP-VIR"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgr-iI-vbQ">
+                        <rect key="frame" x="16" y="232" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="214" id="DLc-CJ-1Vz"/>
+                            <constraint firstAttribute="height" constant="20" id="YZF-Uh-ESx"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="News Title">
+                                <attributes>
+                                    <color key="NSColor" red="0.0013415404040404422" green="0.0013415404040404422" blue="0.0013415404040404422" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uVM-Yb-tqc">
+                        <rect key="frame" x="16" y="260" width="391" height="78"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="78" id="BXW-9I-hzm"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="Rohit Sharma is set to Lead India in the upcoming World Cup">
+                                <attributes>
+                                    <color key="NSColor" systemColor="labelColor"/>
+                                    <font key="NSFont" size="14" name="Lexend-Light"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyu-Uq-FBc">
+                        <rect key="frame" x="16" y="354" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="QJc-ud-dN5"/>
+                            <constraint firstAttribute="width" constant="214" id="zED-5z-tgz"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="News Description">
+                                <attributes>
+                                    <color key="NSColor" red="0.0053464330808080662" green="0.0053464330808080662" blue="0.0053464330808080662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mjc-zU-ZCP">
+                        <rect key="frame" x="16" y="382" width="391" height="290"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="290" id="v2b-RF-Bxp"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment>
+                                <string key="content">The Indian cricket squad has touched down in Thiruvananthpuram, but a notable absence has left fans speculating. Star batter Virat Kohli, a key figure in the Indian team, has been granted leave by the team management due to a personal emergency. He hastily departed from Guwahati to Mumbai and is anticipated to rejoin the squad on Monday. Rumours have been swirling in the media, suggesting that Kohli and his Bollywood celebrity wife, Anushka Sharma, might be expecting their second child</string>
+                                <attributes>
+                                    <color key="NSColor" systemColor="labelColor"/>
+                                    <font key="NSFont" size="14" name="Lexend-Light"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61C-Zw-JD3">
+                        <rect key="frame" x="16" y="688" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="214" id="amz-PD-Blz"/>
+                            <constraint firstAttribute="height" constant="20" id="oma-n1-Qul"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="News Location">
+                                <attributes>
+                                    <color key="NSColor" red="0.0057410037878787845" green="0.0057410037878787845" blue="0.0057410037878787845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Enter News Location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r2D-XJ-HTq">
+                        <rect key="frame" x="16" y="716" width="391" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="oZ1-da-IO2"/>
+                        </constraints>
+                        <attributedString key="attributedText"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3P-30-J6B">
+                        <rect key="frame" x="16" y="780" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="214" id="lEi-9f-XFI"/>
+                            <constraint firstAttribute="height" constant="20" id="sl9-dp-gfs"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="Add Tags">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="159-88-OQz">
+                        <rect key="frame" x="16" y="812" width="72" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Yu-tb-lvF">
+                                <rect key="frame" x="0.6666666666666714" y="-3.6666666666666288" width="71" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Politics">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHc-XK-e62">
+                                <rect key="frame" x="62" y="0.0" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="PWg-Dj-wpT"/>
+                                    <constraint firstAttribute="height" constant="12" id="eQA-hf-fJn"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="remove"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nHc-XK-e62" firstAttribute="top" secondItem="159-88-OQz" secondAttribute="top" id="6EH-rH-LNK"/>
+                            <constraint firstItem="nHc-XK-e62" firstAttribute="leading" secondItem="159-88-OQz" secondAttribute="leading" constant="62" id="8Cl-U3-SJw"/>
+                            <constraint firstAttribute="width" constant="72" id="Fdb-XW-qps"/>
+                            <constraint firstItem="1Yu-tb-lvF" firstAttribute="centerX" secondItem="159-88-OQz" secondAttribute="centerX" id="Frk-OH-Bc0"/>
+                            <constraint firstAttribute="height" constant="24" id="Pre-NB-d0H"/>
+                            <constraint firstItem="1Yu-tb-lvF" firstAttribute="centerY" secondItem="159-88-OQz" secondAttribute="centerY" id="yBm-Ta-3Ph"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.12594598530000001" green="0.52918487790000002" blue="0.99968713519999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y7H-So-fFB">
+                        <rect key="frame" x="100" y="812" width="142" height="24"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FkH-MY-Y5I">
+                                <rect key="frame" x="-3" y="-3.6666666666666288" width="148" height="31.666666666666668"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Gautham Gambhir">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jc-N9-o5f">
+                                <rect key="frame" x="133" y="0.0" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="VyO-8G-2a3"/>
+                                    <constraint firstAttribute="height" constant="12" id="cNQ-ON-Dtf"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="remove"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0jc-N9-o5f" firstAttribute="leading" secondItem="Y7H-So-fFB" secondAttribute="leading" constant="133" id="0Ai-t1-zfU"/>
+                            <constraint firstItem="0jc-N9-o5f" firstAttribute="top" secondItem="Y7H-So-fFB" secondAttribute="top" id="HQy-ia-I4W"/>
+                            <constraint firstItem="FkH-MY-Y5I" firstAttribute="centerX" secondItem="Y7H-So-fFB" secondAttribute="centerX" id="R0Q-1f-ur6"/>
+                            <constraint firstAttribute="width" constant="142" id="aTd-a1-nPo"/>
+                            <constraint firstItem="FkH-MY-Y5I" firstAttribute="centerY" secondItem="Y7H-So-fFB" secondAttribute="centerY" id="bgb-m1-Uum"/>
+                            <constraint firstAttribute="height" constant="24" id="qT4-Mu-hCu"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.12594598530000001" green="0.52918487790000002" blue="0.99968713519999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Tap to start typing…" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nFJ-Gd-88M">
+                        <rect key="frame" x="16" y="848" width="391" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="dpf-c8-kjn"/>
+                        </constraints>
+                        <attributedString key="attributedText"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wa9-HL-UJc">
+                        <rect key="frame" x="319" y="856" width="72" height="32"/>
+                        <color key="backgroundColor" red="0.12594598530000001" green="0.52918487790000002" blue="0.99968713519999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="ccu-og-WhE"/>
+                            <constraint firstAttribute="width" constant="72" id="gUt-DI-a5D"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain">
+                            <attributedString key="attributedTitle">
+                                <fragment content="ADD">
+                                    <attributes>
+                                        <color key="NSColor" red="0.99694207702020199" green="0.99694207702020199" blue="0.99694207702020199" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="14" name="Lexend-SemiBold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </buttonConfiguration>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyb-tT-lyW">
+                        <rect key="frame" x="16" y="912" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="dNe-WD-72c"/>
+                            <constraint firstAttribute="width" constant="214" id="vLC-nY-kNp"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="Upload Image">
+                                <attributes>
+                                    <color key="NSColor" red="0.00033538510101005503" green="0.00033538510101005503" blue="0.00033538510101005503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Cc7-oU-fCh">
+                        <rect key="frame" x="16" y="940" width="146" height="82"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="146" id="4gc-w7-FIg"/>
+                            <constraint firstAttribute="height" constant="82" id="WbK-4U-AIH"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ5-PM-hvP">
+                        <rect key="frame" x="156" y="934" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="JQG-nO-Ugc"/>
+                            <constraint firstAttribute="height" constant="16" id="wvA-Tb-Po1"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="remove"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRd-dk-Dtu">
+                        <rect key="frame" x="16" y="1038" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="8mw-Te-cA2"/>
+                            <constraint firstAttribute="width" constant="214" id="eFM-DT-mcZ"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="Upload Video">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="7KZ-eM-UDZ">
+                        <rect key="frame" x="16" y="1066" width="146" height="82"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="146" id="9rc-N9-kWT"/>
+                            <constraint firstAttribute="height" constant="82" id="R0t-Dg-7Zn"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGQ-3H-cNg">
+                        <rect key="frame" x="152" y="1059" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="5JQ-yQ-3iA"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="B4Y-Rb-Oa1"/>
+                            <constraint firstAttribute="width" constant="16" id="EL8-Ic-DS0"/>
+                            <constraint firstAttribute="height" constant="16" id="Pcn-Ep-GMF"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="remove"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2T-P0-meF">
+                        <rect key="frame" x="16" y="1172" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="axp-tu-Vti"/>
+                            <constraint firstAttribute="height" constant="16" id="fo4-wC-efY"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="Unchecked_box"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTc-gb-xRx">
+                        <rect key="frame" x="40" y="1164" width="331" height="56"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="56" id="ZIY-2I-07g"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="I hereby declare and undertake that the above information is accurate &amp; I have taken reasonable care to ascertain its accuracy">
+                                <attributes>
+                                    <font key="NSFont" size="12" name="Lexend-Light"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxJ-8r-Tl0">
+                        <rect key="frame" x="16" y="1238" width="187.66666666666666" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="h5v-Ng-k9B"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain">
+                            <attributedString key="attributedTitle">
+                                <fragment content="SAVE DRAFT">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0028211805555555802" green="0.0028211805555555802" blue="0.0028211805555555802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </buttonConfiguration>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rag-Rw-zO0">
+                        <rect key="frame" x="219.66666666666663" y="1238" width="187.33333333333337" height="48"/>
+                        <color key="backgroundColor" systemColor="tintColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="TGq-Zx-Djw"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain">
+                            <attributedString key="attributedTitle">
+                                <fragment content="SUBMIT">
+                                    <attributes>
+                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </buttonConfiguration>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="submitBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jXL-Uk-Vgf"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vRd-dk-Dtu" firstAttribute="top" secondItem="Cc7-oU-fCh" secondAttribute="bottom" constant="16" id="0JO-3l-WB6"/>
+                    <constraint firstItem="7KZ-eM-UDZ" firstAttribute="leading" secondItem="Cc7-oU-fCh" secondAttribute="leading" id="0ho-2P-BeU"/>
+                    <constraint firstItem="Y7H-So-fFB" firstAttribute="leading" secondItem="159-88-OQz" secondAttribute="trailing" constant="12" id="0uW-bW-vwg"/>
+                    <constraint firstAttribute="trailing" secondItem="uVM-Yb-tqc" secondAttribute="trailing" constant="16" id="1TM-71-QH3"/>
+                    <constraint firstItem="KQ5-PM-hvP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="136" id="2IQ-Mi-7T3"/>
+                    <constraint firstItem="Rxu-ha-Qmc" firstAttribute="centerY" secondItem="H2e-XK-hFB" secondAttribute="centerY" id="2rT-x2-AtV"/>
+                    <constraint firstItem="1RM-x4-HvY" firstAttribute="centerY" secondItem="fam-Y6-Coq" secondAttribute="centerY" id="37a-9p-Ubf"/>
+                    <constraint firstItem="rag-Rw-zO0" firstAttribute="leading" secondItem="RxJ-8r-Tl0" secondAttribute="trailing" constant="16" id="3T8-86-aQd"/>
+                    <constraint firstItem="61C-Zw-JD3" firstAttribute="top" secondItem="mjc-zU-ZCP" secondAttribute="bottom" constant="16" id="3gq-c7-BaU"/>
+                    <constraint firstItem="nFJ-Gd-88M" firstAttribute="top" secondItem="159-88-OQz" secondAttribute="bottom" constant="12" id="3uU-k6-FcY"/>
+                    <constraint firstItem="bXl-iA-fYN" firstAttribute="leading" secondItem="fam-Y6-Coq" secondAttribute="leading" id="5x8-rP-Gma"/>
+                    <constraint firstItem="eoI-3h-rZA" firstAttribute="centerY" secondItem="zBh-Qh-nKn" secondAttribute="centerY" id="6Bv-27-YKx"/>
+                    <constraint firstAttribute="trailing" secondItem="wa9-HL-UJc" secondAttribute="trailing" constant="32" id="6DG-Zr-Pyu"/>
+                    <constraint firstItem="B3P-30-J6B" firstAttribute="leading" secondItem="61C-Zw-JD3" secondAttribute="leading" id="6N6-7X-g6s"/>
+                    <constraint firstItem="DEb-ca-Pta" firstAttribute="leading" secondItem="bXl-iA-fYN" secondAttribute="trailing" constant="16" id="8Sx-aL-Uf2"/>
+                    <constraint firstItem="q2T-P0-meF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="C3F-JT-BOu"/>
+                    <constraint firstItem="Yyu-Uq-FBc" firstAttribute="top" secondItem="uVM-Yb-tqc" secondAttribute="bottom" constant="16" id="C3L-d4-2vX"/>
+                    <constraint firstItem="ttd-kM-4hC" firstAttribute="leading" secondItem="1RM-x4-HvY" secondAttribute="trailing" constant="16" id="Gya-Cx-N8w"/>
+                    <constraint firstItem="RxJ-8r-Tl0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="HLj-c1-OzW"/>
+                    <constraint firstItem="Rxu-ha-Qmc" firstAttribute="leading" secondItem="rE0-Yz-dLN" secondAttribute="trailing" constant="16" id="LAd-9B-CoN"/>
+                    <constraint firstItem="bXl-iA-fYN" firstAttribute="top" secondItem="Yd8-k1-QPm" secondAttribute="bottom" constant="16" id="MVp-5P-Ej5"/>
+                    <constraint firstAttribute="trailing" secondItem="r2D-XJ-HTq" secondAttribute="trailing" constant="16" id="NFH-F4-98J"/>
+                    <constraint firstItem="mjc-zU-ZCP" firstAttribute="top" secondItem="Yyu-Uq-FBc" secondAttribute="bottom" constant="8" id="NPV-FV-c6O"/>
+                    <constraint firstItem="irt-iB-O0I" firstAttribute="top" secondItem="Cch-QR-lIx" secondAttribute="bottom" constant="16" id="NnI-qy-eN4"/>
+                    <constraint firstItem="1RM-x4-HvY" firstAttribute="leading" secondItem="Yd8-k1-QPm" secondAttribute="trailing" constant="16" id="Nvo-0d-UZ4"/>
+                    <constraint firstItem="q2T-P0-meF" firstAttribute="top" secondItem="7KZ-eM-UDZ" secondAttribute="bottom" constant="24" id="ODP-Wu-0Th"/>
+                    <constraint firstItem="rag-Rw-zO0" firstAttribute="centerY" secondItem="RxJ-8r-Tl0" secondAttribute="centerY" id="Pbs-G5-bYK"/>
+                    <constraint firstItem="fyb-tT-lyW" firstAttribute="leading" secondItem="B3P-30-J6B" secondAttribute="leading" id="QaP-KM-m2M"/>
+                    <constraint firstItem="mjc-zU-ZCP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Qyu-gr-wO8"/>
+                    <constraint firstItem="KQ5-PM-hvP" firstAttribute="top" secondItem="fyb-tT-lyW" secondAttribute="bottom" constant="2" id="RzB-05-D6O"/>
+                    <constraint firstItem="B3P-30-J6B" firstAttribute="top" secondItem="r2D-XJ-HTq" secondAttribute="bottom" constant="16" id="SSO-pN-xcz"/>
+                    <constraint firstItem="L9a-fn-qn9" firstAttribute="centerY" secondItem="CQ5-VG-iqL" secondAttribute="centerY" id="SXN-kx-dOc"/>
+                    <constraint firstItem="Yd8-k1-QPm" firstAttribute="top" secondItem="irt-iB-O0I" secondAttribute="bottom" constant="8" id="TXc-6M-b3Z"/>
+                    <constraint firstItem="Cch-QR-lIx" firstAttribute="top" secondItem="vbb-fY-Fq6" secondAttribute="bottom" constant="8" id="Ue4-ia-j9P"/>
+                    <constraint firstItem="lgr-iI-vbQ" firstAttribute="top" secondItem="nCI-HY-DuR" secondAttribute="bottom" constant="18" id="VTg-6K-inf"/>
+                    <constraint firstItem="uVM-Yb-tqc" firstAttribute="top" secondItem="lgr-iI-vbQ" secondAttribute="bottom" constant="8" id="Vuk-VF-Awv"/>
+                    <constraint firstItem="Yd8-k1-QPm" firstAttribute="leading" secondItem="irt-iB-O0I" secondAttribute="leading" id="W1O-di-PXg"/>
+                    <constraint firstItem="Yyu-Uq-FBc" firstAttribute="leading" secondItem="lgr-iI-vbQ" secondAttribute="leading" id="WIH-1G-p79"/>
+                    <constraint firstItem="uVM-Yb-tqc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="WtZ-Tc-nI5"/>
+                    <constraint firstItem="cGQ-3H-cNg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="132" id="XHY-Ll-o3x"/>
+                    <constraint firstItem="ttd-kM-4hC" firstAttribute="centerY" secondItem="1bm-5n-uCj" secondAttribute="centerY" id="Xdp-kH-frG"/>
+                    <constraint firstItem="vbb-fY-Fq6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="YIJ-pK-VMh"/>
+                    <constraint firstItem="LvS-mu-2Jo" firstAttribute="centerY" secondItem="e1m-Kn-FUu" secondAttribute="centerY" id="Ycf-R4-RRp"/>
+                    <constraint firstItem="rag-Rw-zO0" firstAttribute="height" secondItem="RxJ-8r-Tl0" secondAttribute="height" id="Ye3-cK-Dwd"/>
+                    <constraint firstItem="nFJ-Gd-88M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="a1c-Fl-Kfz"/>
+                    <constraint firstItem="RxJ-8r-Tl0" firstAttribute="top" secondItem="xTc-gb-xRx" secondAttribute="bottom" constant="18" id="aVp-am-z53"/>
+                    <constraint firstItem="vRd-dk-Dtu" firstAttribute="leading" secondItem="fyb-tT-lyW" secondAttribute="leading" id="aaL-el-JmG"/>
+                    <constraint firstItem="Y7H-So-fFB" firstAttribute="centerY" secondItem="1Yu-tb-lvF" secondAttribute="centerY" id="b1j-CC-qUG"/>
+                    <constraint firstItem="Cc7-oU-fCh" firstAttribute="top" secondItem="fyb-tT-lyW" secondAttribute="bottom" constant="8" id="cWB-sK-r6V"/>
+                    <constraint firstItem="fyb-tT-lyW" firstAttribute="top" secondItem="nFJ-Gd-88M" secondAttribute="bottom" constant="16" id="cxY-94-xHI"/>
+                    <constraint firstItem="xTc-gb-xRx" firstAttribute="top" secondItem="7KZ-eM-UDZ" secondAttribute="bottom" constant="16" id="d6u-g8-aek"/>
+                    <constraint firstItem="nCI-HY-DuR" firstAttribute="leading" secondItem="9xJ-0R-Mhf" secondAttribute="leading" id="dlG-NO-o3X"/>
+                    <constraint firstAttribute="trailing" secondItem="nFJ-Gd-88M" secondAttribute="trailing" constant="16" id="e5S-Hv-XXf"/>
+                    <constraint firstItem="r2D-XJ-HTq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="eLT-G5-fxl"/>
+                    <constraint firstItem="rE0-Yz-dLN" firstAttribute="centerY" secondItem="CvZ-om-5bo" secondAttribute="centerY" id="eSO-Ab-fPg"/>
+                    <constraint firstItem="LvS-mu-2Jo" firstAttribute="leading" secondItem="L9a-fn-qn9" secondAttribute="trailing" constant="16" id="eab-2E-bEZ"/>
+                    <constraint firstItem="L9a-fn-qn9" firstAttribute="leading" secondItem="DEb-ca-Pta" secondAttribute="trailing" constant="16" id="egT-KV-g2I"/>
+                    <constraint firstItem="nCI-HY-DuR" firstAttribute="top" secondItem="bXl-iA-fYN" secondAttribute="bottom" constant="16" id="fMh-r0-M8F"/>
+                    <constraint firstItem="xTc-gb-xRx" firstAttribute="leading" secondItem="q2T-P0-meF" secondAttribute="trailing" constant="8" id="hNC-AL-vGm"/>
+                    <constraint firstItem="cGQ-3H-cNg" firstAttribute="top" secondItem="vRd-dk-Dtu" secondAttribute="bottom" constant="1" id="hjf-mf-fe1"/>
+                    <constraint firstItem="r2D-XJ-HTq" firstAttribute="top" secondItem="61C-Zw-JD3" secondAttribute="bottom" constant="8" id="hyC-rj-5lU"/>
+                    <constraint firstAttribute="trailing" secondItem="mjc-zU-ZCP" secondAttribute="trailing" constant="16" id="ik4-7Q-FSY"/>
+                    <constraint firstItem="rE0-Yz-dLN" firstAttribute="leading" secondItem="Cch-QR-lIx" secondAttribute="trailing" constant="16" id="j2s-9i-mqi"/>
+                    <constraint firstItem="eoI-3h-rZA" firstAttribute="leading" secondItem="nCI-HY-DuR" secondAttribute="trailing" constant="16" id="jqf-2L-wkB"/>
+                    <constraint firstItem="7KZ-eM-UDZ" firstAttribute="top" secondItem="vRd-dk-Dtu" secondAttribute="bottom" constant="8" id="kq9-Wf-2Jd"/>
+                    <constraint firstItem="Cc7-oU-fCh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="l1R-sE-gMd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="xTc-gb-xRx" secondAttribute="trailing" constant="32" id="neQ-4X-woZ"/>
+                    <constraint firstAttribute="trailing" secondItem="rag-Rw-zO0" secondAttribute="trailing" constant="16" id="pca-pa-rc4"/>
+                    <constraint firstItem="wa9-HL-UJc" firstAttribute="top" secondItem="r2D-XJ-HTq" secondAttribute="bottom" constant="92" id="plO-4v-rLZ"/>
+                    <constraint firstItem="rag-Rw-zO0" firstAttribute="width" secondItem="RxJ-8r-Tl0" secondAttribute="width" id="qsJ-30-IPq"/>
+                    <constraint firstItem="159-88-OQz" firstAttribute="leading" secondItem="B3P-30-J6B" secondAttribute="leading" id="si5-oZ-lvB"/>
+                    <constraint firstItem="vbb-fY-Fq6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="si9-2F-YqZ"/>
+                    <constraint firstItem="61C-Zw-JD3" firstAttribute="leading" secondItem="Yyu-Uq-FBc" secondAttribute="leading" id="t5A-3m-fa0"/>
+                    <constraint firstItem="Cch-QR-lIx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="tvG-sF-KLF"/>
+                    <constraint firstItem="irt-iB-O0I" firstAttribute="leading" secondItem="vbb-fY-Fq6" secondAttribute="leading" id="u8C-f4-H28"/>
+                    <constraint firstItem="rag-Rw-zO0" firstAttribute="top" secondItem="xTc-gb-xRx" secondAttribute="bottom" constant="18" id="uV9-BW-2Ee"/>
+                    <constraint firstItem="159-88-OQz" firstAttribute="top" secondItem="B3P-30-J6B" secondAttribute="bottom" constant="12" id="w2Q-KU-jud"/>
+                    <constraint firstItem="lgr-iI-vbQ" firstAttribute="leading" secondItem="irt-iB-O0I" secondAttribute="leading" id="z9v-Sf-MlF"/>
+                    <constraint firstItem="DEb-ca-Pta" firstAttribute="centerY" secondItem="9xJ-0R-Mhf" secondAttribute="centerY" id="zce-hq-GXV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+            <connections>
+                <outlet property="addTagsLbl" destination="B3P-30-J6B" id="gIh-QZ-OCe"/>
+                <outlet property="addtagBtn" destination="wa9-HL-UJc" id="xXs-oa-JsT"/>
+                <outlet property="addtagsTf" destination="nFJ-Gd-88M" id="gwb-32-hIM"/>
+                <outlet property="artBtn" destination="dYa-EO-aOy" id="el8-7a-Ydm"/>
+                <outlet property="carsandbikesBtn" destination="PRE-UE-kTd" id="D29-ar-kk2"/>
+                <outlet property="declarationLbl" destination="xTc-gb-xRx" id="bxw-Vo-Tg2"/>
+                <outlet property="englishBtn" destination="CvZ-om-5bo" id="rNq-2i-7U7"/>
+                <outlet property="financeBtn" destination="CQ5-VG-iqL" id="piP-BN-qQ9"/>
+                <outlet property="hindibtn" destination="Rgf-rp-Bl8" id="dXE-HD-vsK"/>
+                <outlet property="moviesBtn" destination="e1m-Kn-FUu" id="sNd-kB-JfQ"/>
+                <outlet property="newsCategoryLbl" destination="irt-iB-O0I" id="9zK-3g-TK5"/>
+                <outlet property="newsDescriptionLbl" destination="Yyu-Uq-FBc" id="5kv-qz-reP"/>
+                <outlet property="newsDescriptionTV" destination="mjc-zU-ZCP" id="8zD-Dg-gPY"/>
+                <outlet property="newsLanguageLbl" destination="vbb-fY-Fq6" id="x1O-G2-IRr"/>
+                <outlet property="newsLocationLbl" destination="61C-Zw-JD3" id="MWR-Al-LaW"/>
+                <outlet property="newsLocationTf" destination="r2D-XJ-HTq" id="oSl-l4-Jcc"/>
+                <outlet property="newsTitleLbl" destination="lgr-iI-vbQ" id="Kxn-LJ-7mq"/>
+                <outlet property="newsTitleTv" destination="uVM-Yb-tqc" id="yrr-GE-rWc"/>
+                <outlet property="politicsBtn" destination="fam-Y6-Coq" id="TES-fW-hep"/>
+                <outlet property="politicsTagBtn" destination="1Yu-tb-lvF" id="Ah6-HR-seK"/>
+                <outlet property="removePoliticsTagBtn" destination="nHc-XK-e62" id="v3i-Pw-lke"/>
+                <outlet property="removeSportsTagBtn" destination="0jc-N9-o5f" id="gFM-iG-H11"/>
+                <outlet property="removeUploadVideoImage" destination="cGQ-3H-cNg" id="kLa-gJ-rEg"/>
+                <outlet property="removeuplopadedimage" destination="KQ5-PM-hvP" id="NQY-jV-eII"/>
+                <outlet property="saveDraftBtn" destination="RxJ-8r-Tl0" id="JGb-YT-SRu"/>
+                <outlet property="sportsTagBtn" destination="FkH-MY-Y5I" id="ZQD-CI-5Wy"/>
+                <outlet property="startupBtn" destination="zBh-Qh-nKn" id="TF6-GE-0lV"/>
+                <outlet property="submitBtn" destination="rag-Rw-zO0" id="rQX-CX-9OO"/>
+                <outlet property="teluguBtn" destination="H2e-XK-hFB" id="wZQ-RG-ZCD"/>
+                <outlet property="unchekedBoxBtn" destination="q2T-P0-meF" id="sYm-7p-8q9"/>
+                <outlet property="uploadVideoImage" destination="7KZ-eM-UDZ" id="Cxe-RO-0g5"/>
+                <outlet property="uploadimageView" destination="Cc7-oU-fCh" id="56P-9m-zWe"/>
+            </connections>
+            <point key="canvasLocation" x="208.3969465648855" y="439.78873239436621"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Unchecked_box" width="16" height="16"/>
+        <image name="news_placeholder" width="1080" height="920"/>
+        <image name="remove" width="12" height="12"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tableCellBlueTextColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="449" height="122"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlightedImage="Profile 1" translatesAutoresizingMaskIntoConstraints="NO" id="zi7-Tg-glv">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="zi7-Tg-glv">
                         <rect key="frame" x="16" y="6" width="36" height="36"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="36" id="71P-xn-Lcp"/>
@@ -46,7 +47,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raP-xr-lxU">
-                        <rect key="frame" x="64" y="27" width="125" height="15"/>
+                        <rect key="frame" x="63.999999999999986" y="27" width="132.66666666666663" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="Itp-sT-5o6"/>
                         </constraints>
@@ -121,20 +122,43 @@
                             <constraint firstAttribute="width" constant="94" id="CEG-N1-eq4"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHz-ad-p2b">
+                        <rect key="frame" x="387" y="27" width="46" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="C5F-Rt-Tkk"/>
+                            <constraint firstAttribute="height" constant="15" id="Er2-Ci-J5X"/>
+                            <constraint firstAttribute="width" constant="46" id="Z61-aT-nBk"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="1 hr ago">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="12" name="Lexend-Light"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="raP-xr-lxU" firstAttribute="leading" secondItem="NGH-Gt-897" secondAttribute="leading" id="311-3l-kbf"/>
                     <constraint firstAttribute="trailing" secondItem="0qw-G4-aOg" secondAttribute="trailing" constant="252" id="8h7-Iq-phH"/>
                     <constraint firstAttribute="trailing" secondItem="tug-hP-7ab" secondAttribute="trailing" constant="16" id="9jj-Bm-WIl"/>
                     <constraint firstAttribute="trailing" secondItem="bsQ-Qg-xex" secondAttribute="trailing" constant="118" id="DA6-c1-POl"/>
                     <constraint firstAttribute="trailing" secondItem="NGH-Gt-897" secondAttribute="trailing" constant="194" id="Fnz-Ik-piW"/>
+                    <constraint firstAttribute="trailing" secondItem="gHz-ad-p2b" secondAttribute="trailing" constant="16" id="GAc-Qe-mdP"/>
                     <constraint firstItem="aVf-gn-wOz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="44" id="Goc-ZP-azW"/>
                     <constraint firstItem="NGH-Gt-897" firstAttribute="leading" secondItem="zi7-Tg-glv" secondAttribute="trailing" constant="12" id="HZf-pZ-FwL"/>
+                    <constraint firstItem="gHz-ad-p2b" firstAttribute="top" secondItem="EBM-FZ-ELy" secondAttribute="bottom" constant="4" id="K5W-ok-PIn"/>
                     <constraint firstItem="zi7-Tg-glv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Nhm-Zb-3x9"/>
                     <constraint firstItem="NGH-Gt-897" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="OjB-Gr-ivG"/>
                     <constraint firstItem="bsQ-Qg-xex" firstAttribute="top" secondItem="aVf-gn-wOz" secondAttribute="bottom" constant="12" id="QlK-TS-11M"/>
                     <constraint firstItem="EBM-FZ-ELy" firstAttribute="leading" secondItem="NGH-Gt-897" secondAttribute="trailing" constant="90" id="TDi-6E-clI"/>
+                    <constraint firstAttribute="trailing" secondItem="gHz-ad-p2b" secondAttribute="trailing" constant="16" id="U2b-L7-hJ6"/>
                     <constraint firstItem="zi7-Tg-glv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="UZd-lL-KXZ"/>
+                    <constraint firstItem="gHz-ad-p2b" firstAttribute="top" secondItem="EBM-FZ-ELy" secondAttribute="bottom" constant="4" id="W6z-9T-dN2"/>
                     <constraint firstItem="aVf-gn-wOz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="28" id="XQr-Gf-hkm"/>
                     <constraint firstItem="0qw-G4-aOg" firstAttribute="top" secondItem="bsQ-Qg-xex" secondAttribute="bottom" constant="6" id="XWa-Oz-wU9"/>
                     <constraint firstItem="EBM-FZ-ELy" firstAttribute="centerY" secondItem="NGH-Gt-897" secondAttribute="centerY" id="aPu-XB-PXN"/>
@@ -148,6 +172,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="deletebtn" destination="5rm-F4-Byk" id="2rv-YY-EFD"/>
                 <outlet property="idLbl" destination="EBM-FZ-ELy" id="58B-qL-M8u"/>
@@ -157,14 +182,18 @@
                 <outlet property="newsTitleLbl" destination="bsQ-Qg-xex" id="ucN-e7-h0w"/>
                 <outlet property="profileImage" destination="zi7-Tg-glv" id="ftN-RI-mOS"/>
                 <outlet property="reportername" destination="NGH-Gt-897" id="e00-3z-TL3"/>
+                <outlet property="updatedTime" destination="gHz-ad-p2b" id="10x-nS-5nJ"/>
             </connections>
             <point key="canvasLocation" x="228.24427480916029" y="16.197183098591552"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Profile 1" width="54" height="54"/>
         <image name="call 1" width="16" height="16"/>
         <image name="news_placeholder" width="1080" height="920"/>
         <image name="trash-bin" width="16" height="16"/>
+        <image name="user_placeholder" width="64" height="64"/>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

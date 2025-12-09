@@ -50,6 +50,9 @@ struct API {
     static let RESET_PASSWORD = BASE_URL + "userservice/authentication/password/forgot"
     static let FORGOT_PASSWORD =  BASE_URL + "userservice/authentication/sendotp?is_forgot_password=True"
     static let NEWS_REPORTER_APPLY = BASE_URL + "news/reporter/apply"
+    static let NEWS_POST = BASE_URL + "news/reporter/posts"
+    static let STORE_FILES = BASE_URL + "userservice/store/files"
+
     
     static let GET_PROFILE = BASE_URL + "userservice/profile"
     static let EDIT_PROFILE = BASE_URL + "userservice/profile"  // same URL, PUT method for edit

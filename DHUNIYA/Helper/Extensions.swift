@@ -56,23 +56,33 @@ extension UIView {
     }
     
     func addDottedBorder(color: UIColor = .lightGray, cornerRadius: CGFloat = 10) {
-        self.layer.sublayers?
-            .filter { $0.name == "dotted-border" }
-            .forEach { $0.removeFromSuperlayer() }
 
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.name = "dotted-border"
-        shapeLayer.strokeColor = color.cgColor
-        shapeLayer.lineDashPattern = [6, 3]
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.lineWidth = 1.5
-        shapeLayer.frame = bounds
-        shapeLayer.path = UIBezierPath(
-            roundedRect: bounds,
-            cornerRadius: cornerRadius
-        ).cgPath
-        layer.addSublayer(shapeLayer)
-    }
+            // make sure layout is up to date
+            layoutIfNeeded()
+
+            // remove any existing border
+            layer.sublayers?
+                .filter { $0.name == "dotted-border" }
+                .forEach { $0.removeFromSuperlayer() }
+
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.name = "dotted-border"
+            shapeLayer.strokeColor = color.cgColor
+            shapeLayer.lineDashPattern = [6, 3]
+            shapeLayer.fillColor = UIColor.clear.cgColor
+            shapeLayer.lineWidth = 1.5
+
+            // IMPORTANT: draw inside the bounds so it doesn't cut
+            let rect = bounds.insetBy(dx: shapeLayer.lineWidth / 2,
+                                      dy: shapeLayer.lineWidth / 2)
+            shapeLayer.frame = bounds
+            shapeLayer.path = UIBezierPath(
+                roundedRect: rect,
+                cornerRadius: cornerRadius
+            ).cgPath
+
+            layer.addSublayer(shapeLayer)
+        }
     
     func addBottomShadow(color: UIColor = .black,
                          opacity: Float = 0.15,
@@ -238,6 +248,21 @@ extension UIImageView {
                     .diskCacheExpiration(.days(30))
                 ]
             )
+        }
+    }
+}
+extension UITableView {
+
+    func setCellSpacing(_ height: CGFloat) {
+        self.sectionHeaderHeight = height
+        self.sectionFooterHeight = height
+        self.separatorStyle = .none
+    }
+}
+extension NSMutableData {
+    func appendString(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            append(data)
         }
     }
 }
