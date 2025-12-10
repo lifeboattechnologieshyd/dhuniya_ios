@@ -173,7 +173,7 @@
         <scene sceneID="vbv-c9-fDz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TJi-yQ-WDm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Stream" image="business" id="9HU-g1-LBK"/>
+                    <tabBarItem key="tabBarItem" title="Stream" image="ET" id="9HU-g1-LBK"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jUe-aA-I1H">
@@ -191,8 +191,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ET" width="20" height="20"/>
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
-        <image name="business" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

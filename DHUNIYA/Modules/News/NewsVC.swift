@@ -10,9 +10,7 @@ import UIKit
 class NewsVC: UIViewController {
 
     @IBOutlet weak var tblVw: UITableView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var topVw: UIView!
-
+   
     var newsList = [NewsModel]()
 
     override func viewDidLoad() {
@@ -39,11 +37,24 @@ class NewsVC: UIViewController {
     }
 
     private func setupTableView() {
-        tblVw.delegate = self
-        tblVw.dataSource = self
-        tblVw.rowHeight = UITableView.automaticDimension
-        tblVw.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "NewsCell")
-    }
+            tblVw.delegate = self
+            tblVw.dataSource = self
+
+            // ✅ let auto layout decide the height
+            tblVw.rowHeight = UITableView.automaticDimension
+            tblVw.estimatedRowHeight = 600
+
+            tblVw.separatorStyle = .none
+
+            // if you have nav/tab bar, this is safe but optional
+            if #available(iOS 11.0, *) {
+                tblVw.contentInsetAdjustmentBehavior = .never
+            }
+
+            tblVw.register(UINib(nibName: "NewsCell", bundle: nil),
+                           forCellReuseIdentifier: "NewsCell")
+        }
+
 
     func convertToDate(_ dateString: String) -> Date? {
         let formatter = ISO8601DateFormatter()

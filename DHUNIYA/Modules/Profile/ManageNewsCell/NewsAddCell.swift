@@ -57,102 +57,111 @@ class NewsAddCell: UITableViewCell {
 
     
     var isChecked: Bool = false
-        var selectedLanguage: String = "ENGLISH"
-        var selectedImage: UIImage?
-        var selectedVideoURL: URL?
-        private var selectedCategories: Set<String> = []
-        
-        private lazy var categoryButtons: [UIButton: String] = [
-            politicsBtn: "Politics",
-            financeBtn: "Finance",
-            carsandbikesBtn: "Cars & Bikes",
-            startupBtn: "Start-up",
-            artBtn: "Art",
-            moviesBtn: "Movies",
-            sportsBtn: "Sports",
-            telanganaBtn: "Telangana",
-            internationalAffairsBtn: "International Affairs"
-        ]
-        
-        private lazy var categoryViews: [UIButton: UIView] = [
-            politicsBtn: politicsView,
-            financeBtn: financeView,
-            carsandbikesBtn: carsView,
-            startupBtn: startupView,
-            artBtn: artView,
-            moviesBtn: moviesView,
-            sportsBtn: sportsView,
-            telanganaBtn: telanganaView,
-            internationalAffairsBtn: internationalView
-        ]
-        
-        private lazy var languageViews: [UIButton: UIView] = [
-            englishBtn: englishView,
-            teluguBtn: teluguView,
-            hindiBtn: hindiView
-        ]
-        
-        private let tagOptions = ["Politics","Sports","International Affairs","Telangana","Finance","Movies","Art","Start-up","Cars & Bikes"]
+    var selectedLanguage: String = "ENGLISH"
+    var selectedImage: UIImage?
+    var selectedVideoURL: URL?
+    private var selectedCategories: Set<String> = []
+    
+    private lazy var categoryButtons: [UIButton: String] = [
+        politicsBtn: "Politics",
+        financeBtn: "Finance",
+        carsandbikesBtn: "Cars & Bikes",
+        startupBtn: "Start-up",
+        artBtn: "Art",
+        moviesBtn: "Movies",
+        sportsBtn: "Sports",
+        telanganaBtn: "Telangana",
+        internationalAffairsBtn: "International Affairs"
+    ]
+    
+    private lazy var categoryViews: [UIButton: UIView] = [
+        politicsBtn: politicsView,
+        financeBtn: financeView,
+        carsandbikesBtn: carsView,
+        startupBtn: startupView,
+        artBtn: artView,
+        moviesBtn: moviesView,
+        sportsBtn: sportsView,
+        telanganaBtn: telanganaView,
+        internationalAffairsBtn: internationalView
+    ]
+    
+    private lazy var languageViews: [UIButton: UIView] = [
+        englishBtn: englishView,
+        teluguBtn: teluguView,
+        hindiBtn: hindiView
+    ]
+    
+    private lazy var languageTitles: [UIButton: String] = [
+        englishBtn: "English",
+        teluguBtn: "Telugu",
+        hindiBtn: "Hindi"
+    ]
+    
+    private let tagOptions = ["Politics","Sports","International Affairs","Telangana","Finance","Movies","Art","Start-up","Cars & Bikes"]
+    
     override func awakeFromNib() {
-            super.awakeFromNib()
-            setupLanguageViews()
-            setupLanguageButtons()
-            setupCategoryButtons()
-        }
+        super.awakeFromNib()
+        setupLanguageButtons()
+        setupCategoryButtons()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-
         imageVw.addDottedBorder(color: .lightGray, cornerRadius: 8)
         videoVw.addDottedBorder(color: .lightGray, cornerRadius: 8)
     }
 
-
-private func setupLanguageViews() {
-        [englishView, teluguView, hindiView].forEach { view in
-            view?.backgroundColor = .systemGray6
-            view?.layer.cornerRadius = 8
-            view?.clipsToBounds = true
-        }
-    }
-
+    // MARK  Language Button Setup
     private func setupLanguageButtons() {
-        [englishBtn, teluguBtn, hindiBtn].forEach { btn in
-            btn?.backgroundColor = .clear
-
-            btn?.setTitle(btn?.currentTitle, for: .normal)
-            btn?.setTitleColor(.black, for: .normal)
-            btn?.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-            btn?.titleLabel?.textAlignment = .center
-
-            btn?.addTarget(self, action: #selector(languageButtonTapped(_:)), for: .touchUpInside)
-        }
-
-        languageViews.forEach { (_, view) in
+        // Configure buttons and views
+        for (button, view) in languageViews {
+            // Clear any existing configuration
+            button.configuration = nil
+            
+            // Set title and appearance
+            button.setTitle(languageTitles[button], for: .normal)
+            button.backgroundColor = .clear
+            button.setTitleColor(.black, for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+            button.contentHorizontalAlignment = .center
+            button.addTarget(self, action: #selector(languageButtonTapped(_:)), for: .touchUpInside)
+            
+            // Configure view borders
             view.layer.borderWidth = 1
             view.layer.borderColor = UIColor.systemGray.cgColor
             view.layer.cornerRadius = 6
+            view.backgroundColor = .clear
+            view.clipsToBounds = true
         }
-
+        
+        // Set default selection to English
         updateLanguageSelection(selected: englishBtn)
     }
 
     @objc private func languageButtonTapped(_ sender: UIButton) {
         updateLanguageSelection(selected: sender)
     }
+    
     private func updateLanguageSelection(selected button: UIButton?) {
+        // Reset all buttons and view borders
         languageViews.forEach { btn, view in
-            // Reset all
             btn.setTitleColor(.black, for: .normal)
             view.layer.borderColor = UIColor.systemGray.cgColor
             view.backgroundColor = .clear
         }
-
-        if let btn = button, let view = languageViews[btn] {
-            btn.setTitleColor(.systemBlue, for: .normal)
-            view.layer.borderColor = UIColor.systemBlue.cgColor
-            view.backgroundColor = .clear
+        
+        // Highlight selected button
+        if let selectedBtn = button, let selectedView = languageViews[selectedBtn] {
+            selectedLanguage = selectedBtn.currentTitle?.uppercased() ?? "ENGLISH"
+            
+            selectedBtn.setTitleColor(.systemBlue, for: .normal)
+            selectedView.layer.borderColor = UIColor.systemBlue.cgColor
+            selectedView.backgroundColor = .clear
         }
     }
+
+    // MARK: Category Button Setup
     private func setupCategoryButtons() {
         for (button, title) in categoryButtons {
             button.configuration = nil
@@ -188,7 +197,7 @@ private func setupLanguageViews() {
         }
     }
 
-
+    // MARK: Actions
     @IBAction func onTapuncheckboxButtonx(_ sender: UIButton) {
         isChecked.toggle()
         uncheckedBoxBtn.setImage(UIImage(named: isChecked ? "checked_box" : "Unchecked_box"), for: .normal)
@@ -218,7 +227,6 @@ private func setupLanguageViews() {
         }
     }
 
-    
     @IBAction func imageUploadBtnTapped(_ sender: UIButton) {
         openPicker(for: .photoLibrary, mediaTypes: ["public.image"])
     }
@@ -237,12 +245,9 @@ private func setupLanguageViews() {
         if let topVC = UIApplication.shared.windows.first?.rootViewController {
             topVC.present(picker, animated: true)
         }
-        
     }
-    
 
     @IBAction func submitBtnTapped(_ sender: UIButton) {
-        
         let reporterId = String(Session.shared.userDetails?.id ?? 0)
         let reporterName = Session.shared.userDetails?.username ?? ""
 
@@ -290,7 +295,7 @@ private func setupLanguageViews() {
         }
     }
 
-
+    // MARK: Network Calls
     private func postNews(reporterId: String, reporterName: String, uploadedImageUrls: [String]) {
         let payload: [String: Any] = [
             "title": newsTitleTv.text ?? "",
@@ -316,7 +321,12 @@ private func setupLanguageViews() {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    self.showAlert(title: response.success ? "Success" : "Error", message: response.description)
+                    self.showAlert(title: response.success ? "Success" : "Error", message: response.description) {
+                        // Navigate to ReportVC after success
+                        if response.success {
+                            self.navigateToReportVC()
+                        }
+                    }
                 case .failure(let error):
                     self.showAlert(title: "Error", message: error.localizedDescription)
                 }
@@ -378,15 +388,30 @@ private func setupLanguageViews() {
         }.resume()
     }
 
-    private func showAlert(title: String, message: String) {
-        if let topVC = UIApplication.shared.windows.first?.rootViewController {
+    // MARK:  Helper Methods
+    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        if let parentVC = self.parentViewController() {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            topVC.present(alert, animated: true)
+            alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                completion?()
+            })
+            parentVC.present(alert, animated: true)
+        }
+    }
+
+    private func navigateToReportVC() {
+        guard let parentVC = self.parentViewController() else { return }
+        let storyboard = UIStoryboard(name: "Reporter", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ReporterVC")
+        if let nav = parentVC.navigationController {
+            nav.pushViewController(vc, animated: true)
+        } else {
+            parentVC.present(vc, animated: true)
         }
     }
 }
 
+// MARK: UIImagePickerControllerDelegate
 extension NewsAddCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -416,4 +441,3 @@ extension NewsAddCell: UIImagePickerControllerDelegate, UINavigationControllerDe
         }
     }
 }
-

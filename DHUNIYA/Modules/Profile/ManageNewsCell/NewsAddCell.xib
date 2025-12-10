@@ -37,7 +37,7 @@
                         <rect key="frame" x="20" y="42" width="72" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmW-qT-QJB">
-                                <rect key="frame" x="0.6666666666666714" y="-4" width="71" height="32"/>
+                                <rect key="frame" x="0.6666666666666714" y="-3.6666666666666643" width="71" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -69,13 +69,25 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" red="0.0030776515149999999" green="0.0030776515149999999" blue="0.0030776515149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.20000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="0.0" height="3"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O53-TN-YDW">
                         <rect key="frame" x="108" y="42" width="72" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjz-Ra-JXQ">
-                                <rect key="frame" x="3" y="-4" width="66.333333333333329" height="32"/>
+                                <rect key="frame" x="3" y="-3.6666666666666643" width="66.333333333333329" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -107,13 +119,25 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" red="0.0030776515149999999" green="0.0030776515149999999" blue="0.0030776515149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.20000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="0.0" height="6"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knF-qT-8jz">
                         <rect key="frame" x="196" y="42" width="72" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gh6-dv-ysA">
-                                <rect key="frame" x="6.6666666666666536" y="-4" width="58.666666666666657" height="32"/>
+                                <rect key="frame" x="6.6666666666666536" y="-3.6666666666666643" width="58.666666666666657" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -168,7 +192,7 @@
                         <rect key="frame" x="16" y="114" width="72" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upG-GP-5bI">
-                                <rect key="frame" x="0.6666666666666714" y="-4" width="71" height="32"/>
+                                <rect key="frame" x="0.6666666666666714" y="-3.6666666666666714" width="71" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -206,7 +230,7 @@
                         <rect key="frame" x="104" y="114" width="72" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjL-vy-IQw">
-                                <rect key="frame" x="2.3333333333333286" y="-4" width="67.666666666666671" height="32"/>
+                                <rect key="frame" x="2.3333333333333286" y="-3.6666666666666714" width="67.666666666666671" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -244,7 +268,7 @@
                         <rect key="frame" x="192" y="114" width="164" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWM-hK-OB0">
-                                <rect key="frame" x="3" y="-4" width="158.33333333333334" height="32"/>
+                                <rect key="frame" x="3" y="-3.6666666666666714" width="158.33333333333334" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -282,7 +306,7 @@
                         <rect key="frame" x="16.666666666666671" y="154" width="94" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFo-pw-Un4">
-                                <rect key="frame" x="0.6666666666666643" y="-4" width="92.333333333333343" height="32"/>
+                                <rect key="frame" x="0.6666666666666643" y="-3.6666666666666572" width="92.333333333333343" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -320,7 +344,7 @@
                         <rect key="frame" x="126.66666666666669" y="154" width="94" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6a-af-alS">
-                                <rect key="frame" x="8.9999999999999858" y="-4" width="76" height="32"/>
+                                <rect key="frame" x="8.9999999999999858" y="-3.6666666666666572" width="76" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -358,7 +382,7 @@
                         <rect key="frame" x="236.66666666666663" y="154" width="70" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdu-hs-9WV">
-                                <rect key="frame" x="-0.33333333333331439" y="-4" width="70.666666666666671" height="32"/>
+                                <rect key="frame" x="-0.33333333333331439" y="-3.6666666666666572" width="70.333333333333329" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -396,7 +420,7 @@
                         <rect key="frame" x="322.66666666666669" y="154" width="46" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiz-8q-f1d">
-                                <rect key="frame" x="0.66666666666662877" y="-4" width="44.333333333333336" height="32"/>
+                                <rect key="frame" x="0.66666666666662877" y="-3.6666666666666572" width="44.333333333333336" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -434,7 +458,7 @@
                         <rect key="frame" x="17.333333333333329" y="194" width="82" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2st-Wk-u6e">
-                                <rect key="frame" x="1.3333333333333357" y="-4" width="79.666666666666657" height="32"/>
+                                <rect key="frame" x="1.3333333333333357" y="-3.6666666666666572" width="79.666666666666657" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -472,7 +496,7 @@
                         <rect key="frame" x="115.33333333333331" y="194" width="108" height="24"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9a-rg-Gsw">
-                                <rect key="frame" x="0.6666666666666714" y="-4" width="107" height="32"/>
+                                <rect key="frame" x="0.6666666666666714" y="-3.6666666666666572" width="107" height="31.666666666666668"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -534,6 +558,18 @@
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" red="0.0030776515149999999" green="0.0030776515149999999" blue="0.0030776515149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.20000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="0.0" height="3"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </textView>
@@ -863,7 +899,7 @@
                             <attributedString key="attributedTitle">
                                 <fragment content="SUBMIT">
                                     <attributes>
-                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="16" name="Lexend-SemiBold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                     </attributes>

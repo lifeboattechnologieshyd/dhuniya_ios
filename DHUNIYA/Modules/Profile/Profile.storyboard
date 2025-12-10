@@ -464,7 +464,7 @@
                             </wkWebView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mbo-5J-NQl"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="mbo-5J-NQl" firstAttribute="bottom" secondItem="T1x-0c-S2F" secondAttribute="bottom" id="9Nq-cf-cbO"/>
                             <constraint firstItem="T1x-0c-S2F" firstAttribute="leading" secondItem="mbo-5J-NQl" secondAttribute="leading" id="HJm-um-TkE"/>

@@ -29,31 +29,13 @@ class FeelsViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         colVw.register(UINib(nibName: "FeelsCollectionViewCell", bundle: nil),
                        forCellWithReuseIdentifier: "FeelsCollectionViewCell")
-        
-     //   getEdutainment()
     }
     @IBAction func onClickBack(_ sender: UIButton) {
         print("Back pressed macha!!!")
 
-        // 1. If pushed → pop
-        if let nav = self.navigationController, nav.viewControllers.count > 1 {
-            nav.popViewController(animated: true)
-            return
+        if let tab = self.tabBarController {
+            tab.selectedIndex = 0   // or whichever tab you want
         }
-
-        // 2. If presented → dismiss
-        if self.presentingViewController != nil {
-            self.dismiss(animated: true)
-            return
-        }
-
-        // 3. If inside a nav controller that was presented as root → dismiss nav
-        if let nav = self.navigationController, nav.presentingViewController != nil {
-            nav.dismiss(animated: true)
-            return
-        }
-
-        print("⚠️ No navigation or presentation context found macha!")
     }
 
 

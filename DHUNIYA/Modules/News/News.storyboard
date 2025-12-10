@@ -24,10 +24,10 @@
                         <viewLayoutGuide key="safeArea" id="rKf-Ya-1ar"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cZb-Mf-4wJ" firstAttribute="leading" secondItem="rKf-Ya-1ar" secondAttribute="leading" id="DDc-5a-YGF"/>
-                            <constraint firstItem="cZb-Mf-4wJ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="H2S-Zb-Tbp"/>
-                            <constraint firstItem="rKf-Ya-1ar" firstAttribute="bottom" secondItem="cZb-Mf-4wJ" secondAttribute="bottom" constant="20" id="hyp-70-FRM"/>
-                            <constraint firstItem="cZb-Mf-4wJ" firstAttribute="trailing" secondItem="rKf-Ya-1ar" secondAttribute="trailing" id="wmx-bg-grQ"/>
+                            <constraint firstItem="rKf-Ya-1ar" firstAttribute="bottom" secondItem="cZb-Mf-4wJ" secondAttribute="bottom" constant="20" id="4mV-Gy-u14"/>
+                            <constraint firstItem="cZb-Mf-4wJ" firstAttribute="trailing" secondItem="rKf-Ya-1ar" secondAttribute="trailing" id="AqI-Vi-Ub5"/>
+                            <constraint firstItem="cZb-Mf-4wJ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="IXH-6U-l1v"/>
+                            <constraint firstItem="cZb-Mf-4wJ" firstAttribute="leading" secondItem="rKf-Ya-1ar" secondAttribute="leading" id="edw-n6-tKB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EAv-08-Bbr"/>

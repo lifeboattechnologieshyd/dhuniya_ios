@@ -41,7 +41,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YIa-F9-9c5" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="ET" image="ET" id="hVT-No-XRc"/>
+                    <tabBarItem key="tabBarItem" title="ET" image="mydhunia" id="hVT-No-XRc"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mxa-0a-uG9">
@@ -60,7 +60,7 @@
     </scenes>
     <resources>
         <image name="ComingSoon " width="957" height="1701"/>
-        <image name="ET" width="20" height="20"/>
+        <image name="mydhunia" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
