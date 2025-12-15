@@ -8,7 +8,9 @@
 import UIKit
 
 class ApproveNewsVC: UIViewController {
-
+    
+    @IBOutlet weak var rejectBtn: UIButton!
+    @IBOutlet weak var approveBtn: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tblVw: UITableView!
     
@@ -55,4 +57,5 @@ extension ApproveNewsVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
 }

@@ -883,6 +883,9 @@
                                 <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="rejectBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gVw-2J-mq1"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rag-Rw-zO0">
                         <rect key="frame" x="219.66666666666663" y="1238" width="187.33333333333337" height="48"/>
@@ -1017,11 +1020,12 @@
                 <outlet property="newsTitleTv" destination="uVM-Yb-tqc" id="yrr-GE-rWc"/>
                 <outlet property="politicsBtn" destination="fam-Y6-Coq" id="TES-fW-hep"/>
                 <outlet property="politicsTagBtn" destination="1Yu-tb-lvF" id="Ah6-HR-seK"/>
+                <outlet property="rejectBtn" destination="RxJ-8r-Tl0" id="GN8-XN-JzF"/>
                 <outlet property="removePoliticsTagBtn" destination="nHc-XK-e62" id="v3i-Pw-lke"/>
                 <outlet property="removeSportsTagBtn" destination="0jc-N9-o5f" id="gFM-iG-H11"/>
                 <outlet property="removeUploadVideoImage" destination="cGQ-3H-cNg" id="kLa-gJ-rEg"/>
                 <outlet property="removeuplopadedimage" destination="KQ5-PM-hvP" id="NQY-jV-eII"/>
-                <outlet property="saveDraftBtn" destination="RxJ-8r-Tl0" id="JGb-YT-SRu"/>
+                <outlet property="saveDraftBtn" destination="RxJ-8r-Tl0" id="OJk-7a-1og"/>
                 <outlet property="sportsTagBtn" destination="FkH-MY-Y5I" id="ZQD-CI-5Wy"/>
                 <outlet property="startupBtn" destination="zBh-Qh-nKn" id="TF6-GE-0lV"/>
                 <outlet property="submitBtn" destination="rag-Rw-zO0" id="rQX-CX-9OO"/>

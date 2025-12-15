@@ -119,17 +119,16 @@ extension UIView {
     }
 
     func parentViewController() -> UIViewController? {
-        var parentResponder: UIResponder? = self
-        while let responder = parentResponder {
-            parentResponder = responder.next
-            if let vc = parentResponder as? UIViewController {
-                return vc
+            var parentResponder: UIResponder? = self
+            while let responder = parentResponder {
+                parentResponder = responder.next
+                if let vc = parentResponder as? UIViewController {
+                    return vc
+                }
             }
+            return nil
         }
-        return nil
     }
-}
-
 
 
 // MARK: - UIViewController extension
@@ -264,5 +263,17 @@ extension NSMutableData {
         if let data = string.data(using: .utf8) {
             append(data)
         }
+    }
+}
+extension SubmitNewsCell {
+    func presentVC(_ viewController: UIViewController, from parentVC: UIViewController) {
+        let transition = CATransition()
+        transition.duration = 0.35
+        transition.type = .push
+        transition.subtype = .fromRight
+        parentVC.view.window?.layer.add(transition, forKey: kCATransition)
+
+        viewController.modalPresentationStyle = .fullScreen
+        parentVC.present(viewController, animated: false)
     }
 }

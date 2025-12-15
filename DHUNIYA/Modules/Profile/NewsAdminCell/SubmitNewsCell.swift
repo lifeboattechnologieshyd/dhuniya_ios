@@ -35,13 +35,23 @@ class SubmitNewsCell: UITableViewCell {
     @IBOutlet weak var politicsTagBtn: UIButton!
     @IBOutlet weak var uploadimageView: UIImageView!
     @IBOutlet weak var removeuplopadedimage: UIButton!
+    @IBOutlet weak var saveDraftBtn: UIButton!
     @IBOutlet weak var uploadVideoImage: UIImageView!
     @IBOutlet weak var removeUploadVideoImage: UIButton!
-    @IBOutlet weak var approveBtn: UIButton!
+    @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var unchekedBoxBtn: UIButton!
     @IBOutlet weak var declarationLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    @IBAction func submitBtnTapped(_ sender: UIButton) {
+        if let parentVC = self.parentViewController() {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let reporterVC = storyboard.instantiateViewController(withIdentifier: "ReporterVC")
+            
+            parentVC.navigationController?.pushViewController(reporterVC, animated: true)
+        }
     }
 }
