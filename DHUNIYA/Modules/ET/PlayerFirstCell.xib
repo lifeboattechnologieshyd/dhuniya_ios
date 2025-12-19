@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lexend-Light.ttf">
+            <string>Lexend-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PlayerFirstCell" rowHeight="104" id="DmP-BI-DdK" customClass="PlayerFirstCell" customModule="DHUNIYA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="104"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DmP-BI-DdK" id="d4u-sb-zyi">
+                <rect key="frame" x="0.0" y="0.0" width="360" height="104"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-Ox-m2g">
+                        <rect key="frame" x="0.0" y="30" width="360" height="44"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="18G-Vs-fn1">
+                                <rect key="frame" x="0.0" y="0.33333333333333215" width="109.33333333333333" height="43.666666666666671"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watch_list" translatesAutoresizingMaskIntoConstraints="NO" id="6XT-3l-DTH">
+                                        <rect key="frame" x="44.666666666666664" y="0.0" width="19.999999999999993" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watch List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULm-eH-qoN">
+                                        <rect key="frame" x="20" y="26" width="69.666666666666671" height="17.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="Lexend-Light" family="Lexend" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bD2-o3-wPt">
+                                <rect key="frame" x="125.33333333333334" y="0.33333333333333215" width="109.33333333333334" height="43.666666666666671"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="review_movie" translatesAutoresizingMaskIntoConstraints="NO" id="VSy-aa-bSa">
+                                        <rect key="frame" x="44.666666666666671" y="0.0" width="20" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKD-H8-Mwd">
+                                        <rect key="frame" x="31.333333333333325" y="26" width="46.666666666666657" height="17.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="Lexend-Light" family="Lexend" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="3kb-Dv-uTS">
+                                <rect key="frame" x="250.66666666666666" y="0.33333333333333215" width="109.33333333333334" height="43.666666666666671"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_movie" translatesAutoresizingMaskIntoConstraints="NO" id="ij5-mi-5G4">
+                                        <rect key="frame" x="44.666666666666657" y="0.0" width="20" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7T-Ep-BvY">
+                                        <rect key="frame" x="35.666666666666657" y="26" width="38.333333333333343" height="17.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="Lexend-Light" family="Lexend" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8f-zu-Bsk">
+                        <rect key="frame" x="0.0" y="30.333333333333332" width="109.33333333333333" height="43.666666666666671"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="btnWatchListTapped:" destination="DmP-BI-DdK" eventType="touchUpInside" id="AN9-sL-cua"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxD-FW-8tk">
+                        <rect key="frame" x="125.33333333333334" y="30.333333333333332" width="109.33333333333334" height="43.666666666666671"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="btnReviewTapped:" destination="DmP-BI-DdK" eventType="touchUpInside" id="p8M-zr-LYU"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsF-hz-aOX">
+                        <rect key="frame" x="250.66666666666666" y="30.333333333333332" width="109.33333333333334" height="43.666666666666671"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="btnShareTapped:" destination="DmP-BI-DdK" eventType="touchUpInside" id="w41-BB-Fhv"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fsF-hz-aOX" firstAttribute="bottom" secondItem="3kb-Dv-uTS" secondAttribute="bottom" id="5ZH-45-1BH"/>
+                    <constraint firstItem="g8f-zu-Bsk" firstAttribute="top" secondItem="18G-Vs-fn1" secondAttribute="top" id="FcB-ni-Yg1"/>
+                    <constraint firstItem="g8f-zu-Bsk" firstAttribute="bottom" secondItem="18G-Vs-fn1" secondAttribute="bottom" id="IMq-FL-iQl"/>
+                    <constraint firstItem="fsF-hz-aOX" firstAttribute="trailing" secondItem="3kb-Dv-uTS" secondAttribute="trailing" id="LWs-Lg-7AR"/>
+                    <constraint firstItem="vxD-FW-8tk" firstAttribute="bottom" secondItem="bD2-o3-wPt" secondAttribute="bottom" id="MSF-KH-NBR"/>
+                    <constraint firstItem="2VA-Ox-m2g" firstAttribute="leading" secondItem="d4u-sb-zyi" secondAttribute="leading" id="RfK-Fk-kSk"/>
+                    <constraint firstItem="vxD-FW-8tk" firstAttribute="top" secondItem="bD2-o3-wPt" secondAttribute="top" id="TQ3-mX-448"/>
+                    <constraint firstAttribute="trailing" secondItem="2VA-Ox-m2g" secondAttribute="trailing" id="cQA-WK-FW2"/>
+                    <constraint firstItem="vxD-FW-8tk" firstAttribute="trailing" secondItem="bD2-o3-wPt" secondAttribute="trailing" id="ddM-AY-dWH"/>
+                    <constraint firstItem="g8f-zu-Bsk" firstAttribute="leading" secondItem="18G-Vs-fn1" secondAttribute="leading" id="knf-0r-XNC"/>
+                    <constraint firstAttribute="bottom" secondItem="2VA-Ox-m2g" secondAttribute="bottom" constant="30" id="mvd-wJ-W4Y"/>
+                    <constraint firstItem="2VA-Ox-m2g" firstAttribute="top" secondItem="d4u-sb-zyi" secondAttribute="top" constant="30" id="qik-g9-jnm"/>
+                    <constraint firstItem="fsF-hz-aOX" firstAttribute="leading" secondItem="3kb-Dv-uTS" secondAttribute="leading" id="rMc-BB-1hv"/>
+                    <constraint firstItem="fsF-hz-aOX" firstAttribute="top" secondItem="3kb-Dv-uTS" secondAttribute="top" id="yWj-5r-Bx4"/>
+                    <constraint firstItem="g8f-zu-Bsk" firstAttribute="trailing" secondItem="18G-Vs-fn1" secondAttribute="trailing" id="zXr-n2-aWJ"/>
+                    <constraint firstItem="vxD-FW-8tk" firstAttribute="leading" secondItem="bD2-o3-wPt" secondAttribute="leading" id="zy3-OY-hjM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="DZ1-dR-Jyd"/>
+            <connections>
+                <outlet property="hStackView" destination="2VA-Ox-m2g" id="mqC-lB-9gT"/>
+                <outlet property="lblReview" destination="vKD-H8-Mwd" id="0vy-kX-QkM"/>
+                <outlet property="lblShare" destination="U7T-Ep-BvY" id="N4P-4z-EwY"/>
+                <outlet property="lblWatchList" destination="ULm-eH-qoN" id="nQm-dk-i99"/>
+            </connections>
+            <point key="canvasLocation" x="108.3969465648855" y="40.845070422535215"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="review_movie" width="20" height="20"/>
+        <image name="share_movie" width="20" height="20"/>
+        <image name="watch_list" width="20" height="20"/>
+    </resources>
+</document>

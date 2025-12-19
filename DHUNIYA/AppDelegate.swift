@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Enable IQKeyboardManager
         IQKeyboardManager.shared.isEnabled = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
 
         // IQKeyboardToolbarManager does not exist in IQKeyboardManagerSwift 8.0.1
@@ -36,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
 
     private func configureFirebase() {
         guard let plistName = Bundle.main.object(forInfoDictionaryKey: "FirebasePlistFile") as? String,
@@ -71,4 +73,5 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("🔥 FCM Token:", fcmToken ?? "")
     }
+    
 }

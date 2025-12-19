@@ -2,10 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>server_url</key>
-	<string>$(server_url)</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Allow to save images</string>
+	<key>FirebasePlistFile</key>
+	<string>$(FIREBASE_PLIST_NAME)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>whatsapp</string>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lexend-Black.ttf</string>
@@ -17,9 +24,16 @@
 		<string>Lexend-Regular.ttf</string>
 		<string>Lexend-Thin.ttf</string>
 		<string>Lexend-SemiBold.ttf</string>
+		<string>NotoSansTelugu_Condensed-Black.ttf</string>
+		<string>NotoSansTelugu_Condensed-Bold.ttf</string>
+		<string>NotoSansTelugu_Condensed-ExtraBold.ttf</string>
+		<string>NotoSansTelugu_Condensed-ExtraLight.ttf</string>
+		<string>NotoSansTelugu_Condensed-Light.ttf</string>
+		<string>NotoSansTelugu_Condensed-Medium.ttf</string>
+		<string>NotoSansTelugu_Condensed-Regular.ttf</string>
+		<string>NotoSansTelugu_Condensed-SemiBold.ttf</string>
+		<string>NotoSansTelugu_Condensed-Thin.ttf</string>
 	</array>
-	<key>FirebasePlistFile</key>
-	<string>$(FIREBASE_PLIST_NAME)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -43,16 +57,7 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>whatsapp</string>
-	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
+	<key>server_url</key>
+	<string>$(server_url)</string>
 </dict>
 </plist>
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-</dict>

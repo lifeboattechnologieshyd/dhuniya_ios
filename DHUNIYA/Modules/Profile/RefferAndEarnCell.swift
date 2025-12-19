@@ -25,6 +25,15 @@ class RefferAndEarnCell: UITableViewCell {
     @IBOutlet weak var lblRefferText: UILabel!
     @IBOutlet weak var referalCodeBlurView: UIView!
     
+    // Controls whether the Know More button is visible and tappable
+    var showKnowMoreButton: Bool = true {
+        didSet {
+            btnKnowMore.isHidden = !showKnowMoreButton
+            btnKnowMore.isUserInteractionEnabled = showKnowMoreButton
+        }
+    }
+
+    
     var referrals: [ReferralUser] = [] {
         didSet {
             lblRefferText.text = referrals.isEmpty ? "No referrals yet" : "You have \(referrals.count) referrals"
@@ -83,8 +92,32 @@ class RefferAndEarnCell: UITableViewCell {
     @objc private func referralCodeUpdated() {
         updateReferralCode()
     }
+    @IBAction func btnShareAppTapped(_ sender: UIButton) {
+        guard let parentVC = self.parentViewController() else { return }
+
+        // The text or link you want to share
+        let shareText = "Join the app using my referral code: \(Session.shared.userDetails?.referral_code ?? "") and get benefits!"
+        
+        // Create Activity View Controller
+        let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+        
+        // Optional: Exclude some activity types if needed
+        activityVC.excludedActivityTypes = [.assignToContact, .print, .addToReadingList, .saveToCameraRoll]
+        
+        // For iPad (prevents crash)
+        if let popover = activityVC.popoverPresentationController {
+            popover.sourceView = sender
+            popover.sourceRect = sender.bounds
+        }
+        
+        // Present the share sheet
+        parentVC.present(activityVC, animated: true)
+    }
+
     
     @IBAction func btnKnowMoreTapped(_ sender: UIButton) {
+        guard showKnowMoreButton else { return }  // Do nothing if hidden
+        
         if let parentVC = self.parentViewController() {
             let storyboard = UIStoryboard(name: "Refer&Earn", bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "ReferAndEarnVC") as? ReferAndEarnVC {
@@ -92,6 +125,10 @@ class RefferAndEarnCell: UITableViewCell {
             }
         }
     }
+    func configure(showKnowMore: Bool) {
+        self.showKnowMoreButton = showKnowMore
+    }
+
     
     @IBAction func btnEditReferralCodeTapped(_ sender: UIButton) {
         guard let parentVC = self.parentViewController() else { return }

@@ -14,7 +14,8 @@ class ReferAndEarnVC: UIViewController {
     @IBOutlet weak var topVw: UIView!
     
     var selectedTab: String = "rules"
-    
+    var referrals: [ReferralUser] = []  // This will hold the API referral data
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,12 +48,14 @@ extension ReferAndEarnVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // Section 0 → header cell
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RefferAndEarnCell", for: indexPath) as! RefferAndEarnCell
+            
+            // Hide the Know More button in this VC
+            cell.configure(showKnowMore: false)
+            
             return cell
         }
-        
         // Section 1 → buttons cell
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonsCell", for: indexPath) as! ButtonsCell
@@ -71,6 +74,15 @@ extension ReferAndEarnVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyReferals", for: indexPath) as! MyReferals
+            
+            // Pass the referral data
+            if referrals.isEmpty {
+                cell.configure(with: nil)   // No data
+            } else {
+                let referral = referrals[indexPath.row]  // if showing multiple referrals
+                cell.configure(with: referral)
+            }
+            
             return cell
         }
     }

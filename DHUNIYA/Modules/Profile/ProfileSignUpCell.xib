@@ -102,12 +102,12 @@
                                         <rect key="frame" x="235" y="14" width="116" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dq3-UC-9qS">
-                                                <rect key="frame" x="5.3333333333333144" y="4.3333333333333446" width="105.33333333333333" height="31.666666666666671"/>
+                                                <rect key="frame" x="3.6666666666666856" y="4.3333333333333446" width="108.66666666666667" height="31.666666666666671"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <attributedString key="attributedTitle">
-                                                        <fragment content="WiTHDRAW">
+                                                        <fragment content="WITHDRAW">
                                                             <attributes>
                                                                 <font key="NSFont" size="14" name="Lexend-SemiBold"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -135,7 +135,7 @@
                                                 <color key="value" systemColor="opaqueSeparatorColor"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="3"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>

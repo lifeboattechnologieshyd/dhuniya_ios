@@ -17,7 +17,23 @@ class MyReferals: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
+    }
+    
+    func configure(with referral: ReferralUser?) {
+        if let referral = referral {
+            lblName.text = referral.fullName
+            lbldate.text = referral.joinedDate
+            mobileNumber.text = referral.mobileNumber
+            if let urlString = referral.profileImageURL, let url = URL(string: urlString) {
+                // load async image here
+            } else {
+                profileImage.image = UIImage(named: "defaultProfile")
+            }
+        } else {
+            lblName.text = "No referrals yet"
+            lbldate.text = ""
+            mobileNumber.text = ""
+            profileImage.image = UIImage(named: "defaultProfile")
+        }
     }
 }

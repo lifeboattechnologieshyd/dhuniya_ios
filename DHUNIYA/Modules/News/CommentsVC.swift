@@ -8,6 +8,7 @@ import UIKit
 
 class CommentsVC: UIViewController {
     
+    @IBOutlet weak var bgVw: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userimage: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
@@ -15,10 +16,13 @@ class CommentsVC: UIViewController {
     @IBOutlet weak var txtFieldComment: UITextField!
     var newsId: Int = 0                    // News ID to fetch comments
     var commentsList: [CommentModel] = []  // Store API comments
+    var onCommentAdded: (() -> Void)?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+
         
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.isOpaque = false
@@ -26,6 +30,16 @@ class CommentsVC: UIViewController {
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         
         fetchComments()
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        bgVw.layer.cornerRadius = 30
+        bgVw.layer.maskedCorners = [
+            .layerMinXMinYCorner,  // top-left
+            .layerMaxXMinYCorner   // top-right
+        ]
+        bgVw.layer.masksToBounds = true
     }
     
     private func setupTableView() {
@@ -72,12 +86,19 @@ class CommentsVC: UIViewController {
             switch result {
             case .success(let response):
                 if response.success {
-                    self.commentsList.append(response.info!)
+                    
+                    if let comment = response.info {
+                        self.commentsList.append(comment)
+                    }
+                    
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.onCommentAdded?()
+                        self.txtFieldComment.text = ""
+                        self.dismiss(animated: true)
                     }
                 }
-            case .failure(let error):
+     case .failure(let error):
                 print("Comments API Error:", error)
                 self.showAlert(message: error.localizedDescription)
             }
@@ -146,13 +167,28 @@ extension CommentsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     private func formatDate(_ isoString: String) -> String {
+        
         let formatter = ISO8601DateFormatter()
-        if let date = formatter.date(from: isoString) {
-            let displayFormatter = DateFormatter()
-            displayFormatter.dateFormat = "h:mm a, dd MMM yyyy"
-            displayFormatter.locale = Locale(identifier: "en_US_POSIX")
-            return displayFormatter.string(from: date)
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        guard let date = formatter.date(from: isoString) else {
+            return isoString
         }
-        return isoString
+        
+        let now = Date()
+        let secondsIn24Hours: TimeInterval = 24 * 60 * 60
+        let displayFormatter = DateFormatter()
+        displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        if now.timeIntervalSince(date) < secondsIn24Hours {
+            // Less than 24 hours → show time
+            displayFormatter.dateFormat = "h:mm a"
+        } else {
+            // More than 24 hours → show date
+            displayFormatter.dateFormat = "dd MMM yyyy"
+        }
+        
+        return displayFormatter.string(from: date)
     }
+    
 }

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lexend-Light.ttf">
+            <string>Lexend-Light</string>
+        </array>
+        <array key="Lexend-Medium.ttf">
+            <string>Lexend-Medium</string>
+        </array>
+        <array key="Lexend-Regular.ttf">
+            <string>Lexend-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PlayerSecondCell" rowHeight="221" id="4aK-N0-eQr" customClass="PlayerSecondCell" customModule="DHUNIYA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="221"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4aK-N0-eQr" id="opX-gp-Hz6">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="221"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About the Creators" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rT3-lu-Dju">
+                        <rect key="frame" x="0.0" y="0.0" width="398" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="vHl-sQ-Nru"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lexend-Medium" family="Lexend" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie_ph" translatesAutoresizingMaskIntoConstraints="NO" id="FTq-lN-ZcJ">
+                        <rect key="frame" x="0.0" y="37" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="OWN-V7-Vr3"/>
+                            <constraint firstAttribute="width" constant="60" id="nEz-ee-w0t"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Production House Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEA-V5-CuW">
+                        <rect key="frame" x="76" y="37" width="330" height="17"/>
+                        <fontDescription key="fontDescription" name="Lexend-Regular" family="Lexend" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An out &amp; out Action thriller Film by Director Prashanth Varma." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMQ-JI-Pqx">
+                        <rect key="frame" x="76" y="60" width="322" height="30"/>
+                        <fontDescription key="fontDescription" name="Lexend-Light" family="Lexend" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="director-chair" translatesAutoresizingMaskIntoConstraints="NO" id="VO1-jJ-efU">
+                        <rect key="frame" x="0.0" y="121" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="DnU-lG-gI0"/>
+                            <constraint firstAttribute="width" constant="16" id="Z85-SJ-0JG"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Director : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38P-31-1zy">
+                        <rect key="frame" x="28" y="121.00000000000001" width="70" height="17.666666666666671"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="VJH-CJ-Aun"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lexend-Light" family="Lexend" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prashanth Varma" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmV-Ia-YEw">
+                        <rect key="frame" x="110" y="121.00000000000001" width="288" height="17.666666666666671"/>
+                        <fontDescription key="fontDescription" name="Lexend-Regular" family="Lexend" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie" translatesAutoresizingMaskIntoConstraints="NO" id="lnR-Hj-nOM">
+                        <rect key="frame" x="0.0" y="149" width="16" height="16"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cast : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Orj-9H-aK6" userLabel="Cast :">
+                        <rect key="frame" x="28" y="149" width="70" height="17.666666666666657"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="Kty-zk-sG7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lexend-Light" family="Lexend" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nagarjuna, Venkatesh, Tabu, Rao Ramesh, Ileana Dsouza" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0i-Sr-dSB">
+                        <rect key="frame" x="110" y="149" width="288" height="35"/>
+                        <fontDescription key="fontDescription" name="Lexend-Regular" family="Lexend" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="XTT-V4-jBF">
+                        <rect key="frame" x="0.0" y="192" width="16" height="16"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6e-11-kmY">
+                        <rect key="frame" x="28" y="192" width="70" height="17.666666666666657"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="VNK-Cw-gnD"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lexend-Light" family="Lexend" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telugu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6E-AW-U9n">
+                        <rect key="frame" x="110" y="192" width="288" height="17.666666666666657"/>
+                        <fontDescription key="fontDescription" name="Lexend-Regular" family="Lexend" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="m6E-AW-U9n" firstAttribute="leading" secondItem="k6e-11-kmY" secondAttribute="trailing" constant="12" id="03G-Te-F9u"/>
+                    <constraint firstItem="AMQ-JI-Pqx" firstAttribute="top" secondItem="BEA-V5-CuW" secondAttribute="bottom" constant="6" id="0j4-YH-DeE"/>
+                    <constraint firstItem="lnR-Hj-nOM" firstAttribute="width" secondItem="VO1-jJ-efU" secondAttribute="width" id="2DI-av-qik"/>
+                    <constraint firstItem="m6E-AW-U9n" firstAttribute="top" secondItem="k6e-11-kmY" secondAttribute="top" id="2RN-lx-pHL"/>
+                    <constraint firstItem="rT3-lu-Dju" firstAttribute="top" secondItem="opX-gp-Hz6" secondAttribute="top" id="3Ks-nJ-rrJ"/>
+                    <constraint firstItem="lnR-Hj-nOM" firstAttribute="leading" secondItem="VO1-jJ-efU" secondAttribute="leading" id="5N6-se-NWA"/>
+                    <constraint firstItem="rT3-lu-Dju" firstAttribute="leading" secondItem="opX-gp-Hz6" secondAttribute="leading" id="6mt-C1-dbs"/>
+                    <constraint firstItem="hmV-Ia-YEw" firstAttribute="leading" secondItem="38P-31-1zy" secondAttribute="trailing" constant="12" id="8ct-VZ-mfm"/>
+                    <constraint firstAttribute="trailing" secondItem="hmV-Ia-YEw" secondAttribute="trailing" constant="16" id="8rF-PY-czo"/>
+                    <constraint firstAttribute="trailing" secondItem="AMQ-JI-Pqx" secondAttribute="trailing" constant="16" id="BQh-p6-eDC"/>
+                    <constraint firstItem="VO1-jJ-efU" firstAttribute="leading" secondItem="FTq-lN-ZcJ" secondAttribute="leading" id="CGx-ee-AHp"/>
+                    <constraint firstItem="k6e-11-kmY" firstAttribute="top" secondItem="XTT-V4-jBF" secondAttribute="top" id="DL3-C1-XJt"/>
+                    <constraint firstItem="k6e-11-kmY" firstAttribute="leading" secondItem="XTT-V4-jBF" secondAttribute="trailing" constant="12" id="Ekd-uD-biW"/>
+                    <constraint firstItem="XTT-V4-jBF" firstAttribute="height" secondItem="lnR-Hj-nOM" secondAttribute="height" id="FL0-rx-EVH"/>
+                    <constraint firstItem="FTq-lN-ZcJ" firstAttribute="top" secondItem="rT3-lu-Dju" secondAttribute="bottom" constant="12" id="G3J-Jd-e6B"/>
+                    <constraint firstItem="e0i-Sr-dSB" firstAttribute="top" secondItem="Orj-9H-aK6" secondAttribute="top" id="HvS-6M-up8"/>
+                    <constraint firstAttribute="trailing" secondItem="m6E-AW-U9n" secondAttribute="trailing" constant="16" id="LUW-tB-65R"/>
+                    <constraint firstAttribute="trailing" secondItem="e0i-Sr-dSB" secondAttribute="trailing" constant="16" id="VZE-aB-zFb"/>
+                    <constraint firstAttribute="trailing" secondItem="rT3-lu-Dju" secondAttribute="trailing" constant="16" id="WDI-G8-Mvv"/>
+                    <constraint firstItem="lnR-Hj-nOM" firstAttribute="top" secondItem="VO1-jJ-efU" secondAttribute="bottom" constant="12" id="WjB-8h-Zuw"/>
+                    <constraint firstItem="XTT-V4-jBF" firstAttribute="leading" secondItem="lnR-Hj-nOM" secondAttribute="leading" id="bQd-qi-TKh"/>
+                    <constraint firstItem="BEA-V5-CuW" firstAttribute="leading" secondItem="FTq-lN-ZcJ" secondAttribute="trailing" constant="16" id="fBi-AC-mXz"/>
+                    <constraint firstItem="Orj-9H-aK6" firstAttribute="top" secondItem="lnR-Hj-nOM" secondAttribute="top" id="faD-Px-q8X"/>
+                    <constraint firstItem="BEA-V5-CuW" firstAttribute="top" secondItem="FTq-lN-ZcJ" secondAttribute="top" id="jby-Tf-nEB"/>
+                    <constraint firstItem="XTT-V4-jBF" firstAttribute="width" secondItem="lnR-Hj-nOM" secondAttribute="width" id="kE1-Gg-410"/>
+                    <constraint firstItem="lnR-Hj-nOM" firstAttribute="height" secondItem="VO1-jJ-efU" secondAttribute="height" id="kKa-0F-1hS"/>
+                    <constraint firstItem="FTq-lN-ZcJ" firstAttribute="leading" secondItem="rT3-lu-Dju" secondAttribute="leading" id="lPD-0w-ImZ"/>
+                    <constraint firstItem="Orj-9H-aK6" firstAttribute="leading" secondItem="lnR-Hj-nOM" secondAttribute="trailing" constant="12" id="lbk-JP-iwi"/>
+                    <constraint firstItem="hmV-Ia-YEw" firstAttribute="top" secondItem="38P-31-1zy" secondAttribute="top" id="lrP-6E-NMJ"/>
+                    <constraint firstItem="e0i-Sr-dSB" firstAttribute="leading" secondItem="Orj-9H-aK6" secondAttribute="trailing" constant="12" id="nrs-Jr-yUy"/>
+                    <constraint firstItem="38P-31-1zy" firstAttribute="top" secondItem="VO1-jJ-efU" secondAttribute="top" id="rqv-nQ-ASa"/>
+                    <constraint firstAttribute="trailing" secondItem="BEA-V5-CuW" secondAttribute="trailing" constant="8" id="rrz-Cr-8Qa"/>
+                    <constraint firstItem="m6E-AW-U9n" firstAttribute="top" secondItem="e0i-Sr-dSB" secondAttribute="bottom" constant="8" id="tfg-gk-4vw"/>
+                    <constraint firstItem="VO1-jJ-efU" firstAttribute="top" secondItem="FTq-lN-ZcJ" secondAttribute="bottom" constant="24" id="tmi-TM-7SJ"/>
+                    <constraint firstItem="AMQ-JI-Pqx" firstAttribute="leading" secondItem="BEA-V5-CuW" secondAttribute="leading" id="uCB-bd-vOf"/>
+                    <constraint firstItem="38P-31-1zy" firstAttribute="leading" secondItem="VO1-jJ-efU" secondAttribute="trailing" constant="12" id="xLu-vu-8Lw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="E4I-gn-vSj"/>
+            <connections>
+                <outlet property="imgProduction" destination="FTq-lN-ZcJ" id="aBf-Ot-TkN"/>
+                <outlet property="lblAudioHeading" destination="k6e-11-kmY" id="nx7-Sz-Wqc"/>
+                <outlet property="lblAudioLang" destination="m6E-AW-U9n" id="jtP-ft-U2C"/>
+                <outlet property="lblCastDetails" destination="e0i-Sr-dSB" id="GcY-nd-ANt"/>
+                <outlet property="lblCastHeading" destination="Orj-9H-aK6" id="qlX-hJ-WG6"/>
+                <outlet property="lblDirectorHeading" destination="38P-31-1zy" id="wU4-yO-8t3"/>
+                <outlet property="lblDirectorName" destination="hmV-Ia-YEw" id="4xm-y7-MUn"/>
+                <outlet property="lblHeading" destination="rT3-lu-Dju" id="CEi-lx-0Wi"/>
+                <outlet property="lblProductionHouseDesc" destination="AMQ-JI-Pqx" id="up7-yd-K6j"/>
+                <outlet property="lblProductionHouseName" destination="BEA-V5-CuW" id="RhN-fU-7xW"/>
+            </connections>
+            <point key="canvasLocation" x="267.17557251908397" y="84.859154929577471"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="director-chair" width="16" height="21"/>
+        <image name="movie" width="16" height="16.333333969116211"/>
+        <image name="movie_ph" width="173" height="218"/>
+        <image name="speaker" width="16" height="16"/>
+    </resources>
+</document>

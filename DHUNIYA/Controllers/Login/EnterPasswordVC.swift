@@ -24,21 +24,30 @@ class EnterPasswordVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.definesPresentationContext = true
-        self.modalPresentationStyle = .overCurrentContext
+        // Prevent auto-dismiss on background tap
+        self.modalPresentationStyle = .overFullScreen
+        self.isModalInPresentation = true   // Important: prevents swipe-down & tap-out dismissal
+
+        // Semi-transparent background
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        self.view.isOpaque = false
         
-        bgView.layer.cornerRadius = 20
-        bgView.clipsToBounds = true
-        bgView.backgroundColor = .white
-        
+         
         if let num = mobileNumber {
             lblUsername.text = num
         }
         
+        // Optional: tap outside to dismiss keyboard, not VC
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
     }
-    
+
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+
+
+
     // Central dismiss function
     func dismissToProfile() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

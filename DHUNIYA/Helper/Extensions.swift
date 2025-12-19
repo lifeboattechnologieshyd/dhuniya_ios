@@ -7,8 +7,43 @@
 
 import UIKit
 import Kingfisher
+import ObjectiveC
 
-// MARK: - UIView extensions
+
+struct FontManager {
+
+    // MARK: Telugu
+    static func teluguTitle(_ size: CGFloat) -> UIFont {
+        return UIFont(
+            name: "NotoSansTeluguCondensed-Medium",
+            size: size
+        ) ?? UIFont.systemFont(ofSize: size, weight: .medium)
+    }
+
+    static func teluguBody(_ size: CGFloat) -> UIFont {
+        return UIFont(
+            name: "NotoSansTeluguCondensed-Regular",
+            size: size
+        ) ?? UIFont.systemFont(ofSize: size)
+    }
+
+    // MARK:  English
+    static func englishTitle(_ size: CGFloat) -> UIFont {
+        return UIFont(
+            name: "Lexend-Medium",
+            size: size
+        ) ?? UIFont.systemFont(ofSize: size, weight: .medium)
+    }
+
+    static func englishBody(_ size: CGFloat) -> UIFont {
+        return UIFont(
+            name: "Lexend-Regular",
+            size: size
+        ) ?? UIFont.systemFont(ofSize: size)
+    }
+}
+
+// MARK:UIView extensions
 extension UIView {
     
     // Corner Radius
@@ -131,7 +166,7 @@ extension UIView {
     }
 
 
-// MARK: - UIViewController extension
+// MARK:  UIViewController extension
 extension UIViewController {
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
@@ -168,7 +203,7 @@ extension UIViewController {
 }
 
 
-// MARK: - Date extension
+// MARK:  Date extension
 extension Date {
     func timeAgo() -> String {
         let secondsAgo = Int(Date().timeIntervalSince(self))
@@ -185,7 +220,7 @@ extension Date {
     }
 }
 
-// MARK: - UIImageView extension
+// MARK:  UIImageView extension
 extension UIImageView {
     func setKFImage(_ urlString: String?, placeholder: UIImage? = UIImage(named: "news_placeholder")) {
         guard let urlString = urlString, let url = URL(string: urlString) else {
@@ -200,20 +235,29 @@ extension UIImageView {
     }
 }
 extension String {
-    
     func extractYoutubeId() -> String? {
-        if let url = URL(string: self) {
-            if url.absoluteString.contains("youtube.com/shorts") {
-                return url.lastPathComponent
+        // Shorts URL
+        if let url = URL(string: self), url.absoluteString.contains("youtube.com/shorts") {
+            return url.lastPathComponent
+        }
+        
+        // Normal youtube URL
+        let pattern = "(?<=v=)[^&]+|(?<=be/)[^?&]+|(?<=embed/)[^?&]+"
+        if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {
+            let nsString = self as NSString
+            if let match = regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: nsString.length)) {
+                return nsString.substring(with: match.range)
             }
         }
+        
         return nil
     }
+    
     func youtubeThumbnailURL(quality: String = "hqdefault") -> String {
         "https://img.youtube.com/vi/\(self)/\(quality).jpg"
     }
-    
 }
+
 extension UIImageView {
     
     
@@ -258,6 +302,206 @@ extension UITableView {
         self.separatorStyle = .none
     }
 }
+
+extension UILabel {
+    func setupLineSpacing(lineSpace : CGFloat, font: UIFont =  CustomFonts.LSB18.font) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpace
+        let attributedString = NSMutableAttributedString(string: self.text ?? "")
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(NSAttributedString.Key.font, value: font, range: NSMakeRange(0, attributedString.length))
+        self.attributedText = attributedString
+    }
+}
+extension UITextView {
+
+    func setupLineSpacing(lineSpace: CGFloat,
+                          font: UIFont = CustomFonts.LR16.font) {
+
+        guard let text = self.text, !text.isEmpty else { return }
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpace
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes([
+            .paragraphStyle: paragraphStyle,
+            .font: font
+        ], range: NSRange(location: 0, length: attributedString.length))
+        self.attributedText = attributedString
+    }
+}
+
+enum CustomFonts : String {
+    
+    case LB12, LB14, LB16, LB18, LB20, LB24, LB100,
+         LR12, LR14, LR16,LR18,
+         LEL12,LEL16, LEL14,
+         LL12, LL14,LL16,
+         LM12, LM16, LM14,
+         LSB12,LSB14,LSB16, LSB18,LSB20, LSB24
+
+    var font: UIFont {
+        switch self {
+        case .LB12:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Bold", size: 12)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Bold", size: 12)!
+        case .LB14:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Bold", size: 14)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Bold", size: 14)!
+
+        case .LB16:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Bold", size: 16)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Bold", size: 16)!
+
+        case .LB18:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Bold", size: 18)!
+
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Bold", size: 18)!
+
+        case .LB20:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Bold", size: 20)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Bold", size: 20)!
+
+        case .LB24:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Bold", size: 24)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Bold", size: 24)!
+        case .LB100:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Bold", size: 100)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Bold", size: 100)!
+        case .LR12:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Regular", size: 12)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Regular", size: 12)!
+
+            
+        case .LR14:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Regular", size: 14)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Regular", size: 14)!
+
+        case .LR16:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Regular", size: 16)!
+            }
+            return UIFont(name: "Lexend-Regular", size: 16)!
+
+//            return UIFont(name: "NotoSansTeluguCondensed-Regular", size: 16)!
+
+        case .LR18:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Regular", size: 18)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Regular", size: 18)!
+
+        case .LEL12:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-ExtraLight", size: 12)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-ExtraLight", size: 12)!
+
+        case .LEL14:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-ExtraLight", size: 14)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-ExtraLight", size: 14)!
+
+        case .LEL16:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-ExtraLight", size: 16)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-ExtraLight", size: 16)!
+
+        case .LL12:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Light", size: 12)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Light", size: 12)!
+
+        case .LL14:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Light", size: 14)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Light", size: 14)!
+
+        case .LL16:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Light", size: 16)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Light", size: 16)!
+
+        case .LM12:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Medium", size: 12)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Medium", size: 12)!
+
+        case .LM16:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Medium", size: 16)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Medium", size: 16)!
+
+        case .LM14:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-Medium", size: 14)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-Medium", size: 14)!
+
+        case .LSB12:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-SemiBold", size: 12)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-SemiBold", size: 12)!
+        case .LSB14:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-SemiBold", size: 14)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-SemiBold", size: 14)!
+            
+        case .LSB16:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-SemiBold", size: 16)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-SemiBold", size: 16)!
+
+        case .LSB18:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-SemiBold", size: 18)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-SemiBold", size: 18)!
+
+        case .LSB20:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-SemiBold", size: 20)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-SemiBold", size: 20)!
+
+        case .LSB24:
+            if Session.shared.news_language == "en" {
+                return UIFont(name: "Lexend-SemiBold", size: 24)!
+            }
+            return UIFont(name: "NotoSansTeluguCondensed-SemiBold", size: 24)!
+        }
+    }
+}
+
+
+
 extension NSMutableData {
     func appendString(_ string: String) {
         if let data = string.data(using: .utf8) {
@@ -275,5 +519,68 @@ extension SubmitNewsCell {
 
         viewController.modalPresentationStyle = .fullScreen
         parentVC.present(viewController, animated: false)
+    }
+}
+import Network
+
+class NetworkMonitor {
+
+    static let shared = NetworkMonitor()
+
+    private let monitor = NWPathMonitor()
+    private let queue = DispatchQueue.global(qos: .background)
+
+    private init() {}
+
+    func start(_ handler: @escaping (Bool) -> Void) {
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                handler(true)
+            } else {
+                handler(false)
+            }
+        }
+        monitor.start(queue: queue)
+    }
+
+    func stop() {
+        monitor.cancel()
+    }
+}
+private var lastClickTimeKey: Void?
+
+extension UIButton {
+    private var lastClickTime: TimeInterval {
+        get { return objc_getAssociatedObject(self, &lastClickTimeKey) as? TimeInterval ?? 0 }
+        set { objc_setAssociatedObject(self, &lastClickTimeKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+
+    /// Add debounce action to button
+    func addDebouncedAction(interval: TimeInterval = 0.5, action: @escaping () -> Void) {
+        self.addTargetClosure { [weak self] in
+            guard let self = self else { return }
+            let now = Date().timeIntervalSince1970
+            if now - self.lastClickTime > interval {
+                self.lastClickTime = now
+                action()
+            }
+        }
+    }
+}
+
+// MARK: UIControl Closure Extension
+
+private var actionKey: Void?
+
+extension UIControl {
+    func addTargetClosure(closure: @escaping () -> Void) {
+        objc_setAssociatedObject(self, &actionKey, closure, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        addTarget(self, action: #selector(handleAction), for: .touchUpInside)
+    }
+
+    @objc private func handleAction() {
+        if let closure = objc_getAssociatedObject(self, &actionKey) as? () -> Void {
+            closure()
+        }
     }
 }

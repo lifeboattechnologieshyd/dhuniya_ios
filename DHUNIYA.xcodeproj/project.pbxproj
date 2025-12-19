@@ -10,6 +10,7 @@
 		88851E802ED1820C0084142F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 88851E7F2ED1820C0084142F /* Kingfisher */; };
 		8893B6932ED82B7200F50211 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8893B6922ED82B7200F50211 /* IQKeyboardManagerSwift */; };
 		88B8DA9C2ED6D2B900A795FB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 88B8DA9B2ED6D2B900A795FB /* Lottie */; };
+		88D050542EEFEDDB00C1E297 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 88D050532EEFEDDB00C1E297 /* YouTubeiOSPlayerHelper */; };
 		88FCA63F2ED04F440062B716 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA63E2ED04F440062B716 /* FirebaseAnalytics */; };
 		88FCA6412ED04F440062B716 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA6402ED04F440062B716 /* FirebaseCore */; };
 		88FCA6432ED04F440062B716 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA6422ED04F440062B716 /* FirebaseCrashlytics */; };
@@ -17,20 +18,8 @@
 		88FCA6472ED04F440062B716 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 88FCA6462ED04F440062B716 /* FirebaseMessaging */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		88DA9A7D2ED84AB50072C3CB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		886546C92EF3C4BC00FBFD80 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		889F573D2ED03E1100201CA7 /* DHUNIYA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DHUNIYA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -70,16 +59,26 @@
 				88FCA6472ED04F440062B716 /* FirebaseMessaging in Frameworks */,
 				88FCA63F2ED04F440062B716 /* FirebaseAnalytics in Frameworks */,
 				88FCA6452ED04F440062B716 /* FirebaseInstallations in Frameworks */,
+				88D050542EEFEDDB00C1E297 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		886546C82EF3C4BC00FBFD80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				886546C92EF3C4BC00FBFD80 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		889F57342ED03E1100201CA7 = {
 			isa = PBXGroup;
 			children = (
 				889F573F2ED03E1100201CA7 /* DHUNIYA */,
+				886546C82EF3C4BC00FBFD80 /* Frameworks */,
 				889F573E2ED03E1100201CA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,7 +104,6 @@
 				889F573B2ED03E1100201CA7 /* Resources */,
 				88FCAA2A2ED0A94B0062B716 /* Firebase Config Script
  */,
-				88DA9A7D2ED84AB50072C3CB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,6 +122,7 @@
 				88851E7F2ED1820C0084142F /* Kingfisher */,
 				88B8DA9B2ED6D2B900A795FB /* Lottie */,
 				8893B6922ED82B7200F50211 /* IQKeyboardManagerSwift */,
+				88D050532EEFEDDB00C1E297 /* YouTubeiOSPlayerHelper */,
 			);
 			productName = DHUNIYA;
 			productReference = 889F573D2ED03E1100201CA7 /* DHUNIYA.app */;
@@ -158,6 +157,7 @@
 				88851E7E2ED1820C0084142F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				8893B6912ED82B7200F50211 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				88D050522EEFEDDB00C1E297 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 889F573E2ED03E1100201CA7 /* Products */;
@@ -246,22 +246,27 @@
 				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya ";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow to save images";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.35;
 				PRODUCT_BUNDLE_IDENTIFIER = Dhuniya.news.business.listings.classifieds.ott;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -276,24 +281,29 @@
 				DEVELOPMENT_TEAM = TXMHM3J3JT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Dhuniya;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya ";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow to save images";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.35;
 				PRODUCT_BUNDLE_IDENTIFIER = Dhuniya.news.business.listings.classifieds.ott;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -502,24 +512,29 @@
 				DEVELOPMENT_TEAM = TXMHM3J3JT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya ";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow to save images";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.35;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifeboat.Dhuniya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Debug Dev";
 		};
@@ -595,24 +610,29 @@
 				FIREBASE_PLIST_NAME = "GoogleService-Info-Dev";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/DHUNIYA/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "Dhuniya ";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow to save images";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.35;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifeboat.Dhuniya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Release Dev";
 		};
@@ -668,6 +688,14 @@
 				minimumVersion = 4.5.2;
 			};
 		};
+		88D050522EEFEDDB00C1E297 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		88FCA63D2ED04F440062B716 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -693,6 +721,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		88D050532EEFEDDB00C1E297 /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88D050522EEFEDDB00C1E297 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 		88FCA63E2ED04F440062B716 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

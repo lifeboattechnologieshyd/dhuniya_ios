@@ -40,7 +40,7 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="Close"/>
                                                 <connections>
-                                                    <action selector="backButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cGb-mm-FB5"/>
+                                                    <action selector="backButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="AWF-li-gXa"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-hC-OKg">
@@ -474,28 +474,29 @@
                                         <rect key="frame" x="0.0" y="218" width="393" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7F-MS-dK0">
-                                                <rect key="frame" x="32" y="8" width="107" height="20"/>
+                                                <rect key="frame" x="24.000000000000007" y="8" width="92.666666666666686" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="VrA-ek-SSK"/>
+                                                    <constraint firstAttribute="height" constant="20" id="pMG-3B-OKQ"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="Submitted">
                                                             <attributes>
-                                                                <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                                                <color key="NSColor" red="0.019866635101010055" green="0.019866635101010055" blue="0.019866635101010055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="14" name="Lexend-Light"/>
                                                                 <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="submittedBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HC7-ci-47a"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgY-yA-X7B">
-                                                <rect key="frame" x="139" y="8" width="88" height="18"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="18" id="9Db-98-meX"/>
-                                                </constraints>
+                                                <rect key="frame" x="142.66666666666666" y="2.3333333333333162" width="87.666666666666657" height="31.666666666666671"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <attributedString key="attributedTitle">
@@ -504,17 +505,17 @@
                                                                 <color key="NSColor" red="0.023476957070707072" green="0.014023409623863515" blue="0.0090343692211697184" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <font key="NSFont" size="14" name="Lexend-Light"/>
                                                                 <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="publishedBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="bgq-hH-t4y"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdA-sg-s7y">
-                                                <rect key="frame" x="237" y="8" width="66" height="18"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="18" id="l0d-pV-Aal"/>
-                                                </constraints>
+                                                <rect key="frame" x="195.66666666666666" y="2.3333333333333162" width="65.999999999999972" height="31.666666666666671"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <attributedString key="attributedTitle">
@@ -528,12 +529,12 @@
                                                         </fragment>
                                                     </attributedString>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="draftsBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Bjr-Xb-B8k"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Foc-PL-7q8">
-                                                <rect key="frame" x="303" y="8" width="82" height="18"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="18" id="FiP-Ve-KHH"/>
-                                                </constraints>
+                                                <rect key="frame" x="287.66666666666669" y="2.3333333333333162" width="81.333333333333314" height="31.666666666666671"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <attributedString key="attributedTitle">
@@ -547,32 +548,22 @@
                                                         </fragment>
                                                     </attributedString>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="rejectedBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9sD-Ef-s5w"/>
+                                                </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ID7-ZL-nXC">
-                                                <rect key="frame" x="50" y="37" width="83" height="2"/>
-                                                <color key="backgroundColor" systemColor="tableCellBlueTextColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="2" id="6Q1-v7-Zlh"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2y0-vD-jyh"/>
-                                            <constraint firstItem="r7F-MS-dK0" firstAttribute="leading" secondItem="Z8T-Yy-ySe" secondAttribute="leading" constant="32" id="3LB-4N-zKK"/>
-                                            <constraint firstItem="UdA-sg-s7y" firstAttribute="top" secondItem="Z8T-Yy-ySe" secondAttribute="top" constant="8" id="DVr-0v-KQr"/>
-                                            <constraint firstItem="r7F-MS-dK0" firstAttribute="top" secondItem="Z8T-Yy-ySe" secondAttribute="top" constant="8" id="FZP-EN-Rgk"/>
-                                            <constraint firstItem="UdA-sg-s7y" firstAttribute="leading" secondItem="jgY-yA-X7B" secondAttribute="trailing" constant="10" id="Gdd-GW-Okc"/>
-                                            <constraint firstAttribute="trailing" secondItem="Foc-PL-7q8" secondAttribute="trailing" constant="8" id="Ith-FT-y7z"/>
-                                            <constraint firstItem="ID7-ZL-nXC" firstAttribute="leading" secondItem="Z8T-Yy-ySe" secondAttribute="leading" constant="50" id="K3a-bO-Xr1"/>
-                                            <constraint firstItem="ID7-ZL-nXC" firstAttribute="top" secondItem="r7F-MS-dK0" secondAttribute="bottom" constant="9" id="Kc6-ll-YEf"/>
-                                            <constraint firstItem="Foc-PL-7q8" firstAttribute="leading" secondItem="UdA-sg-s7y" secondAttribute="trailing" id="MuG-pX-G57"/>
-                                            <constraint firstAttribute="trailing" secondItem="jgY-yA-X7B" secondAttribute="trailing" constant="166" id="P1S-ol-Hz8"/>
-                                            <constraint firstAttribute="trailing" secondItem="ID7-ZL-nXC" secondAttribute="trailing" constant="260" id="QsH-dC-geW"/>
-                                            <constraint firstItem="jgY-yA-X7B" firstAttribute="leading" secondItem="r7F-MS-dK0" secondAttribute="trailing" id="aKU-X7-zim"/>
-                                            <constraint firstItem="jgY-yA-X7B" firstAttribute="top" secondItem="Z8T-Yy-ySe" secondAttribute="top" constant="8" id="gaP-oU-DYV"/>
-                                            <constraint firstAttribute="trailing" secondItem="UdA-sg-s7y" secondAttribute="trailing" constant="90" id="ng2-UX-KjX"/>
-                                            <constraint firstItem="Foc-PL-7q8" firstAttribute="top" secondItem="Z8T-Yy-ySe" secondAttribute="top" constant="8" id="yT9-3p-C6D"/>
+                                            <constraint firstItem="UdA-sg-s7y" firstAttribute="centerY" secondItem="jgY-yA-X7B" secondAttribute="centerY" id="AdX-n8-uwy"/>
+                                            <constraint firstItem="r7F-MS-dK0" firstAttribute="leading" secondItem="Z8T-Yy-ySe" secondAttribute="leading" constant="24" id="ECx-eK-5lN"/>
+                                            <constraint firstAttribute="trailing" secondItem="Foc-PL-7q8" secondAttribute="trailing" constant="24" id="HKI-oU-2V6"/>
+                                            <constraint firstItem="Foc-PL-7q8" firstAttribute="leading" secondItem="UdA-sg-s7y" secondAttribute="trailing" constant="26" id="RcG-73-Mf0"/>
+                                            <constraint firstItem="r7F-MS-dK0" firstAttribute="top" secondItem="Z8T-Yy-ySe" secondAttribute="top" constant="8" id="VFn-iC-9jW"/>
+                                            <constraint firstItem="Foc-PL-7q8" firstAttribute="centerY" secondItem="UdA-sg-s7y" secondAttribute="centerY" id="gWa-H8-yYL"/>
+                                            <constraint firstItem="jgY-yA-X7B" firstAttribute="leading" secondItem="r7F-MS-dK0" secondAttribute="trailing" constant="26" id="oh4-hp-kyv"/>
+                                            <constraint firstItem="jgY-yA-X7B" firstAttribute="centerY" secondItem="r7F-MS-dK0" secondAttribute="centerY" id="ucl-1Y-Ktw"/>
                                         </constraints>
                                     </view>
                                 </subviews>

@@ -34,8 +34,8 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        TblVw.delegate = self as any UITableViewDelegate
-        TblVw.dataSource = self as any UITableViewDataSource
+        TblVw.delegate = self
+        TblVw.dataSource = self
 
         // Register all new cells
         TblVw.register(UINib(nibName: "ProfileSignUpCell", bundle: nil), forCellReuseIdentifier: "ProfileSignUpCell")
@@ -174,7 +174,9 @@ class ProfileVC: UIViewController, MFMailComposeViewControllerDelegate {
 // MARK: UITableView Delegate & DataSource
 extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
 
-    func numberOfSections(in tableView: UITableView) -> Int { sections.count }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        sections.count
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sections[section].count
@@ -366,14 +368,15 @@ extension ProfileVC {
                 if response.success {
                     if let data = response.info {  
                         self.myReferrals = data
-                        DispatchQueue.main.async {
-                            self.TblVw.reloadData()
-                        }
+                        
                     } else {
                         print("Referral API returned no data")
                     }
                 } else {
                     print("Referral API failed: \(response.description)")
+                }
+                DispatchQueue.main.async {
+                    self.reloadProfile()
                 }
             case .failure(let error):
                 print("Referral API error: \(error.localizedDescription)")

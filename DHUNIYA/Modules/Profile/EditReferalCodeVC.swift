@@ -29,27 +29,35 @@ class EditReferalCodeVC: UIViewController {
     @IBAction func comfirmButtonTapped(_ sender: UIButton) {
         guard let newCode = CodeTf.text, !newCode.isEmpty else { return }
         
-        guard let url = URL(string: "https://dev-api.dhuniya.in/userservice/profile/referral") else { return }
+        guard let url = URL(string: API.GET_REFERRALS) else { return }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
+        request.httpMethod = "PUT"  // PUT is correct for updating referral
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(Session.shared.accesstoken)", forHTTPHeaderField: "Authorization")
-        request.httpBody = try? JSONSerialization.data(withJSONObject: ["referral_code": newCode], options: [])
+        
+        let body = ["referral_code": newCode]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
         
         URLSession.shared.dataTask(with: request) { data, _, error in
             DispatchQueue.main.async {
                 if let _ = data, error == nil {
-                    // update Session
+                    // Update local session
                     if var user = Session.shared.userDetails {
                         user.referral_code = newCode
                         Session.shared.userDetails = user
                     }
-                    // notify observers
+                    
+                    // Notify observers that referral code changed
                     NotificationCenter.default.post(name: Notification.Name("ReferralCodeUpdated"), object: nil)
+                    
                     self.dismiss(animated: true)
                 } else {
-                    let alert = UIAlertController(title: "Error", message: error?.localizedDescription ?? "Failed to update", preferredStyle: .alert)
+                    let alert = UIAlertController(
+                        title: "Error",
+                        message: error?.localizedDescription ?? "Failed to update",
+                        preferredStyle: .alert
+                    )
                     alert.addAction(UIAlertAction(title: "OK", style: .default))
                     self.present(alert, animated: true)
                 }

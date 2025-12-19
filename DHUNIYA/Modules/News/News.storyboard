@@ -17,16 +17,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZb-Mf-4wJ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rKf-Ya-1ar"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="rKf-Ya-1ar" firstAttribute="bottom" secondItem="cZb-Mf-4wJ" secondAttribute="bottom" constant="20" id="4mV-Gy-u14"/>
                             <constraint firstItem="cZb-Mf-4wJ" firstAttribute="trailing" secondItem="rKf-Ya-1ar" secondAttribute="trailing" id="AqI-Vi-Ub5"/>
                             <constraint firstItem="cZb-Mf-4wJ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="IXH-6U-l1v"/>
+                            <constraint firstItem="rKf-Ya-1ar" firstAttribute="bottom" secondItem="cZb-Mf-4wJ" secondAttribute="bottom" id="dj9-uJ-FTt"/>
                             <constraint firstItem="cZb-Mf-4wJ" firstAttribute="leading" secondItem="rKf-Ya-1ar" secondAttribute="leading" id="edw-n6-tKB"/>
                         </constraints>
                     </view>
@@ -157,7 +157,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="30"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -173,6 +173,7 @@
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="bgVw" destination="vbK-Lu-2s3" id="adg-ha-Jwb"/>
                         <outlet property="closeButton" destination="Tki-Ii-x9h" id="kkf-0z-Bso"/>
                         <outlet property="tableView" destination="YhS-h8-MQi" id="gwV-6H-NaI"/>
                         <outlet property="txtFieldComment" destination="9XC-Wh-fCX" id="X8o-ZI-dMD"/>

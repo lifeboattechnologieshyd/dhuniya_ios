@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeelsCollectionViewCell" id="gTV-IL-0wX" customClass="FeelsCollectionViewCell" customModule="SF_Dev" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeelsCollectionViewCell" id="gTV-IL-0wX" customClass="FeelsCollectionViewCell" customModule="DHUNIYA" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="194" height="311"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -38,31 +37,99 @@
                             <action selector="onClickPlay:" destination="gTV-IL-0wX" eventType="touchUpInside" id="8eJ-Eg-kdS"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AoR-SB-vfg">
+                        <rect key="frame" x="172" y="10" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="KUG-Jo-lD6"/>
+                            <constraint firstAttribute="height" constant="12" id="jQB-KT-KzG"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="Feelshare"/>
+                        <connections>
+                            <action selector="onClickShare:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Zus-rq-Dgg"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rm-uJ-kjQ">
+                        <rect key="frame" x="148" y="236" width="42" height="20"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WS-CS-AOV">
+                                <rect key="frame" x="5" y="3" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="Fg3-h7-1x6"/>
+                                    <constraint firstAttribute="height" constant="12" id="SMh-j7-HoZ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="FeelLike"/>
+                                <connections>
+                                    <action selector="onClickLike:" destination="gTV-IL-0wX" eventType="touchUpInside" id="2yF-Dt-QUw"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53O-VL-z6S">
+                                <rect key="frame" x="21" y="1.6666666666666572" width="12.666666666666664" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="Ix7-2e-fxY"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="12">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99515837429999998" green="0.95072263479999997" blue="0.011294791469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="12" name="Lexend-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="2By-8Z-Shl"/>
+                            <constraint firstItem="6WS-CS-AOV" firstAttribute="leading" secondItem="9rm-uJ-kjQ" secondAttribute="leading" constant="5" id="3wy-wf-LSr"/>
+                            <constraint firstAttribute="height" constant="20" id="BPU-X2-7Sm"/>
+                            <constraint firstItem="6WS-CS-AOV" firstAttribute="top" secondItem="9rm-uJ-kjQ" secondAttribute="top" constant="3" id="NDQ-Ya-xsT"/>
+                            <constraint firstItem="53O-VL-z6S" firstAttribute="leading" secondItem="6WS-CS-AOV" secondAttribute="trailing" constant="4" id="PJb-0f-mm3"/>
+                            <constraint firstItem="53O-VL-z6S" firstAttribute="centerY" secondItem="6WS-CS-AOV" secondAttribute="centerY" id="apj-FT-SQr"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="9"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="HwE-jI-jq9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="2L0-Ct-WP9"/>
+                <constraint firstAttribute="trailing" secondItem="AoR-SB-vfg" secondAttribute="trailing" constant="10" id="346-WG-uBQ"/>
+                <constraint firstAttribute="trailing" secondItem="9rm-uJ-kjQ" secondAttribute="trailing" constant="4" id="C3c-dA-NwE"/>
                 <constraint firstItem="V8T-3n-YYB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="cPy-aZ-8hx"/>
                 <constraint firstAttribute="trailing" secondItem="V8T-3n-YYB" secondAttribute="trailing" id="dgy-Nu-S19"/>
                 <constraint firstItem="pSL-Xb-Ka5" firstAttribute="centerY" secondItem="V8T-3n-YYB" secondAttribute="centerY" id="en6-3k-xtS"/>
                 <constraint firstAttribute="bottom" secondItem="HwE-jI-jq9" secondAttribute="bottom" constant="8" id="epT-k5-iJi"/>
+                <constraint firstItem="HwE-jI-jq9" firstAttribute="top" secondItem="9rm-uJ-kjQ" secondAttribute="bottom" constant="4" id="h71-CQ-bay"/>
                 <constraint firstItem="pSL-Xb-Ka5" firstAttribute="centerX" secondItem="V8T-3n-YYB" secondAttribute="centerX" id="jmm-SD-5ft"/>
                 <constraint firstAttribute="bottom" secondItem="V8T-3n-YYB" secondAttribute="bottom" id="ly0-v1-r8x"/>
+                <constraint firstItem="AoR-SB-vfg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="n1s-UU-Fg5"/>
                 <constraint firstAttribute="trailing" secondItem="HwE-jI-jq9" secondAttribute="trailing" constant="8" id="xc0-pK-Tm5"/>
                 <constraint firstItem="V8T-3n-YYB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zYm-Kr-Lfh"/>
             </constraints>
             <size key="customSize" width="391" height="311"/>
             <connections>
+                <outlet property="btnLike" destination="6WS-CS-AOV" id="w0R-aT-jDd"/>
                 <outlet property="btnPlay" destination="pSL-Xb-Ka5" id="KsV-5x-1M2"/>
+                <outlet property="btnShare" destination="AoR-SB-vfg" id="kLG-pt-dpE"/>
                 <outlet property="imgVw" destination="V8T-3n-YYB" id="VnH-G8-reC"/>
                 <outlet property="lblName" destination="HwE-jI-jq9" id="IBl-uY-g2i"/>
+                <outlet property="likesLbl" destination="53O-VL-z6S" id="Y4o-OY-SOR"/>
             </connections>
             <point key="canvasLocation" x="389.3129770992366" y="79.929577464788736"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="FeelLike" width="12" height="12"/>
         <image name="FeelsOne" width="160" height="284"/>
+        <image name="Feelshare" width="12" height="12"/>
         <image name="play" width="40" height="40"/>
     </resources>
 </document>

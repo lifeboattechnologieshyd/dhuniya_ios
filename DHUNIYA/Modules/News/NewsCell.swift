@@ -25,6 +25,7 @@ class NewsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+         
         downloadButton.addTarget(self, action: #selector(downloadTapped), for: .touchUpInside)
         
         // Share button action
@@ -33,7 +34,14 @@ class NewsCell: UITableViewCell {
         // Comment button action
         commentButton.addTarget(self, action: #selector(commentTapped), for: .touchUpInside)
     }
-    
+    func updateLikeUI(isLiked: Bool) {
+        if isLiked {
+            likeButton.setImage(UIImage(named: "red"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(named: "black"), for: .normal)
+        }
+    }
+
     @objc func commentTapped() {
         // Call closure defined in the view controller
         onCommentButtonTapped?()
@@ -64,6 +72,7 @@ class NewsCell: UITableViewCell {
             
             topVC.present(activityVC, animated: true)
         }
+
     }
 
     func captureScreenshot() -> UIImage {

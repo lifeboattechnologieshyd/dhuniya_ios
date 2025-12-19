@@ -109,12 +109,12 @@ class LoginVC: UIViewController {
         self.dismiss(animated: true)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if !loginView.frame.contains(touch.location(in: self.view)) {
-            self.dismiss(animated: true)
-        }
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let touch = touches.first else { return }
+//        if !loginView.frame.contains(touch.location(in: self.view)) {
+//            self.dismiss(animated: true)
+//        }
+    
     
     @IBAction func btnProceedTapped(_ sender: UIButton) {
         
