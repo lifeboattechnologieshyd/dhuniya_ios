@@ -166,9 +166,8 @@ extension ETVC: UICollectionViewDelegate,
                 
                 cell.imageVw.kf.setImage(
                     with: url,
-                    placeholder: UIImage(named: "news_placeholder"),
+                    placeholder: UIImage(named: "thumbnail_image"),
                     options: [
-                        .transition(.fade(0.25)),
                         .cacheOriginalImage
                     ]
                 )
@@ -198,8 +197,8 @@ extension ETVC: UICollectionViewDelegate,
                    
                 cell.imgVw.kf.setImage(
                     with: url,
-                    placeholder: UIImage(named: "news_placeholder"),
-                    options: [.transition(.fade(0.25))]
+                    placeholder: UIImage(named: "thumbnail_image")
+                   // options: [.transition(.fade(0.01))]
                 )
             } else {
                 cell.imgVw.image = UIImage(named: "news_placeholder")
@@ -215,7 +214,7 @@ extension ETVC: UICollectionViewDelegate,
         guard let playerVC = storyboard?
             .instantiateViewController(withIdentifier: "PlayerVC")
                 as? PlayerVC else { return }
-        
+            
         playerVC.videoURL = collectionView == bannerColVw
         ? bannerData[indexPath.row].cover_image ?? ""
         : newReleaseData[indexPath.row].cover_image ?? ""

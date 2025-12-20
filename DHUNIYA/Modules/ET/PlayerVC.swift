@@ -224,7 +224,7 @@ extension PlayerVC {
 
             imgCoverPic.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "news_placeholder")
+                placeholder: UIImage(named: "thumbnail_image")
             )
         }
     }
@@ -254,7 +254,7 @@ extension PlayerVC {
 
                             self.imgCoverPic.kf.setImage(
                                 with: url,
-                                placeholder: UIImage(named: "news_placeholder")
+                                placeholder: UIImage(named: "thumbnail_image")
                             )
                         }
 
@@ -331,7 +331,7 @@ extension PlayerVC: UITableViewDelegate, UITableViewDataSource {
 
                     cell.imgProduction.kf.setImage(
                         with: url,
-                        placeholder: UIImage(named: "news_placeholder")
+                        placeholder: UIImage(named: "thumbnail_image")
                     )
                 }
             }

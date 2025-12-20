@@ -19,13 +19,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w3O-Es-pok">
                                 <rect key="frame" x="0.0" y="59" width="393" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Feels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzc-Pf-RLO">
-                                        <rect key="frame" x="62" y="13.999999999999998" width="42" height="22.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzc-Pf-RLO">
+                                        <rect key="frame" x="20" y="13.999999999999998" width="66.333333333333329" height="22.333333333333329"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22.329999999999998" id="WUS-Cd-VS9"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                        <nil key="textColor"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content=" Videos">
+                                                <attributes>
+                                                    <font key="NSFont" size="18" name="Lexend-SemiBold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -33,7 +39,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="5v8-pf-RHs"/>
                                     <constraint firstItem="pzc-Pf-RLO" firstAttribute="top" secondItem="w3O-Es-pok" secondAttribute="top" constant="14" id="H5c-L4-DPs"/>
-                                    <constraint firstItem="pzc-Pf-RLO" firstAttribute="leading" secondItem="w3O-Es-pok" secondAttribute="leading" constant="62" id="WL6-zd-Xbg"/>
+                                    <constraint firstItem="pzc-Pf-RLO" firstAttribute="leading" secondItem="w3O-Es-pok" secondAttribute="leading" constant="20" id="WL6-zd-Xbg"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RS2-1L-7ys">
@@ -98,14 +104,15 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjJ-Cw-4dU">
-                                        <rect key="frame" x="62" y="13.999999999999998" width="40.333333333333343" height="22.333333333333329"/>
+                                        <rect key="frame" x="62" y="13.999999999999998" width="61" height="22.333333333333329"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22.329999999999998" id="DQu-oR-a1d"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content=" Feels">
+                                            <fragment content="Videos">
                                                 <attributes>
-                                                    <font key="NSFont" metaFont="system" size="15"/>
+                                                    <font key="NSFont" size="18" name="Lexend-SemiBold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -219,11 +226,11 @@
             </objects>
             <point key="canvasLocation" x="2677.0992366412211" y="-35.211267605633807"/>
         </scene>
-        <!--Stream-->
+        <!--Videos-->
         <scene sceneID="vbv-c9-fDz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="TJi-yQ-WDm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Stream" image="ET" id="9HU-g1-LBK"/>
+                    <tabBarItem key="tabBarItem" title="Videos" image="ET" id="9HU-g1-LBK"/>
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
