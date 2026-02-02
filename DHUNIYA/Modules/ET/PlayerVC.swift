@@ -78,7 +78,8 @@ class PlayerVC: UIViewController, YTPlayerViewDelegate {
             showAlert(title: "Error", message: "Video URL not available")
             return
         }
-
+        showLoader()
+        
         if finalURL.contains("youtu.be") || finalURL.contains("youtube.com") {
             playYouTubeVideo(youtubeURL: finalURL)
         } else {
@@ -116,10 +117,12 @@ class PlayerVC: UIViewController, YTPlayerViewDelegate {
     }
 
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        hideLoader()
         playerView.playVideo()
     }
 
     func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
+        hideLoader()
 
         if error == .notEmbeddable {
             openInYouTubeApp()
@@ -130,29 +133,50 @@ class PlayerVC: UIViewController, YTPlayerViewDelegate {
     }
 
     private func playWithAVPlayer(urlString: String) {
-
+        
         cleanup()
-
+        
         guard let url = URL(string: urlString) else {
+            hideLoader()
             showAlert(title: "Error", message: "Invalid video URL")
             return
         }
-
+        
         playerItem = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: playerItem)
-
+        
+        playerItem?.addObserver(self, forKeyPath: "status", options: [.new], context: nil)
+        
         playerController = AVPlayerViewController()
         playerController?.player = player
         playerController?.showsPlaybackControls = true
-
+        
         addChild(playerController!)
         videoView.addSubview(playerController!.view)
         playerController!.view.frame = videoView.bounds
         playerController!.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         playerController!.didMove(toParent: self)
-
+        
         player?.play()
     }
+        override func observeValue(forKeyPath keyPath: String?,
+                                  of object: Any?,
+                                  change: [NSKeyValueChangeKey : Any]?,
+                                  context: UnsafeMutableRawPointer?) {
+            
+            if keyPath == "status",
+               let playerItem = object as? AVPlayerItem {
+                
+                DispatchQueue.main.async { [weak self] in
+                    self?.hideLoader()
+                    
+                    if playerItem.status == .failed {
+                        self?.showAlert(title: "Error", message: "Failed to load video")
+                    }
+                }
+            }
+        }
+    
 
     private func extractYouTubeID(from url: String) -> String? {
 
@@ -184,15 +208,18 @@ class PlayerVC: UIViewController, YTPlayerViewDelegate {
     }
 
     private func cleanup() {
-
+        
+        // ✅ Remove observer
+        playerItem?.removeObserver(self, forKeyPath: "status")
+        
         ytPlayerView?.stopVideo()
         ytPlayerView?.removeFromSuperview()
         ytPlayerView = nil
-
+        
         player?.pause()
         player = nil
         playerItem = nil
-
+        
         playerController?.willMove(toParent: nil)
         playerController?.view.removeFromSuperview()
         playerController?.removeFromParent()
@@ -230,11 +257,13 @@ extension PlayerVC {
     }
 
     func fetchMovieDetails() {
+        showLoader()
 
         NetworkManager.shared.request(
             urlString: API.MOVIES
         ) { (result: Result<APIResponse<[MovieResponseItem]>, NetworkError>) in
-
+            self.hideLoader()
+            
             switch result {
             case .success(let response):
 

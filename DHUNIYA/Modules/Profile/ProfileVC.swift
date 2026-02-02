@@ -357,14 +357,15 @@ extension ProfileVC {
     func getReferralsAPI() {
         guard !isLoadingReferrals else { return }
         isLoadingReferrals = true
+        showLoader()
         
         NetworkManager.shared.request(urlString: API.GET_REFERRALS, method: .GET) { [weak self] (result: Result<APIResponse<[ReferralUser]>, NetworkError>) in
             guard let self = self else { return }
             self.isLoadingReferrals = false
-            
+            self.hideLoader()
             switch result {
             case .success(let response):
-                print("Referral API Success:", response) // <-- Add this line
+                print("Referral API Success:", response)
                 if response.success {
                     if let data = response.info {  
                         self.myReferrals = data

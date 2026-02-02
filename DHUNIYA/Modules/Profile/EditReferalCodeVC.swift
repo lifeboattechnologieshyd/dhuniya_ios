@@ -28,9 +28,12 @@ class EditReferalCodeVC: UIViewController {
     
     @IBAction func comfirmButtonTapped(_ sender: UIButton) {
         guard let newCode = CodeTf.text, !newCode.isEmpty else { return }
+        showLoader()
         
-        guard let url = URL(string: API.GET_REFERRALS) else { return }
-        
+        guard let url = URL(string: API.GET_REFERRALS) else {
+                hideLoader()
+                return
+            }
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"  // PUT is correct for updating referral
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -41,6 +44,7 @@ class EditReferalCodeVC: UIViewController {
         
         URLSession.shared.dataTask(with: request) { data, _, error in
             DispatchQueue.main.async {
+                self.hideLoader()
                 if let _ = data, error == nil {
                     // Update local session
                     if var user = Session.shared.userDetails {

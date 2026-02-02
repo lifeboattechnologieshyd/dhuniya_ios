@@ -51,6 +51,7 @@ class ProfileEditVC: UIViewController {
     }
     
     func updateProfile(username: String?, mobile: String?, dob: String?, gender: String?) {
+//        showLoader()
         let request = EditProfileRequest(username: username, mobile: mobile, dob: dob, gender: gender)
         
 

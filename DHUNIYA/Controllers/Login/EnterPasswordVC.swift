@@ -174,15 +174,30 @@ class EnterPasswordVC: UIViewController {
         }
     }
 
+    // In EnterPasswordVC.swift
+
     func navigateToProfileVC() {
-        NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
-        self.view.window?.rootViewController?.dismiss(animated: false, completion: {
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let window = windowScene.windows.first,
-               let nav = window.rootViewController as? UINavigationController {
-                nav.popToRootViewController(animated: false)
-            }
-        })
+        DispatchQueue.main.async {
+            // Dismiss any modals
+            self.view.window?.rootViewController?.dismiss(animated: false, completion: {
+                
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    
+                    if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
+                        
+                        tabBarVC.selectedIndex = 4
+                        
+                        window.rootViewController = tabBarVC
+                        window.makeKeyAndVisible()
+                        
+                        NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
+                    }
+                }
+            })
+        }
     }
     
     func showCustomAlert(message: String) {

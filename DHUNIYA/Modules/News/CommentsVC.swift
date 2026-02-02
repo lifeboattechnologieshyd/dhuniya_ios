@@ -52,10 +52,12 @@ class CommentsVC: UIViewController {
     }
     
     private func fetchComments() {
+        showLoader()
         NetworkManager.shared.request(
             urlString: API.NEWS_COMMENTS + "?news_id=\(newsId)",
             method: .GET
         ) { (result: Result<APIResponse<[CommentModel]>, NetworkError>) in
+            self.hideLoader()
             switch result {
             case .success(let response):
                 if response.success {
@@ -72,6 +74,7 @@ class CommentsVC: UIViewController {
     }
     
     func postComment() {
+        showLoader()
         
         let payload : [String: Any] =
         [
@@ -83,6 +86,7 @@ class CommentsVC: UIViewController {
             method: .POST,
             parameters: payload
         ) { (result: Result<APIResponse<CommentModel>, NetworkError>) in
+            self.hideLoader()
             switch result {
             case .success(let response):
                 if response.success {

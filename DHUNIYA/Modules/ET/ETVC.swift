@@ -85,12 +85,14 @@ extension ETVC {
 extension ETVC {
     
     func callHomeAPI() {
+        showLoader()
         
         NetworkManager.shared.request(urlString: API.HOME) {
             (result: Result<APIResponse<HomeInfo>, NetworkError>) in
             
+            self.hideLoader()
+
             switch result {
-                
             case .success(let response):
                 print("✅ API Success")
                 print("Total items: \(response.total)")
@@ -114,6 +116,7 @@ extension ETVC {
                     self.newReleaseData = info.new_releases ?? []
                     
                     DispatchQueue.main.async {
+                        
                         self.bannerColVw.reloadData()
                         self.newreleaseColVw.reloadData()
                     }

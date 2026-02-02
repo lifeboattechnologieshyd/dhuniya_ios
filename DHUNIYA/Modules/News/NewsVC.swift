@@ -39,10 +39,16 @@ class NewsVC: UIViewController {
     func getNews(limit: Int = 10) {
         guard !isLoading else { return }
         isLoading = true
+        
+        if currentPage == 1 {
+                showLoader()
+            }
         let urlString = "\(API.GET_NEWS)?offset=\(currentPage)&limit=\(limit)"
         
         NetworkManager.shared.request(urlString: urlString) { (result: Result<APIResponse<[NewsModel]>, NetworkError>) in
             self.isLoading = false
+            
+            self.hideLoader()
             
             switch result {
             case .success(let response):

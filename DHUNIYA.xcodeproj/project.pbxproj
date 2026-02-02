@@ -257,7 +257,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.35;
+				MARKETING_VERSION = 1.36;
 				PRODUCT_BUNDLE_IDENTIFIER = Dhuniya.news.business.listings.classifieds.ott;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -294,7 +294,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.35;
+				MARKETING_VERSION = 1.36;
 				PRODUCT_BUNDLE_IDENTIFIER = Dhuniya.news.business.listings.classifieds.ott;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -525,7 +525,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.35;
+				MARKETING_VERSION = 1.36;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifeboat.Dhuniya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -623,7 +623,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.35;
+				MARKETING_VERSION = 1.36;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifeboat.Dhuniya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZk-Re-d8F">
-                        <rect key="frame" x="16" y="6" width="381" height="80"/>
+                        <rect key="frame" x="12" y="6" width="389" height="80"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ak-Bh-fpP">
-                                <rect key="frame" x="16" y="0.0" width="111" height="80"/>
+                                <rect key="frame" x="10.000000000000007" y="0.0" width="117.66666666666669" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6p-1R-ICS">
-                                        <rect key="frame" x="35.666666666666671" y="10" width="40" height="40"/>
+                                        <rect key="frame" x="39" y="10" width="40" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFY-YV-f8h">
                                                 <rect key="frame" x="-3" y="3" width="46" height="34"/>
@@ -49,7 +49,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yD8-zF-OHR">
-                                        <rect key="frame" x="0.0" y="54" width="111" height="18"/>
+                                        <rect key="frame" x="0.0" y="54" width="117.66666666666667" height="18"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Contact Us">
                                                 <attributes>
@@ -72,10 +72,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYm-70-trW">
-                                <rect key="frame" x="135" y="0.0" width="111" height="80"/>
+                                <rect key="frame" x="135.66666666666666" y="0.0" width="117.66666666666666" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-mh-96W">
-                                        <rect key="frame" x="35.666666666666657" y="10" width="40" height="40"/>
+                                        <rect key="frame" x="39" y="10" width="40" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPN-qu-yRv">
                                                 <rect key="frame" x="0.33333333333334281" y="3.6666666666666679" width="39.333333333333336" height="33"/>
@@ -100,7 +100,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XM-0a-4Y4">
-                                        <rect key="frame" x="0.0" y="54" width="111" height="18"/>
+                                        <rect key="frame" x="0.0" y="54" width="117.66666666666667" height="18"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Share App">
                                                 <attributes>
@@ -123,13 +123,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdW-27-NA7">
-                                <rect key="frame" x="254" y="0.0" width="111" height="80"/>
+                                <rect key="frame" x="261.33333333333331" y="0.0" width="117.66666666666669" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-iu-Byn">
-                                        <rect key="frame" x="35.666666666666686" y="10" width="40" height="40"/>
+                                        <rect key="frame" x="39" y="10" width="40" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yco-WA-eg5">
-                                                <rect key="frame" x="0.66666666666662877" y="6.3333333333333304" width="38.333333333333336" height="27.666666666666671"/>
+                                                <rect key="frame" x="0.66666666666668561" y="6.3333333333333304" width="38.333333333333336" height="27.666666666666671"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="rateus"/>
                                                 <connections>
@@ -151,7 +151,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QE4-V3-VeO">
-                                        <rect key="frame" x="0.0" y="54" width="111" height="18"/>
+                                        <rect key="frame" x="0.0" y="54" width="117.66666666666667" height="18"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Rate us">
                                                 <attributes>
@@ -185,9 +185,9 @@
                             <constraint firstItem="QYm-70-trW" firstAttribute="leading" secondItem="0Ak-Bh-fpP" secondAttribute="trailing" constant="8" id="nZb-79-N6v"/>
                             <constraint firstItem="0Ak-Bh-fpP" firstAttribute="top" secondItem="gZk-Re-d8F" secondAttribute="top" id="oBX-OV-Dmj"/>
                             <constraint firstItem="kdW-27-NA7" firstAttribute="height" secondItem="0Ak-Bh-fpP" secondAttribute="height" id="qMX-LB-sH6"/>
-                            <constraint firstAttribute="trailing" secondItem="kdW-27-NA7" secondAttribute="trailing" constant="16" id="sIZ-ZM-A8w"/>
+                            <constraint firstAttribute="trailing" secondItem="kdW-27-NA7" secondAttribute="trailing" constant="10" id="sIZ-ZM-A8w"/>
                             <constraint firstItem="kdW-27-NA7" firstAttribute="centerY" secondItem="QYm-70-trW" secondAttribute="centerY" id="vAI-FF-8Ft"/>
-                            <constraint firstItem="0Ak-Bh-fpP" firstAttribute="leading" secondItem="gZk-Re-d8F" secondAttribute="leading" constant="16" id="ye3-8G-NYl"/>
+                            <constraint firstItem="0Ak-Bh-fpP" firstAttribute="leading" secondItem="gZk-Re-d8F" secondAttribute="leading" constant="10" id="ye3-8G-NYl"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -198,9 +198,9 @@
                 </subviews>
                 <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="gZk-Re-d8F" firstAttribute="leading" secondItem="Ja7-4f-5pk" secondAttribute="leading" constant="16" id="7DE-UW-QIV"/>
+                    <constraint firstItem="gZk-Re-d8F" firstAttribute="leading" secondItem="Ja7-4f-5pk" secondAttribute="leading" constant="12" id="7DE-UW-QIV"/>
                     <constraint firstItem="gZk-Re-d8F" firstAttribute="top" secondItem="Ja7-4f-5pk" secondAttribute="top" constant="6" id="ObO-AH-P00"/>
-                    <constraint firstAttribute="trailing" secondItem="gZk-Re-d8F" secondAttribute="trailing" constant="16" id="VsR-FZ-xBc"/>
+                    <constraint firstAttribute="trailing" secondItem="gZk-Re-d8F" secondAttribute="trailing" constant="12" id="VsR-FZ-xBc"/>
                     <constraint firstAttribute="bottom" secondItem="gZk-Re-d8F" secondAttribute="bottom" constant="6" id="sQo-ph-sRC"/>
                 </constraints>
             </tableViewCellContentView>

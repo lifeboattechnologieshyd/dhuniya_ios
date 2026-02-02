@@ -147,6 +147,10 @@ class FeelsViewController: UIViewController, UICollectionViewDelegate, UICollect
         guard !isLoading else { return }
         isLoading = true
         
+        if page == 1 {
+                showLoader()
+            }
+        
         let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString = "\(API.BASE_URL)ott_service/get/feels?keyword=\(encodedKeyword)&page=\(page)&page_size=\(pageSize)"
         
@@ -154,6 +158,7 @@ class FeelsViewController: UIViewController, UICollectionViewDelegate, UICollect
             guard let self = self else { return }
             self.isLoading = false
             
+            self.hideLoader()
             switch result {
             case .success(let response):
                 if response.success, let data = response.info {

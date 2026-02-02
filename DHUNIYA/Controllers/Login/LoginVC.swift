@@ -39,7 +39,18 @@ class LoginVC: UIViewController {
         btnCheckBox.setImage(UIImage(named: "Unchecked_box"), for: .normal)
         updateProceedButtonState()
     }
-    
+    func onLoginSuccess() {
+        self.dismiss(animated: true) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+                    window.rootViewController = tabBarVC
+                    window.makeKeyAndVisible()
+                }
+            }
+        }
+    }
     //  Send OTP
     func sendOtp() {
         let payload: [String:Any] = [
@@ -144,18 +155,22 @@ class LoginVC: UIViewController {
         present(alert, animated: true)
     }
     
-    //dismiss all modally presented VCs and go to ProfileVC
+    // In LoginVC.swift
+
     func goToProfileVC() {
         DispatchQueue.main.async {
-            // Dismiss all presented view controllers
+            // Dismiss the Login Popup first
             self.view.window?.rootViewController?.dismiss(animated: false, completion: {
                 
-                // Set ProfileVC as root
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                    let window = windowScene.windows.first {
+                    
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC {
-                        window.rootViewController = profileVC
+                    
+                      if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
+                            tabBarVC.selectedIndex = 4
+                        
+                        window.rootViewController = tabBarVC
                         window.makeKeyAndVisible()
                         
                         // Notify profile to reload data
@@ -165,4 +180,5 @@ class LoginVC: UIViewController {
             })
         }
     }
-}
+    }
+
