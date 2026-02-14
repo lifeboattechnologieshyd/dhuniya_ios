@@ -22,12 +22,16 @@ class WithdrawVC: UIViewController {
     @IBOutlet weak var moneyVw: UIView!
     @IBOutlet weak var bankaccountnumber: UILabel!
     
+    @IBOutlet weak var addbankaccountVwHeightConstraint: NSLayoutConstraint!
+    
     var bankDetails: BankDetails?
+    var originalAddBankHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         topVw.addBottomShadow()
         self.navigationItem.hidesBackButton = true
+        originalAddBankHeight = addbankaccountVwHeightConstraint.constant
         setupUI()
     }
     
@@ -39,6 +43,7 @@ class WithdrawVC: UIViewController {
     func setupUI() {
         addbankaccountVw.isHidden = true
         bankaccountVw.isHidden = true
+        addbankaccountVwHeightConstraint.constant = 0
         amountLbl.text = String(format: "₹%.2f", Session.shared.totalEarnings)
     }
     
@@ -71,16 +76,26 @@ class WithdrawVC: UIViewController {
     
     func showBankDetails(_ details: BankDetails) {
         addbankaccountVw.isHidden = true
+        addbankaccountVwHeightConstraint.constant = 0
         bankaccountVw.isHidden = false
         
-        bankaccountVw.frame = addbankaccountVw.frame
+        let accountNumber = details.account_number ?? ""
+        let bankName = details.bank_name ?? ""
+        bankaccountnumber.text = "\(accountNumber) - \(bankName)"
         
-        bankaccountnumber.text = details.account_number ?? ""
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     func showAddBankView() {
         addbankaccountVw.isHidden = false
+        addbankaccountVwHeightConstraint.constant = originalAddBankHeight
         bankaccountVw.isHidden = true
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
