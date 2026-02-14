@@ -225,19 +225,56 @@ struct ProfileResponse: Codable {
     let total: Int
     let info: [ProfileDetails]   // Use ProfileDetails here
 }
-
 struct ProfileInfo: Codable {
-    let id: Int
-    let username: String
-    let mobile: Int
+    let id: Int?
+    let full_name: String?
+    let username: String?
+    let referral_code: String?
+    let can_change_referral_code: Bool?
+    let profile_image: String?
+    let email: String?
+    let mobile: Int?
+    let earnings: Double?
+    let total_earnings: Double?
+    let user_role: [String]?
+    let can_change_username: Bool?
     let dob: String?
-    let gender: String
+    let gender: String?
+    let min_withdrawable_amount: Int?
 }
+
 struct EditProfileRequest: Codable {
     let username: String?
     let mobile: String?
     let dob: String?
     let gender: String?
+}
+
+struct Transaction {
+    let type: String
+    let amountId: String
+    let amount: String
+    let closingBalance: String
+    let time: String
+    let date: String
+    let status: String
+}
+
+struct BankDetails: Codable {
+    let id: Int?
+    let account_number: String?
+    let user: Int?
+    let ifsc: String?
+    let bank_name: String?
+    let branch: String?
+    let account_holder_name: String?
+    let is_primary: Bool?
+    let order_id: String?
+    let cf_status: String?
+    let created_by: String?
+    let updated_by: String?
+    let creation_date: String?
+    let updation_date: String?
 }
 class FeelItem: Codable {
     var id: String
@@ -505,20 +542,4 @@ struct MovieMakerData: Codable {
     let name: String?
     let logo: String?
     let description: String?
-}
-struct BankDetails: Codable {
-    let id: Int?
-    let account_number: String?
-    let user: Int?
-    let ifsc: String?
-    let bank_name: String?
-    let branch: String?
-    let account_holder_name: String?
-    let is_primary: Bool?
-    let order_id: String?
-    let cf_status: String?
-    let created_by: String?
-    let updated_by: String?
-    let creation_date: String?
-    let updation_date: String?
 }

@@ -630,3 +630,47 @@ extension UIViewController {
         }
     }
 }
+extension UIView {
+    
+    func addCardShow(
+        cornerRadius: CGFloat = 16,
+        shadowColor: UIColor = .black,
+        shadowOpacity: Float = 0.15,
+        shadowRadius: CGFloat = 8,
+        shadowOffset: CGSize = CGSize(width: 0, height: 4),
+        borderColor: UIColor = .clear,
+        borderWidth: CGFloat = 0
+    ) {
+        
+        self.layer.cornerRadius = cornerRadius
+        self.layer.masksToBounds = false
+        
+        // Shadow
+        self.layer.shadowColor = shadowColor.cgColor
+        self.layer.shadowOpacity = shadowOpacity
+        self.layer.shadowRadius = shadowRadius
+        self.layer.shadowOffset = shadowOffset
+        
+        // Border
+        self.layer.borderColor = borderColor.cgColor
+        self.layer.borderWidth = borderWidth
+        
+        // Improve performance
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+    }
+}
+extension UITextField {
+    
+    func setLeftPadding(_ padding: CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: self.frame.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    
+    func setRightPadding(_ padding: CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: self.frame.height))
+        self.rightView = paddingView
+        self.rightViewMode = .always
+    }
+}

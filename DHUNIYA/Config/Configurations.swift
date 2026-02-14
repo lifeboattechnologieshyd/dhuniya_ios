@@ -71,6 +71,10 @@ struct API {
     static let MOVIES = BASE_URL + "ott_service/movies"
     
     static let BANK_DETAILS = BASE_URL + "userservice/bank"
+    static let INITIATE_TRANSFER = BASE_URL + "userservice/initiateTransfer"
+    static let PROFILE = BASE_URL + "userservice/profile"
+
+
 
 
     

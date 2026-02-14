@@ -14,6 +14,7 @@ class AddBankVC: UIViewController {
     @IBOutlet weak var bankNameTf: UITextField!
     @IBOutlet weak var ifscCodeTf: UITextField!
     @IBOutlet weak var topVw: UIButton!
+    @IBOutlet weak var mainVw: UIView!
     @IBOutlet weak var addbankaccountBtn: UIButton!
     @IBOutlet weak var checkboxBtn: UIButton!
     
@@ -22,6 +23,9 @@ class AddBankVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainVw.addCardShow()
+        topVw.addBottomShadow()
+
         self.navigationItem.hidesBackButton = true
         checkboxBtn.setImage(UIImage(systemName: "square"), for: .normal)
     }
