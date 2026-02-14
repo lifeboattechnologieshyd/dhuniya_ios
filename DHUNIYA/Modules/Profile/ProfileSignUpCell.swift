@@ -71,6 +71,9 @@ class ProfileSignUpCell: UITableViewCell {
             
             lblUserName.text = Session.shared.userName
             lblPhoneNumber.text = Session.shared.mobileNumber
+        
+        lblMyEarnings.text = String(format: "₹%.2f", Session.shared.totalEarnings)
+
             
             if loggedIn {
                 lblMyEarnings.removeBlur()

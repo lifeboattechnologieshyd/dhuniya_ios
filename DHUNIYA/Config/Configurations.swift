@@ -69,6 +69,9 @@ struct API {
     static let NEWS_DISLIKE = BASE_URL + "news/posts/dislike"
     static let HOME = BASE_URL + "ott_service/home"
     static let MOVIES = BASE_URL + "ott_service/movies"
+    
+    static let BANK_DETAILS = BASE_URL + "userservice/bank"
+
 
     
 }

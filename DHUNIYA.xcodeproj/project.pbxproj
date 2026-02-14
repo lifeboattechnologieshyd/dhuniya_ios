@@ -99,6 +99,7 @@
 			buildConfigurationList = 889F57502ED03E1200201CA7 /* Build configuration list for PBXNativeTarget "DHUNIYA" */;
 			buildPhases = (
 				889F57392ED03E1100201CA7 /* Sources */,
+				888FC89D2F3D997F00D61D5F /* ShellScript */,
 				88FCA64D2ED06BEB0062B716 /* Crashlytics - Upload dSYMs */,
 				889F573A2ED03E1100201CA7 /* Frameworks */,
 				889F573B2ED03E1100201CA7 /* Resources */,
@@ -180,7 +181,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		88FCA64D2ED06BEB0062B716 /* Crashlytics - Upload dSYMs */ = {
+		888FC89D2F3D997F00D61D5F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -189,6 +190,24 @@
 			);
 			inputPaths = (
 			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"🔥 Copying correct GoogleService-Info.plist...\"\n\nif [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n    cp \"${PROJECT_DIR}/DHUNIYA/Config/GoogleService-Info-Dev.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n    echo \"✅ DEV plist copied\"\nelse\n    cp \"${PROJECT_DIR}/DHUNIYA/Config/GoogleService-Info-Prod.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n    echo \"✅ PROD plist copied\"\nfi\n\n";
+		};
+		88FCA64D2ED06BEB0062B716 /* Crashlytics - Upload dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\n${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\n",
+			);
 			name = "Crashlytics - Upload dSYMs";
 			outputFileListPaths = (
 			);
@@ -196,7 +215,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#if [ \"${CONFIGURATION}\" = \"Release\" ] || [ \"${CONFIGURATION}\" = \"Release Dev\" ]; then\n #\"${BUILD_DIR}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n#fi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ \"${CONFIGURATION}\" = \"Release\" ] || [ \"${CONFIGURATION}\" = \"Release Dev\" ]; then\n  \"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		88FCAA2A2ED0A94B0062B716 /* Firebase Config Script
  */ = {
@@ -257,7 +277,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.36;
+				MARKETING_VERSION = 1.37;
 				PRODUCT_BUNDLE_IDENTIFIER = Dhuniya.news.business.listings.classifieds.ott;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -294,7 +314,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.36;
+				MARKETING_VERSION = 1.37;
 				PRODUCT_BUNDLE_IDENTIFIER = Dhuniya.news.business.listings.classifieds.ott;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -525,7 +545,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.36;
+				MARKETING_VERSION = 1.37;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifeboat.Dhuniya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -623,7 +643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.36;
+				MARKETING_VERSION = 1.37;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifeboat.Dhuniya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -159,7 +159,11 @@ class Session {
         }
     }
     
-    
+    var totalEarnings: Double {
+            get { UserDefaults.standard.double(forKey: "totalEarnings") }
+            set { UserDefaults.standard.set(newValue, forKey: "totalEarnings") }
+        }
+
     var isForgotPasswordFlow = false
     
     var isUserLoggedIn: Bool {

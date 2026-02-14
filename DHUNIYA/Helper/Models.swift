@@ -506,3 +506,19 @@ struct MovieMakerData: Codable {
     let logo: String?
     let description: String?
 }
+struct BankDetails: Codable {
+    let id: Int?
+    let account_number: String?
+    let user: Int?
+    let ifsc: String?
+    let bank_name: String?
+    let branch: String?
+    let account_holder_name: String?
+    let is_primary: Bool?
+    let order_id: String?
+    let cf_status: String?
+    let created_by: String?
+    let updated_by: String?
+    let creation_date: String?
+    let updation_date: String?
+}

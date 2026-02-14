@@ -146,6 +146,8 @@ class EnterPasswordVC: UIViewController {
                     Session.shared.refreshtoken = data.refreshToken
                     Session.shared.userDetails = data.profileDetails
                     
+                    Session.shared.totalEarnings = data.profileDetails?.total_earnings ?? 0.0
+
                     // 🚀 SAVE REPORTER ID + NAME
                     if let profile = data.profileDetails {
                         UserSession.shared.reporterId = profile.id

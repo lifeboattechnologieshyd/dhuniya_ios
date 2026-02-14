@@ -213,7 +213,7 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.size.height
         
-        if offsetY > contentHeight - height - 100 { // Near bottom
+        if offsetY > contentHeight - height - 100 { 
             loadNextPage()
         }
     }
