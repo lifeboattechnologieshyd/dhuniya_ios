@@ -10,6 +10,9 @@ import Kingfisher
 
 class GridVC: UIViewController {
     
+    @IBOutlet weak var selectedLbl: UILabel!
+    @IBOutlet weak var topVw: UIView!
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var colVw: UICollectionView!
     
     var data: [BannerModel] = []
@@ -17,6 +20,9 @@ class GridVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        topVw.addBottomShadow()
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationItem.hidesBackButton = true
         setupUI()
     }
     
@@ -26,7 +32,8 @@ class GridVC: UIViewController {
     }
     
     func setupUI() {
-        title = titleText
+        selectedLbl.text = titleText
+        
         colVw.delegate = self
         colVw.dataSource = self
         colVw.register(UINib(nibName: "BanerscolCell", bundle: nil), forCellWithReuseIdentifier: "BanerscolCell")
@@ -38,6 +45,10 @@ class GridVC: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.estimatedItemSize = .zero
         colVw.collectionViewLayout = layout
+    }
+    
+    @IBAction func backBtnTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

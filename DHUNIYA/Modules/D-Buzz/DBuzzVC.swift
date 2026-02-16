@@ -18,9 +18,19 @@ class DBuzzVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        topVw.addBottomShadow()
         setupTableView()
         fetchAllData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.navigationController?.navigationBar.isHidden = true
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+        }
     
     func setupTableView() {
         tblVw.delegate = self
