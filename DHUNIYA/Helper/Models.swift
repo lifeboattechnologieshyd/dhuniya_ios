@@ -543,3 +543,19 @@ struct MovieMakerData: Codable {
     let logo: String?
     let description: String?
 }
+struct BannerModel: Decodable {
+    let id: Int
+    let ref_id: String
+    let priority: Int
+    let name: String
+    let images: [String?]?
+    let videos: String?
+    let content_type: String
+    let banner_type: String
+    let status: String
+    let date: String?
+    let created_date: String
+    let created_by: String
+    let updation_date: String
+    let updated_by: String
+}

@@ -73,6 +73,10 @@ struct API {
     static let BANK_DETAILS = BASE_URL + "userservice/bank"
     static let INITIATE_TRANSFER = BASE_URL + "userservice/initiateTransfer"
     static let PROFILE = BASE_URL + "userservice/profile"
+    
+    static let QUOTES_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=QUOTE&date=2025-09-19"
+    static let CARTOONS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=CARTOON&offset=1&limit=25"
+    static let BANNERS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=QUOTE&date=2025-09-19"
 
 
 
