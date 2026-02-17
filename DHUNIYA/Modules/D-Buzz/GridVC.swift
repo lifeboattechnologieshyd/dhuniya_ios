@@ -50,10 +50,10 @@ class GridVC: UIViewController {
         layout.estimatedItemSize = .zero
         colVw.collectionViewLayout = layout
     }
+    
     @IBAction func backButtonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-
     
     func navigateToFullscreen(selectedIndex: Int) {
         let storyboard = UIStoryboard(name: "DBuzz", bundle: nil)
@@ -61,6 +61,7 @@ class GridVC: UIViewController {
             fullscreenVC.data = data
             fullscreenVC.selectedIndex = selectedIndex
             fullscreenVC.titleText = titleText
+            fullscreenVC.hidesBottomBarWhenPushed = false
             navigationController?.pushViewController(fullscreenVC, animated: true)
         }
     }

@@ -15,12 +15,10 @@ class FullscreenVC: UIViewController {
     var data: [BannerModel] = []
     var selectedIndex: Int = 0
     var titleText: String = ""
-    private var hasScrolledToInitialPosition = false
+    var cellHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.edgesForExtendedLayout = []
-        self.extendedLayoutIncludesOpaqueBars = false
         setupUI()
     }
     
@@ -33,9 +31,16 @@ class FullscreenVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if !hasScrolledToInitialPosition && tblVw.bounds.height > 0 {
-            hasScrolledToInitialPosition = true
-            scrollToSelectedIndex()
+        if cellHeight == 0 {
+            cellHeight = tblVw.frame.height
+            tblVw.reloadData()
+            
+            DispatchQueue.main.async {
+                if self.selectedIndex < self.data.count {
+                    let indexPath = IndexPath(row: self.selectedIndex, section: 0)
+                    self.tblVw.scrollToRow(at: indexPath, at: .top, animated: false)
+                }
+            }
         }
     }
     
@@ -47,6 +52,8 @@ class FullscreenVC: UIViewController {
         tblVw.isPagingEnabled = true
         tblVw.showsVerticalScrollIndicator = false
         tblVw.bounces = false
+        tblVw.contentInset = .zero
+        tblVw.scrollIndicatorInsets = .zero
         
         if #available(iOS 11.0, *) {
             tblVw.contentInsetAdjustmentBehavior = .never
@@ -55,14 +62,6 @@ class FullscreenVC: UIViewController {
         if #available(iOS 15.0, *) {
             tblVw.sectionHeaderTopPadding = 0
         }
-    }
-    
-    func scrollToSelectedIndex() {
-        guard selectedIndex < data.count else { return }
-        let indexPath = IndexPath(row: selectedIndex, section: 0)
-        tblVw.reloadData()
-        tblVw.layoutIfNeeded()
-        tblVw.scrollToRow(at: indexPath, at: .top, animated: false)
     }
     
     @objc func backBtnAction() {
@@ -110,7 +109,10 @@ extension FullscreenVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height
+        if cellHeight > 0 {
+            return cellHeight
+        }
+        return tableView.frame.height
     }
     
     @objc func shareBtnTapped(_ sender: UIButton) {

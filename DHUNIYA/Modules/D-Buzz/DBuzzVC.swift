@@ -115,6 +115,7 @@ class DBuzzVC: UIViewController {
         if let gridVC = storyboard.instantiateViewController(withIdentifier: "GridVC") as? GridVC {
             gridVC.data = data
             gridVC.titleText = title
+            gridVC.hidesBottomBarWhenPushed = false
             navigationController?.pushViewController(gridVC, animated: true)
         }
     }
@@ -125,6 +126,7 @@ class DBuzzVC: UIViewController {
             fullscreenVC.data = data
             fullscreenVC.selectedIndex = selectedIndex
             fullscreenVC.titleText = title
+            fullscreenVC.hidesBottomBarWhenPushed = false
             navigationController?.pushViewController(fullscreenVC, animated: true)
         }
     }
