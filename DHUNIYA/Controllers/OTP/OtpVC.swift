@@ -1,9 +1,11 @@
+
 //
 //  OtpVC.swift
 //  DHUNIYA
 //
 //  Created by Lifeboat on 24/11/25.
 //
+
 import UIKit
 import Lottie
 
@@ -34,9 +36,12 @@ class OtpVC: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // FIX POPUP BLINKING
+        
+        // Prevent auto-dismiss on background tap
+        self.modalPresentationStyle = .overFullScreen
+        self.isModalInPresentation = true
+        
         self.definesPresentationContext = true
-        self.modalPresentationStyle = .overCurrentContext
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.45)
         self.view.isOpaque = false
 
@@ -52,6 +57,14 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         startResendTimer()
         setupOTPFields()
         playAnimation()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
     }
 
     func playAnimation() {
@@ -89,20 +102,32 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func resendButtonTapped(_ sender: UIButton) {
+        clearOTPFields()
         startResendTimer()
         resendOtp()
+    }
+    
+    func clearOTPFields() {
+        otfTf1.text = ""
+        otpTf2.text = ""
+        otpTf3.text = ""
+        otpTf4.text = ""
+        otfTf1.becomeFirstResponder()
+        proceedButton.isEnabled = false
+        proceedButton.alpha = 0.5
     }
 
     func resendOtp() {
         guard let mobile = mobileNumber else { return }
         let params: [String: Any] = ["mobile": mobile]
 
-        NetworkManager.shared.request(urlString: API.SENDOTP, method: .POST, parameters: params) { (result: Result<APIResponse<SendOtpInfo>, NetworkError>) in
+        NetworkManager.shared.requestWithoutAuth(urlString: API.SENDOTP, method: .POST, parameters: params) { (result: Result<APIResponse<SendOtpInfo>, NetworkError>) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
                     if response.success {
-                        print("OTP resent successfully")
+                        print("✅ OTP resent successfully")
+                        self.showAlert("OTP sent successfully!")
                     } else {
                         self.showAlert(response.description)
                     }
@@ -140,7 +165,6 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             case otpTf3: otpTf4.becomeFirstResponder()
             case otpTf4:
                 otpTf4.resignFirstResponder()
-                validateOTP()
             default: break
             }
         }
@@ -153,6 +177,8 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             default: break
             }
         }
+        
+        validateOTP()
     }
 
     func validateOTP() {
@@ -164,41 +190,66 @@ class OtpVC: UIViewController, UITextFieldDelegate {
 
     @IBAction func proceedButtonTapped(_ sender: UIButton) {
         let otp = "\(otfTf1.text ?? "")\(otpTf2.text ?? "")\(otpTf3.text ?? "")\(otpTf4.text ?? "")"
+        
         if otp.count != 4 {
             showAlert("Enter 4 digit OTP")
             return
         }
+        
         guard let mobile = mobileNumber else {
-            showAlert("Mobile missing")
+            showAlert("Mobile number missing")
             return
         }
 
-        let params: [String: String] = ["mobile": mobile, "otp": otp]
+        verifyOTP(mobile: mobile, otp: otp)
+    }
+    
+    func verifyOTP(mobile: String, otp: String) {
+        let params: [String: Any] = [
+            "mobile": mobile,
+            "otp": Int(otp) ?? 0  // API expects integer OTP
+        ]
 
-        NetworkManager.shared.request(urlString: API.LOGIN, method: .POST, parameters: params) { (result: Result<APIResponse<LoginResponse>, NetworkError>) in
+        NetworkManager.shared.requestWithoutAuth(urlString: API.LOGIN, method: .POST, parameters: params) { (result: Result<APIResponse<LoginResponse>, NetworkError>) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
                     if response.success {
-                        // Safely unwrap optional LoginResponse
-                        guard let info = response.info else {
-                            self.showAlert("Login failed: missing profile info")
+                        guard let data = response.info else {
+                            self.showAlert("Login failed: missing info")
                             return
                         }
 
-                        // Save session tokens
+                        // ✅ Save all session data (same as EnterPasswordVC)
+                        Session.shared.isUserLoggedIn = true
                         Session.shared.mobileNumber = mobile
-                        Session.shared.accesstoken = info.accessToken
-                        Session.shared.refreshtoken = info.refreshToken
+                        Session.shared.userName = data.profileDetails?.username ?? ""
+                        Session.shared.accesstoken = data.accessToken
+                        Session.shared.refreshtoken = data.refreshToken
+                        Session.shared.userDetails = data.profileDetails
+                        Session.shared.totalEarnings = data.profileDetails?.total_earnings ?? 0.0
+                        
+                        // ✅ Save user roles
+                        if let roles = data.profileDetails?.user_role {
+                            Session.shared.userroles = roles
+                        }
 
-                        // Save full profile details including referral code
-                        Session.shared.userDetails = info.profileDetails
+                        // ✅ Save Reporter ID + Name
+                        if let profile = data.profileDetails {
+                            UserSession.shared.reporterId = profile.id
+                            UserSession.shared.reporterName = profile.username ?? ""
 
-                        // Notify Refer & Earn VC to reload referral code
+                            print("🆔 Reporter ID Saved: \(String(describing: profile.id))")
+                            print("👤 Reporter Name Saved: \(profile.username ?? "")")
+                        }
+
+                        // ✅ Post notifications
                         NotificationCenter.default.post(name: Notification.Name("ReferralCodeUpdated"), object: nil)
+                        NotificationCenter.default.post(name: Notification.Name("UserDidLogin"), object: nil)
 
-                        // Go to next screen
-                        self.navigateToCreatePassword()
+                        // ✅ Navigate to Profile Tab
+                        self.navigateToProfileVC()
+                        
                     } else {
                         self.showAlert(response.description)
                     }
@@ -209,36 +260,57 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             }
         }
     }
-
-    func navigateToCreatePassword() {
-        let storyboard = UIStoryboard(name: "CreatePassword", bundle: nil)
-        if let createPasswordVC = storyboard.instantiateViewController(withIdentifier: "CreatePasswordVC") as? CreatePasswordVC {
-            createPasswordVC.mobileNumber = mobileNumber
-            createPasswordVC.modalPresentationStyle = .fullScreen
-            self.present(createPasswordVC, animated: true)
+    
+    func navigateToProfileVC() {
+        DispatchQueue.main.async {
+            // Dismiss any modals first
+            self.view.window?.rootViewController?.dismiss(animated: false, completion: {
+                
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    
+                    if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
+                        
+                        // ✅ Select Profile Tab (index 4)
+                        tabBarVC.selectedIndex = 4
+                        
+                        window.rootViewController = tabBarVC
+                        window.makeKeyAndVisible()
+                        
+                        // ✅ Notify profile to reload data
+                        NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
+                    }
+                }
+            })
         }
     }
 
-    func navigateToProfile() {
+    func dismissToProfile() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }
-
-        if let rootVC = window.rootViewController {
-            rootVC.dismiss(animated: true, completion: nil)
-        }
+        
+        // Dismiss all modals
+        window.rootViewController?.dismiss(animated: true, completion: nil)
     }
 
     @IBAction func closeTapped(_ sender: UIButton) {
-        navigateToProfile()
+        dismissToProfile()
     }
 
     @IBAction func goBackTapped(_ sender: UIButton) {
-        navigateToProfile()
+        // Go back to LoginVC (dismiss only this VC)
+        self.dismiss(animated: true)
     }
 
     func showAlert(_ message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    deinit {
+        timer?.invalidate()
     }
 }

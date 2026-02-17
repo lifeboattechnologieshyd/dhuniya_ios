@@ -42,8 +42,6 @@ struct API {
     
     static let BASE_URL = PLISTVALUES.baseUrl.replacingOccurrences(of: "%2F", with: "/")
     
-    static let SENDOTP = BASE_URL + "userservice/authentication/sendotp"
-    static let LOGIN = BASE_URL + "userservice/authentication"
     static let VERIFY_OTP = BASE_URL + "user/authentication/mobile/verify-otp"
     static let SET_PASSWORD = BASE_URL + "user/authentication/set-password"
     static let CREATE_PASSWORD = BASE_URL + "userservice/authentication/password"
@@ -79,7 +77,13 @@ struct API {
     static let BANNERS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=QUOTE&date=2025-09-19"
 
 
-
+        
+        // Send OTP
+        static let SENDOTP = BASE_URL + "userservice/authentication/sendotp"
+        
+        // Verify OTP / Login
+        static let LOGIN = BASE_URL + "userservice/authentication"
+    }
 
     
-}
+

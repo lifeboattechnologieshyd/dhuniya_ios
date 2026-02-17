@@ -39,39 +39,20 @@ class LoginVC: UIViewController {
         btnCheckBox.setImage(UIImage(named: "Unchecked_box"), for: .normal)
         updateProceedButtonState()
     }
-    func onLoginSuccess() {
-        self.dismiss(animated: true) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
-                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                   let window = windowScene.windows.first {
-                    window.rootViewController = tabBarVC
-                    window.makeKeyAndVisible()
-                }
-            }
-        }
-    }
-    //  Send OTP
+    
     func sendOtp() {
-        let payload: [String:Any] = [
-            "mobile" : self.textFieldPhoneNumber.text ?? ""
+        let payload: [String: Any] = [
+            "mobile": self.textFieldPhoneNumber.text ?? ""
         ]
         
-        NetworkManager.shared.request(urlString: API.SENDOTP, method: .POST, parameters: payload) { (result: Result<APIResponse<SendOtpInfo>, NetworkError>) in
+        NetworkManager.shared.requestWithoutAuth(urlString: API.SENDOTP, method: .POST, parameters: payload) { (result: Result<APIResponse<SendOtpInfo>, NetworkError>) in
             
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    if response.success, let info = response.info {
+                    if response.success {
                         Session.shared.mobileNumber = self.textFieldPhoneNumber.text ?? ""
-                        
-                        if info.isLoginWithPassword ?? false {
-                            // Existing user → Enter Password
-                            self.navigateToEnterPasswordVC()
-                        } else {
-                            // New user → OTP
-                            self.navigateToOtpVC()
-                        }
+                        self.navigateToOtpVC()
                     } else {
                         self.showAlert(message: response.description)
                     }
@@ -82,18 +63,6 @@ class LoginVC: UIViewController {
             }
         }
     }
-    
-    //  Navigation
-    func navigateToEnterPasswordVC() {
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "EnterPasswordVC") as? EnterPasswordVC {
-            vc.mobileNumber = self.textFieldPhoneNumber.text ?? ""
-            vc.modalPresentationStyle = .overCurrentContext
-            vc.modalTransitionStyle = .crossDissolve
-            self.present(vc, animated: true)
-        }
-    }
-    
     func navigateToOtpVC() {
         let storyboard = UIStoryboard(name: "OTP", bundle: nil)
         if let otpVC = storyboard.instantiateViewController(withIdentifier: "OtpVC") as? OtpVC {
@@ -104,7 +73,6 @@ class LoginVC: UIViewController {
         }
     }
     
-    // UI Actions
     @IBAction func onTapBtnCheckBox(_ sender: UIButton) {
         isChecked.toggle()
         btnCheckBox.setImage(UIImage(named: isChecked ? "checked_box" : "Unchecked_box"), for: .normal)
@@ -119,13 +87,6 @@ class LoginVC: UIViewController {
     @IBAction func btnCloseTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first else { return }
-//        if !loginView.frame.contains(touch.location(in: self.view)) {
-//            self.dismiss(animated: true)
-//        }
-    
     
     @IBAction func btnProceedTapped(_ sender: UIButton) {
         
@@ -148,37 +109,5 @@ class LoginVC: UIViewController {
         self.sendOtp()
     }
     
-    // Alerts
-    func showLoginAlert(message: String?) {
-        let alert = UIAlertController(title: "Alert", message: message ?? "Something went wrong", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
-    // In LoginVC.swift
-
-    func goToProfileVC() {
-        DispatchQueue.main.async {
-            // Dismiss the Login Popup first
-            self.view.window?.rootViewController?.dismiss(animated: false, completion: {
-                
-                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                   let window = windowScene.windows.first {
-                    
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    
-                      if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
-                            tabBarVC.selectedIndex = 4
-                        
-                        window.rootViewController = tabBarVC
-                        window.makeKeyAndVisible()
-                        
-                        // Notify profile to reload data
-                        NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
-                    }
-                }
-            })
-        }
-    }
-    }
-
+   
+}

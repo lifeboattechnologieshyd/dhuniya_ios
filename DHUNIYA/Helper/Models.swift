@@ -31,102 +31,6 @@ struct CheckUserMobileResponse: Codable {
     }
 }
 
-struct LoginResponse: Codable {
-    let isSetPassword: Bool
-    let refreshToken: String
-    let accessToken: String
-    let profileDetails: ProfileDetails?
-
-    enum CodingKeys: String, CodingKey {
-        case isSetPassword = "is_set_password"
-        case refreshToken = "refresh_token"
-        case accessToken = "access_token"
-        case profileDetails = "profile_details"
-    }
-}
-
-
-struct ProfileDetails: Codable {
-    let id: Int?
-    let full_name: String?
-    let username: String?
-    var referral_code: String?
-    let can_change_referral_code: Bool?
-    let profile_image: String?
-    let email: String?
-    let mobile: Int?
-    let earnings: Double?
-    let total_earnings: Double?
-    let user_role: [String]?
-    let can_change_username: Bool?
-    let dob: String?
-    let gender: String?
-    let reporterId: String?
-   let reporterName: String?
-    let name: String?
-
-    
-    // Added fields from API
-    let password: String?
-    let last_login: String?
-    let is_superuser: Bool?
-    let device_id: String?
-    let fcm_id: String?
-    let user_status: String?
-    let is_active: Bool?
-    let is_staff: Bool?
-    let custom_permissions: [String]?
-    let state: String?
-    let district: String?
-    let mandal: String?
-    let village: String?
-    let city: String?
-    let new_district: String?
-    let created_by: String?
-    let updated_by: String?
-    let groups: [String]?
-    let user_permissions: [String]?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case password
-        case last_login
-        case is_superuser
-        case full_name
-        case username
-        case profile_image
-        case email
-        case mobile
-        case gender
-        case dob
-        case device_id
-        case fcm_id
-        case user_status
-        case earnings
-        case total_earnings
-        case referral_code
-        case can_change_referral_code
-        case can_change_username
-        case user_role
-        case is_active
-        case is_staff
-        case custom_permissions
-        case state
-        case district
-        case mandal
-        case village
-        case city
-        case new_district
-        case created_by
-        case updated_by
-        case groups
-        case user_permissions
-         case reporterId
-        case reporterName
-        case name
-    }
-}
-
 struct LikeResponse: Codable {
     let success: Bool
     let errorCode: Int
@@ -176,20 +80,6 @@ struct SendOtpResponse: Codable {
     let description: String
     let total: Int?
     let info: SendOtpInfo?
-}
-
-struct SendOtpInfo: Codable {
-    let message: String?
-    let isLoginWithPassword: Bool?
-    let profileImage: String?
-    let username: String?
-    
-    private enum CodingKeys: String, CodingKey {
-        case message
-        case isLoginWithPassword = "is_login_with_password"
-        case profileImage = "profile_image"
-        case username
-    }
 }
 
 struct VerifyInfo: Codable {
@@ -549,7 +439,7 @@ struct BannerModel: Decodable {
     let priority: Int
     let name: String
     let images: [String?]?
-    let videos: [String]?
+    let videos: String?
     let content_type: String
     let banner_type: String
     let status: String
@@ -558,4 +448,65 @@ struct BannerModel: Decodable {
     let created_by: String
     let updation_date: String
     let updated_by: String
+}
+// MARK: - Send OTP Response
+struct SendOtpInfo: Codable {
+    let message: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case message
+    }
+}
+
+// MARK: - Login/Verify OTP Response
+struct LoginResponse: Codable {
+    let refreshToken: String
+    let accessToken: String
+    let profileDetails: ProfileDetails?
+
+    enum CodingKeys: String, CodingKey {
+        case refreshToken = "refresh_token"
+        case accessToken = "access_token"
+        case profileDetails = "profile_details"
+    }
+}
+
+// MARK: - Profile Details (keep existing, ensure all fields are there)
+struct ProfileDetails: Codable {
+    let id: Int?
+    let full_name: String?
+    let username: String?
+    var referral_code: String?
+    let can_change_referral_code: Bool?
+    let profile_image: String?
+    let email: String?
+    let mobile: Int?
+    let earnings: Double?
+    let total_earnings: Double?
+    let user_role: [String]?
+    let can_change_username: Bool?
+    let dob: String?
+    let gender: String?
+    let reporterId: String?
+    let reporterName: String?
+    let name: String?
+    let password: String?
+    let last_login: String?
+    let is_superuser: Bool?
+    let device_id: String?
+    let fcm_id: String?
+    let user_status: String?
+    let is_active: Bool?
+    let is_staff: Bool?
+    let custom_permissions: [String]?
+    let state: String?
+    let district: String?
+    let mandal: String?
+    let village: String?
+    let city: String?
+    let new_district: String?
+    let created_by: String?
+    let updated_by: String?
+    let groups: [String]?
+    let user_permissions: [String]?
 }

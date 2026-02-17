@@ -18,6 +18,7 @@ enum NetworkError: Error {
     case invalidURL
     case noData
     case noaccess
+    case unauthorized
     case decodingError(String)
     case serverError(String)
 }
@@ -43,6 +44,12 @@ struct APIResponse<T: Decodable>: Decodable {
     }
 }
 
+// Error response from API
+struct APIErrorResponse: Decodable {
+    let detail: String?
+    let code: String?
+}
+
 class NetworkManager {
 
     static let shared = NetworkManager()
@@ -54,6 +61,7 @@ class NetworkManager {
         method: HTTPMethod = .GET,
         parameters: [String: Any]? = nil,
         headers: [String: String]? = nil,
+        requiresAuth: Bool = true,  // NEW: Control auth requirement
         completion: @escaping (Result<APIResponse<T>, NetworkError>) -> Void
     ) {
         guard var urlComponents = URLComponents(string: urlString) else {
@@ -93,12 +101,94 @@ class NetworkManager {
             }
         }
 
-        // Authorization token
-        if let token = UserDefaults.standard.string(forKey: "accesstoken") {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        // ✅ FIX: Only add Authorization header if token exists and is not empty
+        if requiresAuth {
+            let token = Session.shared.accesstoken
+            if !token.isEmpty {
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            // If token is empty and auth is required, you might want to skip the request
+            // or handle it differently based on your app's needs
+        }
+
+        print("🌐 API Request: \(method.rawValue) \(url)")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("❌ Network Error: \(error.localizedDescription)")
+                completion(.failure(.serverError(error.localizedDescription)))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+
+            // Debug print
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("📦 Response: \(responseString)")
+            }
+            
+            // Check for HTTP status code
+            if let httpResponse = response as? HTTPURLResponse {
+                print("📊 Status Code: \(httpResponse.statusCode)")
+                
+                // Handle 401 Unauthorized
+                if httpResponse.statusCode == 401 {
+                    // Try to decode error response
+                    if let errorResponse = try? JSONDecoder().decode(APIErrorResponse.self, from: data) {
+                        print("🔒 Auth Error: \(errorResponse.detail ?? "Unauthorized")")
+                    }
+                    completion(.failure(.unauthorized))
+                    return
+                }
+            }
+
+            do {
+                let decodedData = try JSONDecoder().decode(APIResponse<T>.self, from: data)
+                completion(.success(decodedData))
+            } catch {
+                print("❌ Decoding Error: \(error)")
+                completion(.failure(.decodingError(error.localizedDescription)))
+            }
+        }.resume()
+    }
+
+    // Request without auth (for public APIs)
+    func requestWithoutAuth<T: Decodable>(
+        urlString: String,
+        method: HTTPMethod = .GET,
+        parameters: [String: Any]? = nil,
+        completion: @escaping (Result<APIResponse<T>, NetworkError>) -> Void
+    ) {
+        request(urlString: urlString, method: method, parameters: parameters, requiresAuth: false, completion: completion)
+    }
+    
+    // Raw request for non-standard responses
+    func requestRaw<T: Decodable>(
+        urlString: String,
+        requiresAuth: Bool = false,
+        completion: @escaping (Result<T, NetworkError>) -> Void
+    ) {
+        guard let url = URL(string: urlString) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        // ✅ FIX: Only add token if it exists and is not empty
+        if requiresAuth {
+            let token = Session.shared.accesstoken
+            if !token.isEmpty {
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
         }
 
         URLSession.shared.dataTask(with: request) { data, response, error in
+
             if let error = error {
                 completion(.failure(.serverError(error.localizedDescription)))
                 return
@@ -109,18 +199,19 @@ class NetworkManager {
                 return
             }
 
-            do {
-                print(String.init(data: data, encoding: .utf8))
+            print("📦 RAW RESPONSE:")
+            print(String(data: data, encoding: .utf8) ?? "nil")
 
-                let decodedData = try JSONDecoder().decode(APIResponse<T>.self, from: data)
-                completion(.success(decodedData))
+            do {
+                let decoded = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(decoded))
             } catch {
+                print("❌ DECODING ERROR:", error)
                 completion(.failure(.decodingError(error.localizedDescription)))
             }
+
         }.resume()
     }
-
-   
 }
 
 class Session {
