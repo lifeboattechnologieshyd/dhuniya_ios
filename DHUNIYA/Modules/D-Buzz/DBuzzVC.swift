@@ -121,16 +121,15 @@ class DBuzzVC: UIViewController {
     }
     
     func navigateToFullscreen(data: [BannerModel], selectedIndex: Int, title: String) {
-        print("Navigating to fullscreen - Data count: \(data.count), Selected: \(selectedIndex), Title: \(title)")
         let storyboard = UIStoryboard(name: "DBuzz", bundle: nil)
-        if let fullscreenVC = storyboard.instantiateViewController(withIdentifier: "FullscreenVC") as? FullscreenVC {
-            fullscreenVC.data = data
-            fullscreenVC.selectedIndex = selectedIndex
-            fullscreenVC.titleText = title
-            navigationController?.pushViewController(fullscreenVC, animated: true)
-        }
+        let fullscreenVC = storyboard.instantiateViewController(withIdentifier: "FullscreenVC") as! FullscreenVC
+        fullscreenVC.data = data
+        fullscreenVC.selectedIndex = selectedIndex
+        fullscreenVC.titleText = title
+        self.navigationController?.pushViewController(fullscreenVC, animated: true)
     }
-}
+    }
+
 extension DBuzzVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3

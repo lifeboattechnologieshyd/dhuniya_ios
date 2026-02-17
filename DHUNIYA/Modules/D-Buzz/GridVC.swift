@@ -56,14 +56,23 @@ class GridVC: UIViewController {
     }
     
     func navigateToFullscreen(selectedIndex: Int) {
+        print("=== GRID VC NAVIGATION START ===")
+        print("Title: \(titleText)")
+        print("Data Count: \(data.count)")
+        print("Selected Index: \(selectedIndex)")
+        
         let storyboard = UIStoryboard(name: "DBuzz", bundle: nil)
-        if let fullscreenVC = storyboard.instantiateViewController(withIdentifier: "FullscreenVC") as? FullscreenVC {
-            fullscreenVC.data = data
-            fullscreenVC.selectedIndex = selectedIndex
-            fullscreenVC.titleText = titleText
-            fullscreenVC.hidesBottomBarWhenPushed = false
-            navigationController?.pushViewController(fullscreenVC, animated: true)
-        }
+        let fullscreenVC = storyboard.instantiateViewController(withIdentifier: "FullscreenVC") as! FullscreenVC
+        
+        let dataCopy = self.data
+        fullscreenVC.data = dataCopy
+        fullscreenVC.selectedIndex = selectedIndex
+        fullscreenVC.titleText = self.titleText
+        
+        print("FullscreenVC data count after set: \(fullscreenVC.data.count)")
+        print("=== GRID VC NAVIGATION END ===")
+        
+        self.navigationController?.pushViewController(fullscreenVC, animated: true)
     }
 }
 
