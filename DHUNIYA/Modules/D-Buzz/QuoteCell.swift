@@ -13,6 +13,7 @@ class QuoteCell: UITableViewCell {
     @IBOutlet weak var colVw: UICollectionView!
     
     var data: [BannerModel] = []
+    var onItemSelected: ((Int) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +25,7 @@ class QuoteCell: UITableViewCell {
         colVw.dataSource = self
         colVw.register(UINib(nibName: "QuoteColCell", bundle: nil), forCellWithReuseIdentifier: "QuoteColCell")
         if let layout = colVw.collectionViewLayout as? UICollectionViewFlowLayout {
+            
         }
     }
     
@@ -50,7 +52,11 @@ extension QuoteCell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 286, height: collectionView.frame.height - 20)
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onItemSelected?(indexPath.row)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 256, height: 370)
+    }
+}

@@ -21,9 +21,13 @@ class GridVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         topVw.addBottomShadow()
-        self.navigationController?.navigationBar.isHidden = true
-        self.navigationItem.hidesBackButton = true
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,9 +50,19 @@ class GridVC: UIViewController {
         layout.estimatedItemSize = .zero
         colVw.collectionViewLayout = layout
     }
-    
-    @IBAction func backBtnTapped(_ sender: UIButton) {
+    @IBAction func backButtonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    
+    func navigateToFullscreen(selectedIndex: Int) {
+        let storyboard = UIStoryboard(name: "DBuzz", bundle: nil)
+        if let fullscreenVC = storyboard.instantiateViewController(withIdentifier: "FullscreenVC") as? FullscreenVC {
+            fullscreenVC.data = data
+            fullscreenVC.selectedIndex = selectedIndex
+            fullscreenVC.titleText = titleText
+            navigationController?.pushViewController(fullscreenVC, animated: true)
+        }
     }
 }
 
@@ -63,6 +77,10 @@ extension GridVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             cell.imgVw.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: "placeholder"))
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigateToFullscreen(selectedIndex: indexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

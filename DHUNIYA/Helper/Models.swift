@@ -549,7 +549,7 @@ struct BannerModel: Decodable {
     let priority: Int
     let name: String
     let images: [String?]?
-    let videos: String?
+    let videos: [String]?
     let content_type: String
     let banner_type: String
     let status: String

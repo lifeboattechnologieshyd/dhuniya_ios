@@ -4,7 +4,6 @@
 //
 //  Created by Lifeboat on 16/02/26.
 //
-
 import UIKit
 
 class DBuzzVC: UIViewController {
@@ -22,15 +21,16 @@ class DBuzzVC: UIViewController {
         setupTableView()
         fetchAllData()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            self.navigationController?.navigationBar.isHidden = true
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
-        }
-        
-        override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-        }
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
     
     func setupTableView() {
         tblVw.delegate = self
@@ -51,10 +51,11 @@ class DBuzzVC: UIViewController {
         NetworkManager.shared.request(urlString: API.QUOTES_API) { [weak self] (result: Result<APIResponse<[BannerModel]>, NetworkError>) in
             switch result {
             case .success(let response):
+                print("Quotes Response: \(response)")
                 if response.success, let data = response.info {
                     DispatchQueue.main.async {
                         self?.quotesData = data
-                        self?.tblVw.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+                        self?.tblVw.reloadData()
                     }
                 }
             case .failure(let error):
@@ -64,13 +65,14 @@ class DBuzzVC: UIViewController {
     }
     
     func fetchCartoons() {
-        NetworkManager.shared.request(urlString:API.CARTOONS_API) { [weak self] (result: Result<APIResponse<[BannerModel]>, NetworkError>) in
+        NetworkManager.shared.request(urlString: API.CARTOONS_API) { [weak self] (result: Result<APIResponse<[BannerModel]>, NetworkError>) in
             switch result {
             case .success(let response):
+                print("Cartoons Response: \(response)")
                 if response.success, let data = response.info {
                     DispatchQueue.main.async {
                         self?.cartoonData = data
-                        self?.tblVw.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+                        self?.tblVw.reloadData()
                     }
                 }
             case .failure(let error):
@@ -83,10 +85,11 @@ class DBuzzVC: UIViewController {
         NetworkManager.shared.request(urlString: API.BANNERS_API) { [weak self] (result: Result<APIResponse<[BannerModel]>, NetworkError>) in
             switch result {
             case .success(let response):
+                print("Banners Response: \(response)")
                 if response.success, let data = response.info {
                     DispatchQueue.main.async {
                         self?.bannersData = data
-                        self?.tblVw.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
+                        self?.tblVw.reloadData()
                     }
                 }
             case .failure(let error):
@@ -115,6 +118,16 @@ class DBuzzVC: UIViewController {
             navigationController?.pushViewController(gridVC, animated: true)
         }
     }
+    
+    func navigateToFullscreen(data: [BannerModel], selectedIndex: Int, title: String) {
+        let storyboard = UIStoryboard(name: "DBuzz", bundle: nil)
+        if let fullscreenVC = storyboard.instantiateViewController(withIdentifier: "FullscreenVC") as? FullscreenVC {
+            fullscreenVC.data = data
+            fullscreenVC.selectedIndex = selectedIndex
+            fullscreenVC.titleText = title
+            navigationController?.pushViewController(fullscreenVC, animated: true)
+        }
+    }
 }
 
 extension DBuzzVC: UITableViewDelegate, UITableViewDataSource {
@@ -128,16 +141,31 @@ extension DBuzzVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteCell
             cell.configureCell(with: quotesData)
             cell.viewallBtn.addTarget(self, action: #selector(viewAllQuotes), for: .touchUpInside)
+            cell.onItemSelected = { [weak self] index in
+                guard let self = self else { return }
+                self.navigateToFullscreen(data: self.quotesData, selectedIndex: index, title: "Quotes")
+            }
+            cell.selectionStyle = .none
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BanersCell", for: indexPath) as! BanersCell
             cell.configureCell(with: bannersData)
             cell.viewAllBtn.addTarget(self, action: #selector(viewAllBanners), for: .touchUpInside)
+            cell.onItemSelected = { [weak self] index in
+                guard let self = self else { return }
+                self.navigateToFullscreen(data: self.bannersData, selectedIndex: index, title: "Banners")
+            }
+            cell.selectionStyle = .none
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CartoonCell", for: indexPath) as! CartoonCell
             cell.configureCell(with: cartoonData)
             cell.viewallBtn.addTarget(self, action: #selector(viewAllCartoons), for: .touchUpInside)
+            cell.onItemSelected = { [weak self] index in
+                guard let self = self else { return }
+                self.navigateToFullscreen(data: self.cartoonData, selectedIndex: index, title: "Cartoons")
+            }
+            cell.selectionStyle = .none
             return cell
         default:
             return UITableViewCell()

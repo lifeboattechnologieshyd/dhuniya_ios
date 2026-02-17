@@ -13,6 +13,7 @@ class CartoonCell: UITableViewCell {
     @IBOutlet weak var colVw: UICollectionView!
     
     var data: [BannerModel] = []
+    var onItemSelected: ((Int) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +25,7 @@ class CartoonCell: UITableViewCell {
         colVw.dataSource = self
         colVw.register(UINib(nibName: "BanerscolCell", bundle: nil), forCellWithReuseIdentifier: "BanerscolCell")
         if let layout = colVw.collectionViewLayout as? UICollectionViewFlowLayout {
-          
+
         }
     }
     
@@ -50,7 +51,12 @@ extension CartoonCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         }
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 96, height: collectionView.frame.height - 20)
-        }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onItemSelected?(indexPath.row)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 96, height: 124)
+    }
+}

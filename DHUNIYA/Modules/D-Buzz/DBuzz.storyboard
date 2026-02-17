@@ -121,7 +121,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="Back"/>
                                         <connections>
-                                            <action selector="backBtnTapped:" destination="1yC-Ni-UdG" eventType="touchUpInside" id="EKU-bK-Exl"/>
+                                            <action selector="backButtonTapped:" destination="1yC-Ni-UdG" eventType="touchUpInside" id="vaG-FQ-usu"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zML-sG-iD8">
@@ -166,6 +166,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMP-g2-eIV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1766" y="131"/>
+        </scene>
+        <!--FullscreenVC-->
+        <scene sceneID="7yA-Yq-mfH">
+            <objects>
+                <viewController storyboardIdentifier="FullscreenVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l3y-zx-Ubv" customClass="FullscreenVC" customModule="DHUNIYA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gFi-hF-nSj">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aKw-Hf-Axh">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="784"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6eu-B4-oGY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aKw-Hf-Axh" firstAttribute="top" secondItem="gFi-hF-nSj" secondAttribute="top" id="Vwm-jg-un1"/>
+                            <constraint firstItem="aKw-Hf-Axh" firstAttribute="leading" secondItem="6eu-B4-oGY" secondAttribute="leading" id="h9x-cq-o5s"/>
+                            <constraint firstItem="aKw-Hf-Axh" firstAttribute="trailing" secondItem="6eu-B4-oGY" secondAttribute="trailing" id="le7-N6-vQu"/>
+                            <constraint firstItem="aKw-Hf-Axh" firstAttribute="bottom" secondItem="6eu-B4-oGY" secondAttribute="bottom" id="nv4-g3-ea7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tblVw" destination="aKw-Hf-Axh" id="Naw-s8-huj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="isI-YR-mXt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2487.7862595419847" y="130.98591549295776"/>
         </scene>
         <!--DBuzz-->
         <scene sceneID="l2b-aS-cdM">
