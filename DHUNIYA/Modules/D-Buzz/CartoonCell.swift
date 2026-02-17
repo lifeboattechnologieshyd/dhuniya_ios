@@ -25,7 +25,7 @@ class CartoonCell: UITableViewCell {
         colVw.dataSource = self
         colVw.register(UINib(nibName: "BanerscolCell", bundle: nil), forCellWithReuseIdentifier: "BanerscolCell")
         if let layout = colVw.collectionViewLayout as? UICollectionViewFlowLayout {
-
+    
         }
     }
     
@@ -53,6 +53,7 @@ extension CartoonCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Cartoon cell tapped at index: \(indexPath.row)")
         onItemSelected?(indexPath.row)
     }
     

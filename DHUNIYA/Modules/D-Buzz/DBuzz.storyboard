@@ -189,6 +189,7 @@
                             <constraint firstItem="o1t-zL-qmR" firstAttribute="leading" secondItem="6eu-B4-oGY" secondAttribute="leading" id="yjM-1r-Von"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="tblVw" destination="o1t-zL-qmR" id="KGf-oE-d6P"/>
                     </connections>

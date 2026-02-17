@@ -121,17 +121,16 @@ class DBuzzVC: UIViewController {
     }
     
     func navigateToFullscreen(data: [BannerModel], selectedIndex: Int, title: String) {
+        print("Navigating to fullscreen - Data count: \(data.count), Selected: \(selectedIndex), Title: \(title)")
         let storyboard = UIStoryboard(name: "DBuzz", bundle: nil)
         if let fullscreenVC = storyboard.instantiateViewController(withIdentifier: "FullscreenVC") as? FullscreenVC {
             fullscreenVC.data = data
             fullscreenVC.selectedIndex = selectedIndex
             fullscreenVC.titleText = title
-            fullscreenVC.hidesBottomBarWhenPushed = false
             navigationController?.pushViewController(fullscreenVC, animated: true)
         }
     }
 }
-
 extension DBuzzVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -145,6 +144,7 @@ extension DBuzzVC: UITableViewDelegate, UITableViewDataSource {
             cell.viewallBtn.addTarget(self, action: #selector(viewAllQuotes), for: .touchUpInside)
             cell.onItemSelected = { [weak self] index in
                 guard let self = self else { return }
+                print("Quote selected at index: \(index)")
                 self.navigateToFullscreen(data: self.quotesData, selectedIndex: index, title: "Quotes")
             }
             cell.selectionStyle = .none
@@ -155,6 +155,7 @@ extension DBuzzVC: UITableViewDelegate, UITableViewDataSource {
             cell.viewAllBtn.addTarget(self, action: #selector(viewAllBanners), for: .touchUpInside)
             cell.onItemSelected = { [weak self] index in
                 guard let self = self else { return }
+                print("Banner selected at index: \(index)")
                 self.navigateToFullscreen(data: self.bannersData, selectedIndex: index, title: "Banners")
             }
             cell.selectionStyle = .none
@@ -165,6 +166,7 @@ extension DBuzzVC: UITableViewDelegate, UITableViewDataSource {
             cell.viewallBtn.addTarget(self, action: #selector(viewAllCartoons), for: .touchUpInside)
             cell.onItemSelected = { [weak self] index in
                 guard let self = self else { return }
+                print("Cartoon selected at index: \(index)")
                 self.navigateToFullscreen(data: self.cartoonData, selectedIndex: index, title: "Cartoons")
             }
             cell.selectionStyle = .none
@@ -178,7 +180,7 @@ extension DBuzzVC: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0: return 424
         case 1: return 174
-        case 2: return 174
+        case 2: return 184
         default: return 0
         }
     }
