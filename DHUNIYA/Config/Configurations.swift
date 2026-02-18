@@ -75,15 +75,10 @@ struct API {
     static let QUOTES_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=QUOTE&date=2025-09-19"
     static let CARTOONS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=CARTOON&offset=1&limit=25"
     static let BANNERS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=QUOTE&date=2025-09-19"
-
-
-        
-        // Send OTP
-        static let SENDOTP = BASE_URL + "userservice/authentication/sendotp"
-        
-        // Verify OTP / Login
-        static let LOGIN = BASE_URL + "userservice/authentication"
-    }
+    
+    static let SENDOTP = BASE_URL + "userservice/authentication/sendotp"
+    static let LOGIN = BASE_URL + "userservice/authentication"
+}
 
     
 
