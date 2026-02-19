@@ -11,7 +11,7 @@ import FirebaseCrashlytics
 import UserNotifications
 import IQKeyboardManagerSwift
 import Kingfisher
-
+import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,22 +22,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         
         configureFirebase()
+        
+        MobileAds.shared.requestConfiguration.testDeviceIdentifiers = []
+        
+
+        MobileAds.shared.start { status in
+            print("🔥 Google Mobile Ads SDK initialized")
+        }
+
         setupPushNotifications(application)
 
         UNUserNotificationCenter.current().delegate = self
         Messaging.messaging().delegate = self
         
-        // Enable IQKeyboardManager
         IQKeyboardManager.shared.isEnabled = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
 
-        // IQKeyboardToolbarManager does not exist in IQKeyboardManagerSwift 8.0.1
-        // IQKeyboardToolbarManager.shared.isEnabled = true // <-- Remove or comment out to fix compile error
-        
         return true
     }
-    
 
     private func configureFirebase() {
         guard let plistName = Bundle.main.object(forInfoDictionaryKey: "FirebasePlistFile") as? String,
@@ -73,5 +76,4 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("🔥 FCM Token:", fcmToken ?? "")
     }
-    
 }

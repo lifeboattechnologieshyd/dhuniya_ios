@@ -2,10 +2,9 @@
 //  NewsVC.swift
 //  DHUNIYA
 //
-//  Created by Lifeboat on 21/11/25.
-//
 
 import UIKit
+import GoogleMobileAds
 
 class NewsVC: UIViewController {
     
@@ -15,13 +14,14 @@ class NewsVC: UIViewController {
     var currentPage = 1
     var totalPages = 10
     var isLoading = false
+    var tableItems: [Any] = []
+    
+    var nativeAdsCache: [Int: NativeAd] = [:]
+    var loadingAdIndexes: Set<Int> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Allow extending under navigation bar only
         self.edgesForExtendedLayout = [.top]
-        
-        // Optional but safe
         self.extendedLayoutIncludesOpaqueBars = false
         setupTableView()
         getNews()
@@ -41,30 +41,87 @@ class NewsVC: UIViewController {
         isLoading = true
         
         if currentPage == 1 {
-                showLoader()
-            }
+            showLoader()
+        }
         let urlString = "\(API.GET_NEWS)?offset=\(currentPage)&limit=\(limit)"
         
         NetworkManager.shared.request(urlString: urlString) { (result: Result<APIResponse<[NewsModel]>, NetworkError>) in
-            self.isLoading = false
-            
-            self.hideLoader()
-            
-            switch result {
-            case .success(let response):
-                if let data = response.info {
-                    if self.currentPage == 1 {
-                        self.newsList = data
-                    } else {
-                        self.newsList.append(contentsOf: data)
-                    }
-                    
-                    DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                self.isLoading = false
+                self.hideLoader()
+                
+                switch result {
+                case .success(let response):
+                    if let data = response.info {
+                        if self.currentPage == 1 {
+                            self.newsList = data
+                        } else {
+                            self.newsList.append(contentsOf: data)
+                        }
+                        
+                        self.prepareTableItems()
+                        self.preloadNativeAds()
                         self.tblVw.reloadData()
                     }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
+            }
+        }
+    }
+    
+    func prepareTableItems() {
+        tableItems.removeAll()
+        
+        for (index, news) in newsList.enumerated() {
+            tableItems.append(news)
+            
+            if (index + 1) % 4 == 0 {
+                let adIdentifier = "NATIVE_AD_\(tableItems.count)"
+                tableItems.append(adIdentifier)
+            }
+        }
+        
+        print("📋 Total tableItems: \(tableItems.count), News: \(newsList.count)")
+    }
+    
+    func preloadNativeAds() {
+        for (index, item) in tableItems.enumerated() {
+            if let adIdentifier = item as? String, adIdentifier.hasPrefix("NATIVE_AD") {
+                if nativeAdsCache[index] == nil && !loadingAdIndexes.contains(index) {
+                    loadNativeAd(for: index)
+                }
+            }
+        }
+    }
+    
+    func loadNativeAd(for index: Int) {
+        guard nativeAdsCache[index] == nil else { return }
+        guard !loadingAdIndexes.contains(index) else { return }
+        
+        loadingAdIndexes.insert(index)
+        print("🔄 Loading native ad for index: \(index)")
+        
+        NativeAdManager.shared.loadNativeAd(from: self) { [weak self] nativeAd in
+            guard let self = self else { return }
+            
+            self.loadingAdIndexes.remove(index)
+            
+            guard let ad = nativeAd else {
+                print("❌ Failed to load native ad for index: \(index)")
+                return
+            }
+            
+            print("✅ Native ad loaded and cached for index: \(index)")
+            self.nativeAdsCache[index] = ad
+            
+            DispatchQueue.main.async {
+                if index < self.tableItems.count {
+                    let indexPath = IndexPath(row: index, section: 0)
+                    if self.tblVw.indexPathsForVisibleRows?.contains(indexPath) == true {
+                        self.tblVw.reloadRows(at: [indexPath], with: .fade)
+                    }
+                }
             }
         }
     }
@@ -72,20 +129,42 @@ class NewsVC: UIViewController {
     private func setupTableView() {
         tblVw.delegate = self
         tblVw.dataSource = self
-        
-        // let auto layout decide the height
-        tblVw.rowHeight = UITableView.automaticDimension
-        //        tblVw.estimatedRowHeight = 600
-        
         tblVw.separatorStyle = .none
+        tblVw.isPagingEnabled = true
+        tblVw.showsVerticalScrollIndicator = false
         
-        // if you have nav/tab bar, this is safe but optional
         if #available(iOS 11.0, *) {
             tblVw.contentInsetAdjustmentBehavior = .never
         }
         
-        tblVw.register(UINib(nibName: "NewsCell", bundle: nil),
-                       forCellReuseIdentifier: "NewsCell")
+        tblVw.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "NewsCell")
+        tblVw.register(FullScreenNativeAdCell.self, forCellReuseIdentifier: FullScreenNativeAdCell.identifier)
+    }
+    
+    // Get 3 recommended news after ad position
+    func getRecommendedNews(afterAdAt tableIndex: Int) -> [NewsModel] {
+        var recommended: [NewsModel] = []
+        
+        // Get news after ad
+        for i in (tableIndex + 1)..<tableItems.count {
+            if let news = tableItems[i] as? NewsModel {
+                recommended.append(news)
+                if recommended.count >= 3 { break }
+            }
+        }
+        
+        // If not enough, get from beginning
+        if recommended.count < 3 {
+            for i in 0..<min(tableIndex, tableItems.count) {
+                if recommended.count >= 3 { break }
+                if let news = tableItems[i] as? NewsModel,
+                   !recommended.contains(where: { $0.id == news.id }) {
+                    recommended.append(news)
+                }
+            }
+        }
+        
+        return recommended
     }
     
     func formatDateTime(_ date: Date) -> String {
@@ -96,10 +175,8 @@ class NewsVC: UIViewController {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         
         if now.timeIntervalSince(date) < secondsIn24Hours {
-            // Within 24 hours → show only time
             formatter.dateFormat = "h:mm a"
         } else {
-            // After 24 hours → show date
             formatter.dateFormat = "dd MMM yyyy"
         }
         
@@ -112,8 +189,17 @@ class NewsVC: UIViewController {
         return formatter.date(from: dateString)
     }
     
+    func getNewsIndex(for tableIndex: Int) -> Int {
+        var newsCount = 0
+        for i in 0..<tableIndex {
+            if tableItems[i] is NewsModel {
+                newsCount += 1
+            }
+        }
+        return newsCount
+    }
+    
     func fetchUserLocation(completion: @escaping (Result<LocationResponse, NetworkError>) -> Void) {
-        
         print("📍 Starting fetchUserLocation request...")
         
         NetworkManager.shared.requestRaw(
@@ -133,18 +219,63 @@ class NewsVC: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
+
 extension NewsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsList.count
+        return tableItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! NewsCell
-        let news = newsList[indexPath.row]
+        let item = tableItems[indexPath.row]
         
-        // Set text FIRST
+        // Native Ad Cell
+        if let adIdentifier = item as? String, adIdentifier.hasPrefix("NATIVE_AD") {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: FullScreenNativeAdCell.identifier,
+                for: indexPath
+            ) as! FullScreenNativeAdCell
+            
+            // Get recommended news for this ad
+            let recommendedNews = getRecommendedNews(afterAdAt: indexPath.row)
+            
+            // Configure with cached ad if available
+            if let nativeAd = nativeAdsCache[indexPath.row] {
+                print("📢 Displaying native ad at index: \(indexPath.row)")
+                cell.configure(nativeAd: nativeAd, relatedNews: recommendedNews)
+            } else {
+                print("⏳ Native ad not yet loaded for index: \(indexPath.row)")
+                cell.showLoading()
+                loadNativeAd(for: indexPath.row)
+            }
+            
+            // Handle news click - scroll to that news
+            cell.onNewsClick = { [weak self] index, news in
+                guard let self = self else { return }
+                print("📰 Tapped news: \(news.title)")
+                
+                // Find news index in tableItems and scroll
+                if let newsIndex = self.tableItems.firstIndex(where: { ($0 as? NewsModel)?.id == news.id }) {
+                    let targetIndexPath = IndexPath(row: newsIndex, section: 0)
+                    self.tblVw.scrollToRow(at: targetIndexPath, at: .top, animated: true)
+                }
+            }
+            
+            return cell
+        }
+        
+        // News Cell
+        guard let news = item as? NewsModel else {
+            return UITableViewCell()
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! NewsCell
+        
+        let newsIndex = getNewsIndex(for: indexPath.row)
+        
         cell.newsTitle.text = news.title
         cell.newsTextView.text = news.description
         cell.likeLbl.text = "\(news.likes_count)"
@@ -152,7 +283,6 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.updateLikeUI(isLiked: news.is_liked == true)
         
-        // Apply font based on language
         if news.language.uppercased() == "TELUGU" {
             cell.newsTextView.setupLineSpacing(lineSpace: 8, font: CustomFonts.LR16.font)
             cell.newsTitle.setupLineSpacing(lineSpace: 10, font: CustomFonts.LSB18.font)
@@ -160,21 +290,18 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
             cell.newsTitle.font = FontManager.englishTitle(16)
             cell.newsTextView.font = FontManager.englishBody(14)
         }
-        // Date
+        
         if let date = convertToDate(news.created_date) {
             cell.uploadedTime.text = formatDateTime(date)
         } else {
             cell.uploadedTime.text = news.created_date
         }
         
-        // Image
         cell.NewsImg.setKFImage(news.image?.first)
         
-        // Like button
-        cell.likeButton.tag = indexPath.row
+        cell.likeButton.tag = newsIndex
         cell.likeButton.addTarget(self, action: #selector(likeButtonTapped(_:)), for: .touchUpInside)
         
-        // Comment action
         cell.onCommentButtonTapped = { [weak self] in
             guard let self = self else { return }
             
@@ -183,9 +310,9 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
                 
                 commentsVC.newsId = news.id
                 
-                // 🔥 THIS IS THE MISSING LINK
                 commentsVC.onCommentAdded = {
-                    self.newsList[indexPath.row].comments_count += 1
+                    self.newsList[newsIndex].comments_count += 1
+                    self.prepareTableItems()
                     
                     DispatchQueue.main.async {
                         self.tblVw.reloadRows(
@@ -208,12 +335,21 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
         return tableView.bounds.height
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let item = tableItems[indexPath.row]
+        if let adIdentifier = item as? String,
+           adIdentifier.hasPrefix("NATIVE_AD"),
+           nativeAdsCache[indexPath.row] == nil {
+            loadNativeAd(for: indexPath.row)
+        }
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.size.height
         
-        if offsetY > contentHeight - height - 100 { 
+        if offsetY > contentHeight - height - 200 {
             loadNextPage()
         }
     }
@@ -225,19 +361,25 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - Like/Dislike Actions
+
 extension NewsVC {
     
-    // Toggle like/dislike based on current status
     @objc private func likeButtonTapped(_ sender: UIButton) {
-        let news = newsList[sender.tag]
+        let newsIndex = sender.tag
+        
+        guard newsIndex < newsList.count else { return }
+        
+        let news = newsList[newsIndex]
         
         if news.is_liked == true {
             sendDislikeRequest(newsId: news.id) { success in
                 DispatchQueue.main.async {
                     if success {
-                        self.newsList[sender.tag].likes_count -= 1
-                        self.newsList[sender.tag].is_liked = false
-                        self.tblVw.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
+                        self.newsList[newsIndex].likes_count -= 1
+                        self.newsList[newsIndex].is_liked = false
+                        self.prepareTableItems()
+                        self.tblVw.reloadData()
                     }
                 }
             }
@@ -245,9 +387,10 @@ extension NewsVC {
             sendLikeRequest(newsId: news.id) { success in
                 DispatchQueue.main.async {
                     if success {
-                        self.newsList[sender.tag].likes_count += 1
-                        self.newsList[sender.tag].is_liked = true
-                        self.tblVw.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
+                        self.newsList[newsIndex].likes_count += 1
+                        self.newsList[newsIndex].is_liked = true
+                        self.prepareTableItems()
+                        self.tblVw.reloadData()
                     }
                 }
             }
@@ -291,6 +434,8 @@ extension NewsVC {
     }
 }
 
+// MARK: - Comment Actions
+
 extension NewsVC {
     
     func sendCommentRequest(newsId: Int, comment: String, completion: @escaping (Bool) -> Void) {
@@ -299,15 +444,14 @@ extension NewsVC {
             "comment": comment
         ]
         
-        NetworkManager.shared.request(urlString: API.NEWS_COMMENTS, method: .POST, parameters: payload) { (result: Result<APIResponse<CommentResponse>, NetworkError>) in
+        NetworkManager.shared.request(
+            urlString: API.NEWS_COMMENTS,
+            method: .POST,
+            parameters: payload
+        ) { (result: Result<APIResponse<CommentResponse>, NetworkError>) in
             switch result {
             case .success(let response):
-                if response.success {
-                    completion(true)
-                } else {
-                    print("Comment API error:", response.description)
-                    completion(false)
-                }
+                completion(response.success)
             case .failure(let error):
                 print("Comment API failed:", error)
                 completion(false)

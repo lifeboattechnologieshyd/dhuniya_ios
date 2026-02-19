@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88349E922F46E00200860EBA /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 88349E912F46E00200860EBA /* GoogleMobileAds */; };
 		88851E802ED1820C0084142F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 88851E7F2ED1820C0084142F /* Kingfisher */; };
 		8893B6932ED82B7200F50211 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8893B6922ED82B7200F50211 /* IQKeyboardManagerSwift */; };
 		88B8DA9C2ED6D2B900A795FB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 88B8DA9B2ED6D2B900A795FB /* Lottie */; };
@@ -53,6 +54,7 @@
 			files = (
 				88851E802ED1820C0084142F /* Kingfisher in Frameworks */,
 				8893B6932ED82B7200F50211 /* IQKeyboardManagerSwift in Frameworks */,
+				88349E922F46E00200860EBA /* GoogleMobileAds in Frameworks */,
 				88B8DA9C2ED6D2B900A795FB /* Lottie in Frameworks */,
 				88FCA6432ED04F440062B716 /* FirebaseCrashlytics in Frameworks */,
 				88FCA6412ED04F440062B716 /* FirebaseCore in Frameworks */,
@@ -124,6 +126,7 @@
 				88B8DA9B2ED6D2B900A795FB /* Lottie */,
 				8893B6922ED82B7200F50211 /* IQKeyboardManagerSwift */,
 				88D050532EEFEDDB00C1E297 /* YouTubeiOSPlayerHelper */,
+				88349E912F46E00200860EBA /* GoogleMobileAds */,
 			);
 			productName = DHUNIYA;
 			productReference = 889F573D2ED03E1100201CA7 /* DHUNIYA.app */;
@@ -159,6 +162,7 @@
 				88B8DA9A2ED6D2B900A795FB /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				8893B6912ED82B7200F50211 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				88D050522EEFEDDB00C1E297 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				88349E902F46E00200860EBA /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 889F573E2ED03E1100201CA7 /* Products */;
@@ -684,6 +688,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		88349E902F46E00200860EBA /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
 		88851E7E2ED1820C0084142F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -727,6 +739,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		88349E912F46E00200860EBA /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88349E902F46E00200860EBA /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
 		88851E7F2ED1820C0084142F /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 88851E7E2ED1820C0084142F /* XCRemoteSwiftPackageReference "Kingfisher" */;
