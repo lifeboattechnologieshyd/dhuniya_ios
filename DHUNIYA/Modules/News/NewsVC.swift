@@ -5,15 +5,18 @@
 
 import UIKit
 import GoogleMobileAds
+import Kingfisher
 
 class NewsVC: UIViewController {
     
     @IBOutlet weak var tblVw: UITableView!
     
     var newsList = [NewsModel]()
+    var bannersData = [BannerModel]()
     var currentPage = 1
     var totalPages = 10
     var isLoading = false
+    var isBannersLoaded = false
     var tableItems: [Any] = []
     
     var nativeAdsCache: [Int: NativeAd] = [:]
@@ -24,14 +27,39 @@ class NewsVC: UIViewController {
         self.edgesForExtendedLayout = [.top]
         self.extendedLayoutIncludesOpaqueBars = false
         setupTableView()
+        fetchBanners()
         getNews()
-        
         fetchUserLocation { result in
             switch result {
             case .success(let location):
                 print("User Location:", location)
             case .failure(let error):
                 print("Failed to fetch location:", error)
+            }
+        }
+    }
+    
+    func fetchBanners() {
+        NetworkManager.shared.request(urlString: API.BANNERS_API) { [weak self] (result: Result<APIResponse<[BannerModel]>, NetworkError>) in
+            switch result {
+            case .success(let response):
+                if response.success, let data = response.info {
+                    DispatchQueue.main.async {
+                        self?.bannersData = data
+                        self?.isBannersLoaded = true
+                        self?.prepareTableItems()
+                        self?.preloadNativeAds()
+                        self?.tblVw.reloadData()
+                    }
+                }
+            case .failure(let error):
+                print("Error fetching banners: \(error)")
+                DispatchQueue.main.async {
+                    self?.isBannersLoaded = true
+                    self?.prepareTableItems()
+                    self?.preloadNativeAds()
+                    self?.tblVw.reloadData()
+                }
             }
         }
     }
@@ -58,7 +86,6 @@ class NewsVC: UIViewController {
                         } else {
                             self.newsList.append(contentsOf: data)
                         }
-                        
                         self.prepareTableItems()
                         self.preloadNativeAds()
                         self.tblVw.reloadData()
@@ -73,16 +100,40 @@ class NewsVC: UIViewController {
     func prepareTableItems() {
         tableItems.removeAll()
         
-        for (index, news) in newsList.enumerated() {
-            tableItems.append(news)
-            
-            if (index + 1) % 4 == 0 {
-                let adIdentifier = "NATIVE_AD_\(tableItems.count)"
-                tableItems.append(adIdentifier)
+        var newsIndex = 0
+        var bannerIndex = 0
+        let totalBanners = bannersData.count
+        
+        while newsIndex < newsList.count {
+            if bannerIndex < totalBanners {
+                var newsAddedInCycle = 0
+                while newsAddedInCycle < 3 && newsIndex < newsList.count {
+                    tableItems.append(newsList[newsIndex])
+                    newsIndex += 1
+                    newsAddedInCycle += 1
+                }
+                
+                if newsAddedInCycle > 0 && bannerIndex < totalBanners {
+                    tableItems.append(bannersData[bannerIndex])
+                    bannerIndex += 1
+                    
+                    let adIdentifier = "NATIVE_AD_\(tableItems.count)"
+                    tableItems.append(adIdentifier)
+                }
+            } else {
+                var newsAddedInCycle = 0
+                while newsAddedInCycle < 4 && newsIndex < newsList.count {
+                    tableItems.append(newsList[newsIndex])
+                    newsIndex += 1
+                    newsAddedInCycle += 1
+                }
+                
+                if newsAddedInCycle == 4 {
+                    let adIdentifier = "NATIVE_AD_\(tableItems.count)"
+                    tableItems.append(adIdentifier)
+                }
             }
         }
-        
-        print("📋 Total tableItems: \(tableItems.count), News: \(newsList.count)")
     }
     
     func preloadNativeAds() {
@@ -100,7 +151,6 @@ class NewsVC: UIViewController {
         guard !loadingAdIndexes.contains(index) else { return }
         
         loadingAdIndexes.insert(index)
-        print("🔄 Loading native ad for index: \(index)")
         
         NativeAdManager.shared.loadNativeAd(from: self) { [weak self] nativeAd in
             guard let self = self else { return }
@@ -108,11 +158,9 @@ class NewsVC: UIViewController {
             self.loadingAdIndexes.remove(index)
             
             guard let ad = nativeAd else {
-                print("❌ Failed to load native ad for index: \(index)")
                 return
             }
             
-            print("✅ Native ad loaded and cached for index: \(index)")
             self.nativeAdsCache[index] = ad
             
             DispatchQueue.main.async {
@@ -139,13 +187,12 @@ class NewsVC: UIViewController {
         
         tblVw.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "NewsCell")
         tblVw.register(FullScreenNativeAdCell.self, forCellReuseIdentifier: FullScreenNativeAdCell.identifier)
+        tblVw.register(FullScreenBannerCell.self, forCellReuseIdentifier: FullScreenBannerCell.identifier)
     }
     
-    // Get 3 recommended news after ad position
     func getRecommendedNews(afterAdAt tableIndex: Int) -> [NewsModel] {
         var recommended: [NewsModel] = []
         
-        // Get news after ad
         for i in (tableIndex + 1)..<tableItems.count {
             if let news = tableItems[i] as? NewsModel {
                 recommended.append(news)
@@ -153,7 +200,6 @@ class NewsVC: UIViewController {
             }
         }
         
-        // If not enough, get from beginning
         if recommended.count < 3 {
             for i in 0..<min(tableIndex, tableItems.count) {
                 if recommended.count >= 3 { break }
@@ -200,26 +246,19 @@ class NewsVC: UIViewController {
     }
     
     func fetchUserLocation(completion: @escaping (Result<LocationResponse, NetworkError>) -> Void) {
-        print("📍 Starting fetchUserLocation request...")
-        
         NetworkManager.shared.requestRaw(
             urlString: API.USER_LOCATION
         ) { (result: Result<LocationResponse, NetworkError>) in
             switch result {
             case .success(let location):
-                print("✅ Location:", location)
                 Session.shared.userLocation = location
                 completion(.success(location))
-                
             case .failure(let error):
-                print("❌ Error:", error)
                 completion(.failure(error))
             }
         }
     }
 }
-
-// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension NewsVC: UITableViewDelegate, UITableViewDataSource {
     
@@ -231,33 +270,23 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
         
         let item = tableItems[indexPath.row]
         
-        // Native Ad Cell
         if let adIdentifier = item as? String, adIdentifier.hasPrefix("NATIVE_AD") {
-            
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: FullScreenNativeAdCell.identifier,
                 for: indexPath
             ) as! FullScreenNativeAdCell
             
-            // Get recommended news for this ad
             let recommendedNews = getRecommendedNews(afterAdAt: indexPath.row)
             
-            // Configure with cached ad if available
             if let nativeAd = nativeAdsCache[indexPath.row] {
-                print("📢 Displaying native ad at index: \(indexPath.row)")
                 cell.configure(nativeAd: nativeAd, relatedNews: recommendedNews)
             } else {
-                print("⏳ Native ad not yet loaded for index: \(indexPath.row)")
                 cell.showLoading()
                 loadNativeAd(for: indexPath.row)
             }
             
-            // Handle news click - scroll to that news
             cell.onNewsClick = { [weak self] index, news in
                 guard let self = self else { return }
-                print("📰 Tapped news: \(news.title)")
-                
-                // Find news index in tableItems and scroll
                 if let newsIndex = self.tableItems.firstIndex(where: { ($0 as? NewsModel)?.id == news.id }) {
                     let targetIndexPath = IndexPath(row: newsIndex, section: 0)
                     self.tblVw.scrollToRow(at: targetIndexPath, at: .top, animated: true)
@@ -267,7 +296,15 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        // News Cell
+        if let banner = item as? BannerModel {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: FullScreenBannerCell.identifier,
+                for: indexPath
+            ) as! FullScreenBannerCell
+            cell.configure(with: banner)
+            return cell
+        }
+        
         guard let news = item as? NewsModel else {
             return UITableViewCell()
         }
@@ -361,8 +398,6 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// MARK: - Like/Dislike Actions
-
 extension NewsVC {
     
     @objc private func likeButtonTapped(_ sender: UIButton) {
@@ -434,8 +469,6 @@ extension NewsVC {
     }
 }
 
-// MARK: - Comment Actions
-
 extension NewsVC {
     
     func sendCommentRequest(newsId: Int, comment: String, completion: @escaping (Bool) -> Void) {
@@ -457,5 +490,158 @@ extension NewsVC {
                 completion(false)
             }
         }
+    }
+}
+
+class FullScreenBannerCell: UITableViewCell {
+    
+    static let identifier = "FullScreenBannerCell"
+    
+    private let bannerImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .black
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "Dhuniya")
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let shareButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "share_banner"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let whatsappButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "whatsappshare"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private var currentImageUrl: String?
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
+        selectionStyle = .none
+        backgroundColor = .black
+        contentView.backgroundColor = .black
+        
+        contentView.addSubview(bannerImageView)
+        contentView.addSubview(logoImageView)
+        contentView.addSubview(whatsappButton)
+        contentView.addSubview(shareButton)
+        
+        NSLayoutConstraint.activate([
+            bannerImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            bannerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            bannerImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            bannerImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            logoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
+            logoImageView.heightAnchor.constraint(equalToConstant: 40),
+            logoImageView.widthAnchor.constraint(equalToConstant: 70),
+            
+            whatsappButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            whatsappButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            whatsappButton.heightAnchor.constraint(equalToConstant: 24),
+            whatsappButton.widthAnchor.constraint(equalToConstant: 24),
+            
+            shareButton.centerYAnchor.constraint(equalTo: whatsappButton.centerYAnchor),
+            shareButton.trailingAnchor.constraint(equalTo: whatsappButton.leadingAnchor, constant: -12),
+            shareButton.heightAnchor.constraint(equalToConstant: 24),
+            shareButton.widthAnchor.constraint(equalToConstant: 24)
+        ])
+        
+        shareButton.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
+        whatsappButton.addTarget(self, action: #selector(whatsappButtonTapped), for: .touchUpInside)
+    }
+    
+    func configure(with banner: BannerModel) {
+        guard let images = banner.images else { return }
+        for image in images {
+            if let imageUrl = image {
+                currentImageUrl = imageUrl
+                bannerImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: "placeholder"))
+                break
+            }
+        }
+    }
+    
+    @objc private func shareButtonTapped() {
+        guard let imageUrl = currentImageUrl, let url = URL(string: imageUrl) else { return }
+        KingfisherManager.shared.retrieveImage(with: url) { [weak self] result in
+            switch result {
+            case .success(let value):
+                self?.shareImage(image: value.image)
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    @objc private func whatsappButtonTapped() {
+        guard let imageUrl = currentImageUrl, let url = URL(string: imageUrl) else { return }
+        KingfisherManager.shared.retrieveImage(with: url) { [weak self] result in
+            switch result {
+            case .success(let value):
+                self?.shareToWhatsApp(image: value.image)
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    private func shareImage(image: UIImage) {
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        if let topVC = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first?.windows.first?.rootViewController {
+            topVC.present(activityVC, animated: true)
+        }
+    }
+    
+    private func shareToWhatsApp(image: UIImage) {
+        guard let imageData = image.pngData() else { return }
+        let tempFile = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("share.png")
+        do {
+            try imageData.write(to: tempFile)
+            let dic = UIDocumentInteractionController(url: tempFile)
+            dic.uti = "net.whatsapp.image"
+            if let topVC = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first?.windows.first?.rootViewController {
+                dic.presentOpenInMenu(from: topVC.view.bounds, in: topVC.view, animated: true)
+            }
+        } catch {
+            print("Error sharing to WhatsApp: \(error)")
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bannerImageView.image = nil
+        currentImageUrl = nil
     }
 }

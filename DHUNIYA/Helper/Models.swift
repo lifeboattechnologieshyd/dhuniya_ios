@@ -439,7 +439,7 @@ struct BannerModel: Decodable {
     let priority: Int
     let name: String
     let images: [String?]?
-    let videos: String?
+    let videos: [String?]?
     let content_type: String
     let banner_type: String
     let status: String
@@ -449,7 +449,7 @@ struct BannerModel: Decodable {
     let updation_date: String
     let updated_by: String
 }
-// MARK: - Send OTP Response
+// MARK:  Send OTP Response
 struct SendOtpInfo: Codable {
     let message: String?
     
@@ -458,7 +458,7 @@ struct SendOtpInfo: Codable {
     }
 }
 
-// MARK: - Login/Verify OTP Response
+// MARK: Login/Verify OTP Response
 struct LoginResponse: Codable {
     let refreshToken: String
     let accessToken: String
@@ -471,7 +471,7 @@ struct LoginResponse: Codable {
     }
 }
 
-// MARK: - Profile Details (keep existing, ensure all fields are there)
+// MARK: Profile Details (keep existing, ensure all fields are there)
 struct ProfileDetails: Codable {
     let id: Int?
     let full_name: String?
