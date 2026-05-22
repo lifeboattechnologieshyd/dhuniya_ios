@@ -135,10 +135,10 @@ class FeelsViewController: UIViewController, UICollectionViewDelegate, UICollect
     // MARK: Navigation
     
     func navigateToPlayer(index: Int) {
-        let stbd = UIStoryboard(name: "Feels", bundle: nil)
-        let vc = stbd.instantiateViewController(identifier: "FeelPlayerController") as! FeelPlayerController
-        vc.selected_feel_item = items[index]
-        navigationController?.pushViewController(vc, animated: true)
+        let pageVC = FeelsPageViewController(transitionStyle: .scroll, navigationOrientation: .vertical, options: nil)
+        pageVC.items = self.items
+        pageVC.currentIndex = index
+        navigationController?.pushViewController(pageVC, animated: true)
     }
     
     // MARK: API Call

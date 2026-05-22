@@ -62,7 +62,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func userIsLoggedIn() -> Bool {
-        return UserDefaults.standard.bool(forKey: "isLoggedIn")
+        return UserDefaults.standard.bool(forKey: "isUserLoggedIn")
     }
 
     // MARK: No Internet

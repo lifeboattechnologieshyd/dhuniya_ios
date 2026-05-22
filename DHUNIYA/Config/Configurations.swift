@@ -72,12 +72,13 @@ struct API {
     static let INITIATE_TRANSFER = BASE_URL + "userservice/initiateTransfer"
     static let PROFILE = BASE_URL + "userservice/profile"
     
-    static let QUOTES_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=QUOTE&date=2025-09-19"
-    static let CARTOONS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=CARTOON&offset=1&limit=25"
-    static let BANNERS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=QUOTE&date=2025-09-19"
-    
+    static let QUOTES_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=QUOTE&offset=1&limit=200"
+    static let CARTOONS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=CARTOON&offset=1&limit=50"
+    static let BANNERS_API = BASE_URL + "news/banners?banner_type=IMAGE&content_type=BANNER&offset=1&limit=50"
+
     static let SENDOTP = BASE_URL + "userservice/authentication/sendotp"
     static let LOGIN = BASE_URL + "userservice/authentication"
+    static let ADS_API = BASE_URL + "advertisement/ads"
 }
 
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,7 +32,7 @@
                                         <attributedString key="attributedText">
                                             <fragment content="Enter OTP">
                                                 <attributes>
-                                                    <font key="NSFont" size="18" name="Lexend-SemiBold"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -53,7 +53,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkt-aG-WR9">
-                                        <rect key="frame" x="84" y="169" width="89" height="19"/>
+                                        <rect key="frame" x="84" y="169" width="85.666666666666686" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="VcS-CZ-8bd"/>
                                         </constraints>
@@ -61,7 +61,7 @@
                                             <fragment content="OTP sent to">
                                                 <attributes>
                                                     <color key="NSColor" red="0.025844381313131271" green="0.025844381313131271" blue="0.025844381313131271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="Lexend-Regular"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -69,7 +69,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="+91 7780595740" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bef-AO-jLh">
-                                        <rect key="frame" x="177" y="168.33333333333337" width="124.33333333333331" height="20"/>
+                                        <rect key="frame" x="173.66666666666666" y="168.33333333333337" width="124.33333333333334" height="20"/>
                                         <fontDescription key="fontDescription" name="Lexend-Medium" family="Lexend" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -155,7 +155,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSq-iR-GEs">
-                                        <rect key="frame" x="233.66666666666666" y="288" width="127.33333333333334" height="32"/>
+                                        <rect key="frame" x="229" y="288" width="132" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="UWD-ds-cLr"/>
                                         </constraints>
@@ -166,14 +166,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya0-I7-8qK">
-                                        <rect key="frame" x="215.33333333333337" y="288" width="128" height="32"/>
+                                        <rect key="frame" x="210.66666666666669" y="288" width="132.66666666666669" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="x8k-9z-W9h"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Resend OTP (23s)">
                                                 <attributes>
-                                                    <font key="NSFont" size="16" name="Lexend-Light"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -181,14 +181,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbK-Ls-GWZ">
-                                        <rect key="frame" x="49.000000000000014" y="294" width="161.33333333333337" height="19"/>
+                                        <rect key="frame" x="49" y="294" width="156.66666666666663" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="c8W-tS-Inq"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Did not receive OTP? ">
                                                 <attributes>
-                                                    <font key="NSFont" size="16" name="Lexend-Light"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -207,7 +207,7 @@
                                                 <fragment content="GO BACK">
                                                     <attributes>
                                                         <color key="NSColor" red="0.0036300505050504972" green="0.0036300505050504972" blue="0.0036300505050504972" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="16" name="Lexend-Light"/>
+                                                        <font key="NSFont" metaFont="system" size="16"/>
                                                         <font key="NSOriginalFont" size="12" name="Helvetica"/>
                                                     </attributes>
                                                 </fragment>
@@ -232,7 +232,7 @@
                                                 <fragment content="PROCEED">
                                                     <attributes>
                                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                                        <font key="NSFont" metaFont="system" size="16"/>
                                                         <font key="NSOriginalFont" size="12" name="Helvetica"/>
                                                     </attributes>
                                                 </fragment>
@@ -310,9 +310,9 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <visualEffectView opaque="NO" alpha="0.30000001192092901" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cd5-8d-zBK">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="418"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="359"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jaj-aW-fxD">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="418"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="359"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -360,13 +360,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

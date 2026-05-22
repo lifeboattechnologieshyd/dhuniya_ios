@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import YouTubeiOSPlayerHelper
+import Kingfisher
 
 class NewsCell: UITableViewCell {
     
@@ -22,6 +24,9 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var newsTitle: UILabel!
     @IBOutlet weak var NewsImg: UIImageView!
     
+    private var ytPlayerView: YTPlayerView?
+    private var currentVideoID: String?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -33,6 +38,20 @@ class NewsCell: UITableViewCell {
         
         // Comment button action
         commentButton.addTarget(self, action: #selector(commentTapped), for: .touchUpInside)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cleanupPlayer()
+        NewsImg.isHidden = false
+        NewsImg.image = nil
+    }
+    
+    private func cleanupPlayer() {
+        ytPlayerView?.stopVideo()
+        ytPlayerView?.removeFromSuperview()
+        ytPlayerView = nil
+        currentVideoID = nil
     }
     func updateLikeUI(isLiked: Bool) {
         if isLiked {
@@ -115,23 +134,64 @@ class NewsCell: UITableViewCell {
         }
     }
     
-    func setNewsImage(from urlString: String?) {
-        if let urlStr = urlString, !urlStr.isEmpty, let url = URL(string: urlStr) {
-            // Load image from URL
-            URLSession.shared.dataTask(with: url) { data, _, _ in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        self.NewsImg.image = UIImage(data: data)
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.NewsImg.image = UIImage(named: "news_placeholder") // default image
-                    }
-                }
-            }.resume()
-        } else {
-            // If URL is nil or empty, use default image
-            self.NewsImg.image = UIImage(named: "news_placeholder")
+    func setNewsImage(from model: NewsModel) {
+        cleanupPlayer()
+        
+        // Check for YouTube URL first
+        if let youtubeUrls = model.youtube_url, let firstUrl = youtubeUrls.first, !firstUrl.isEmpty {
+            if let videoID = extractYouTubeID(from: firstUrl) {
+                setupYouTubePlayer(videoID: videoID)
+                return
+            }
         }
+        
+        // Fallback to image
+        NewsImg.isHidden = false
+        if let images = model.image, let firstImage = images.first, let url = URL(string: firstImage) {
+            NewsImg.kf.setImage(with: url, placeholder: UIImage(named: "news_placeholder"))
+        } else {
+            NewsImg.image = UIImage(named: "news_placeholder")
+        }
+    }
+    
+    private func setupYouTubePlayer(videoID: String) {
+        currentVideoID = videoID
+        
+        let player = YTPlayerView()
+        player.backgroundColor = .black
+        player.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(player)
+        
+        NSLayoutConstraint.activate([
+            player.topAnchor.constraint(equalTo: NewsImg.topAnchor),
+            player.leadingAnchor.constraint(equalTo: NewsImg.leadingAnchor),
+            player.trailingAnchor.constraint(equalTo: NewsImg.trailingAnchor),
+            player.bottomAnchor.constraint(equalTo: NewsImg.bottomAnchor)
+        ])
+        
+        ytPlayerView = player
+        NewsImg.isHidden = true // Hide image when video is present
+        
+        player.load(withVideoId: videoID, playerVars: [
+            "playsinline": 1,
+            "rel": 0,
+            "modestbranding": 1,
+            "controls": 1
+        ])
+    }
+    
+    private func extractYouTubeID(from url: String) -> String? {
+        if url.contains("youtu.be/") {
+            return url.components(separatedBy: "youtu.be/").last?.components(separatedBy: "?").first
+        }
+        if url.contains("youtube.com/watch") {
+            return URLComponents(string: url)?
+                .queryItems?
+                .first(where: { $0.name == "v" })?.value
+        }
+        if url.contains("youtube.com/embed/") {
+            return url.components(separatedBy: "youtube.com/embed/").last?.components(separatedBy: "?").first
+        }
+        return nil
     }
 }

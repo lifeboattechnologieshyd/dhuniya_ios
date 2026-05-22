@@ -1,10 +1,3 @@
-//
-//  LoginVC.swift
-//  DHUNIYA
-//
-//  Created by Lifeboat on 22/11/25.
-//
-
 import UIKit
 
 class LoginVC: UIViewController {
@@ -38,8 +31,22 @@ class LoginVC: UIViewController {
         isChecked = false
         btnCheckBox.setImage(UIImage(named: "Unchecked_box"), for: .normal)
         updateProceedButtonState()
+        
+        // Reset flags
+        Session.shared.isForgotPasswordFlow = false
+        Session.shared.isNewUser = false
+        
+        // Dismiss keyboard on tap
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
     }
     
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - Send OTP API
     func sendOtp() {
         let payload: [String: Any] = [
             "mobile": self.textFieldPhoneNumber.text ?? ""
@@ -52,6 +59,9 @@ class LoginVC: UIViewController {
                 case .success(let response):
                     if response.success {
                         Session.shared.mobileNumber = self.textFieldPhoneNumber.text ?? ""
+                        
+                        // ✅ ALWAYS Go to OTP Screen
+                        Session.shared.isNewUser = !(response.info?.is_login_with_password ?? false)
                         self.navigateToOtpVC()
                     } else {
                         self.showAlert(message: response.description)
@@ -63,13 +73,26 @@ class LoginVC: UIViewController {
             }
         }
     }
+    
+    // MARK: - Navigate to OTP VC (New User)
     func navigateToOtpVC() {
         let storyboard = UIStoryboard(name: "OTP", bundle: nil)
         if let otpVC = storyboard.instantiateViewController(withIdentifier: "OtpVC") as? OtpVC {
             otpVC.mobileNumber = self.textFieldPhoneNumber.text ?? ""
-            otpVC.modalPresentationStyle = .overCurrentContext
+            otpVC.modalPresentationStyle = .overFullScreen  // ✅ Set BEFORE presenting
             otpVC.modalTransitionStyle = .crossDissolve
             self.present(otpVC, animated: true)
+        }
+    }
+    
+    // MARK: - Navigate to Enter Password VC (Existing User)
+    func navigateToEnterPasswordVC() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let passwordVC = storyboard.instantiateViewController(withIdentifier: "EnterPasswordVC") as? EnterPasswordVC {
+            passwordVC.mobileNumber = self.textFieldPhoneNumber.text ?? ""
+            passwordVC.modalPresentationStyle = .overFullScreen  // ✅ Set BEFORE presenting
+            passwordVC.modalTransitionStyle = .crossDissolve
+            self.present(passwordVC, animated: true)
         }
     }
     
@@ -89,7 +112,6 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func btnProceedTapped(_ sender: UIButton) {
-        
         guard let number = textFieldPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               !number.isEmpty else {
             showAlert(message: "Please enter your phone number")
@@ -108,6 +130,4 @@ class LoginVC: UIViewController {
         
         self.sendOtp()
     }
-    
-   
 }

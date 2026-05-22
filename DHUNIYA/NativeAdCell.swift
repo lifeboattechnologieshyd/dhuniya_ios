@@ -38,8 +38,8 @@ class FullScreenNativeAdCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        backgroundColor = .black
-        contentView.backgroundColor = .black
+        backgroundColor = .white
+        contentView.backgroundColor = .white
         setupLayout()
     }
     
@@ -50,12 +50,12 @@ class FullScreenNativeAdCell: UITableViewCell {
     private func setupLayout() {
         // 1. Top Container (Ad) - 52% Height with top padding
         contentView.addSubview(topContainer)
-        topContainer.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
+        topContainer.backgroundColor = .systemGray6
         topContainer.translatesAutoresizingMaskIntoConstraints = false
         
         // 2. Bottom Container (News) - Remaining Height
         contentView.addSubview(bottomContainer)
-        bottomContainer.backgroundColor = .black
+        bottomContainer.backgroundColor = .white
         bottomContainer.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -107,14 +107,14 @@ class FullScreenNativeAdCell: UITableViewCell {
         
         // Headline
         adHeadline.font = UIFont.boldSystemFont(ofSize: 16)
-        adHeadline.textColor = .white
+        adHeadline.textColor = .black
         adHeadline.numberOfLines = 2
         adHeadline.translatesAutoresizingMaskIntoConstraints = false
         nativeAdView.addSubview(adHeadline)
         
         // Advertiser Label
         advertiserLabel.font = UIFont.systemFont(ofSize: 12)
-        advertiserLabel.textColor = .lightGray
+        advertiserLabel.textColor = .darkGray
         advertiserLabel.translatesAutoresizingMaskIntoConstraints = false
         nativeAdView.addSubview(advertiserLabel)
         
@@ -163,13 +163,13 @@ class FullScreenNativeAdCell: UITableViewCell {
     }
     
     private func setupLoadingUI() {
-        loadingIndicator.color = .white
+        loadingIndicator.color = .gray
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         loadingLabel.text = "Loading Ad..."
         loadingLabel.font = UIFont.systemFont(ofSize: 14)
-        loadingLabel.textColor = .lightGray
+        loadingLabel.textColor = .darkGray
         loadingLabel.textAlignment = .center
         loadingLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -189,7 +189,7 @@ class FullScreenNativeAdCell: UITableViewCell {
         // "Recommended News" Header
         recommendedTitle.text = "RECOMMENDED NEWS"
         recommendedTitle.font = UIFont.systemFont(ofSize: 13, weight: .heavy)
-        recommendedTitle.textColor = .lightGray
+        recommendedTitle.textColor = .darkGray
         recommendedTitle.translatesAutoresizingMaskIntoConstraints = false
         bottomContainer.addSubview(recommendedTitle)
         
@@ -272,14 +272,14 @@ class FullScreenNativeAdCell: UITableViewCell {
         // Title on LEFT
         let titleLbl = UILabel()
         titleLbl.text = news.title
-        titleLbl.textColor = .white
+        titleLbl.textColor = .black
         titleLbl.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         titleLbl.numberOfLines = 2
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         
         // Divider Line
         let divider = UIView()
-        divider.backgroundColor = UIColor(white: 0.25, alpha: 1.0)
+        divider.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
         divider.translatesAutoresizingMaskIntoConstraints = false
         
         row.addSubview(imgView)

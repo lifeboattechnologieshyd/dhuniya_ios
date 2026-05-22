@@ -20,6 +20,7 @@ class FeelPlayerController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var selected_feel_item: FeelItem!
+    var pageIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,12 @@ class FeelPlayerController: UIViewController {
         super.viewDidAppear(animated)
         // Extra safety to bring controls to front
         bringControlsToFront()
+        playerView.playVideo()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        playerView.pauseVideo()
     }
     
     private func setupUI() {

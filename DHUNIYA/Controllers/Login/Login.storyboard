@@ -20,11 +20,11 @@
                                 <rect key="frame" x="0.0" y="442" width="393" height="410"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3f-18-dqU">
-                                        <rect key="frame" x="155.66666666666666" y="14.333333333333316" width="82" height="22.666666666666671"/>
+                                        <rect key="frame" x="159.33333333333334" y="18.333333333333314" width="74.666666666666657" height="21.666666666666671"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Welcome">
                                                 <attributes>
-                                                    <font key="NSFont" size="18" name="Lexend-SemiBold"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -32,14 +32,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ha0-Zz-Zpf">
-                                        <rect key="frame" x="0.0" y="57" width="393" height="1"/>
+                                        <rect key="frame" x="0.0" y="60" width="393" height="1"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="pfQ-Ui-RgT"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OzE-YK-XmD">
-                                        <rect key="frame" x="357" y="15.666666666666686" width="20" height="20"/>
+                                        <rect key="frame" x="357" y="19" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="9Pp-2W-7f2"/>
                                             <constraint firstAttribute="height" constant="20" id="AXx-g3-Dcr"/>
@@ -51,12 +51,12 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMb-WO-VyT">
-                                        <rect key="frame" x="16" y="73" width="361" height="40"/>
+                                        <rect key="frame" x="16" y="76" width="361" height="38.333333333333343"/>
                                         <attributedString key="attributedText">
                                             <fragment content="You’re one step away form entering the New World of Dhuniya">
                                                 <attributes>
                                                     <color key="NSColor" red="0.018071338383838342" green="0.018071338383838342" blue="0.018071338383838342" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="Lexend-Regular"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -64,30 +64,30 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30a-9C-oUZ">
-                                        <rect key="frame" x="16" y="149" width="173.33333333333334" height="17.666666666666657"/>
+                                        <rect key="frame" x="16" y="150.33333333333337" width="169" height="17"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Enter your Mobile Number">
                                                 <attributes>
-                                                    <font key="NSFont" size="14" name="Lexend-Light"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TextfieldView" translatesAutoresizingMaskIntoConstraints="NO" id="1pD-Ks-C2u">
-                                        <rect key="frame" x="16" y="178.66666666666663" width="361" height="52"/>
+                                        <rect key="frame" x="16" y="179.33333333333337" width="361" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="POT-VF-3XV"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgK-Ji-Cbo" userLabel="+91">
-                                        <rect key="frame" x="32" y="204.66666666666663" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="32" y="205.33333333333337" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Enter Your Number" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="bZQ-HI-g5a">
-                                        <rect key="frame" x="44" y="184.66666666666663" width="317" height="40"/>
+                                        <rect key="frame" x="44" y="185.33333333333337" width="317" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ASb-F3-4Aq"/>
                                         </constraints>
@@ -95,7 +95,7 @@
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfw-Vq-TOz">
-                                        <rect key="frame" x="16" y="265.66666666666663" width="16" height="16"/>
+                                        <rect key="frame" x="16" y="266.33333333333337" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="6uA-sj-015"/>
                                             <constraint firstAttribute="width" constant="16" id="s7n-l7-MJ8"/>
@@ -107,11 +107,11 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMh-T5-1vC">
-                                        <rect key="frame" x="44" y="256" width="333" height="35"/>
+                                        <rect key="frame" x="44" y="257.33333333333337" width="333" height="33.666666666666686"/>
                                         <attributedString key="attributedText">
                                             <fragment content="I have read &amp; agree to Terms of Use and Privacy Policy">
                                                 <attributes>
-                                                    <font key="NSFont" size="14" name="Lexend-Regular"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -128,7 +128,7 @@
                                             <attributedString key="attributedTitle">
                                                 <fragment content="PROCEED">
                                                     <attributes>
-                                                        <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                                        <font key="NSFont" metaFont="system" size="16"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
@@ -241,14 +241,14 @@
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3i-CM-Fbq">
-                                        <rect key="frame" x="126.66666666666667" y="17" width="139.66666666666663" height="23"/>
+                                        <rect key="frame" x="134.33333333333334" y="17" width="124.33333333333334" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="Bpi-32-925"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Enter Password">
                                                 <attributes>
-                                                    <font key="NSFont" size="18" name="Lexend-SemiBold"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -275,14 +275,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wlE-8Y-gey">
-                                        <rect key="frame" x="139.33333333333334" y="77" width="114.66666666666666" height="20"/>
+                                        <rect key="frame" x="143" y="77" width="107.33333333333331" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="JNL-lC-McO"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Welcome Back">
                                                 <attributes>
-                                                    <font key="NSFont" size="16" name="Lexend-Regular"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -290,11 +290,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHK-tU-uP3">
-                                        <rect key="frame" x="150" y="188" width="93.333333333333314" height="20"/>
+                                        <rect key="frame" x="154.33333333333334" y="188" width="84.666666666666657" height="20"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Musharaf12">
                                                 <attributes>
-                                                    <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -319,7 +319,7 @@
                                             <attributedString key="attributedTitle">
                                                 <fragment content="PROCEED">
                                                     <attributes>
-                                                        <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                                        <font key="NSFont" metaFont="system" size="16"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
@@ -337,7 +337,7 @@
                                                 <fragment content="GO BACK">
                                                     <attributes>
                                                         <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <font key="NSFont" size="16" name="Lexend-SemiBold"/>
+                                                        <font key="NSFont" metaFont="system" size="16"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
@@ -485,10 +485,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.53333333333333333" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

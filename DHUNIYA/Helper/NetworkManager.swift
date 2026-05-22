@@ -107,9 +107,10 @@ class NetworkManager {
             if !token.isEmpty {
                 request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }
-            // If token is empty and auth is required, you might want to skip the request
-            // or handle it differently based on your app's needs
         }
+        
+        // ✅ NEW: Add language header for all requests based on session preference
+        request.setValue(Session.shared.api_language, forHTTPHeaderField: "language")
 
         print("🌐 API Request: \(method.rawValue) \(url)")
         
@@ -267,7 +268,8 @@ class Session {
         UserDefaults.standard.synchronize()
     }
     
-    
+    var isNewUser: Bool = false
+
     var mobileNumber: String {
         get { UserDefaults.standard.string(forKey: "mobileNumber") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "mobileNumber") }
@@ -275,6 +277,14 @@ class Session {
     var news_language: String {
         get { UserDefaults.standard.string(forKey: "language") ?? "TELUGU" }
         set { UserDefaults.standard.set(newValue, forKey: "language") }
+    }
+    
+    var api_language: String {
+        let lang = news_language.lowercased()
+        if lang == "en" || lang == "english" {
+            return "ENGLISH"
+        }
+        return "TELUGU"
     }
     
     var userName: String {
@@ -310,7 +320,7 @@ class Session {
                 UserDefaults.standard.removeObject(forKey: "UserLocation")
             }
         }
-    }
+       }
     
 }
 extension NetworkManager {

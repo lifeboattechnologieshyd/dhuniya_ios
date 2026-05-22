@@ -1,9 +1,3 @@
-//
-//  EnterPasswordVC.swift
-//  DHUNIYA
-//
-//  Created by Lifeboat on 22/11/25.
-//
 import UIKit
 
 class EnterPasswordVC: UIViewController {
@@ -24,19 +18,14 @@ class EnterPasswordVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Prevent auto-dismiss on background tap
         self.modalPresentationStyle = .overFullScreen
-        self.isModalInPresentation = true   // Important: prevents swipe-down & tap-out dismissal
-
-        // Semi-transparent background
+        self.isModalInPresentation = true
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         
-         
         if let num = mobileNumber {
-            lblUsername.text = num
+            lblUsername.text = "+91 \(num)"
         }
         
-        // Optional: tap outside to dismiss keyboard, not VC
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGesture)
@@ -46,159 +35,139 @@ class EnterPasswordVC: UIViewController {
         self.view.endEditing(true)
     }
 
-
-
-    // Central dismiss function
-    func dismissToProfile() {
+    func dismissToHome() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }
-        
-        // Dismiss all modals
         window.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
-        dismissToProfile()
+        dismissToHome()
     }
     
     @IBAction func btnGoBackTapped(_ sender: UIButton) {
-        dismissToProfile()
+        self.dismiss(animated: true)
     }
     
-    // Forgot Password Button
+    // MARK: - Forgot Password → Send OTP & Navigate
     @IBAction func btnForgotPasswordTapped(_ sender: UIButton) {
-        // Mark this as forgot password flow
         Session.shared.isForgotPasswordFlow = true
-        requestForgotPassword() // Call API to send OTP
+        sendOtpForForgotPassword()
     }
     
-    // MARK: Proceed → Go to OTP VC
+    // MARK: - Proceed → Login with Password
     @IBAction func btnProceedTapped(_ sender: UIButton) {
         let password = txtFieldPassword.text ?? ""
         if password.isEmpty {
             showCustomAlert(message: "Please enter your password")
             return
         }
-        checkLogin()
+        loginWithPassword()
     }
     
-    // Navigate to OTP screen
-    func goToOtpVC() {
+    // MARK: - Send OTP for Forgot Password
+    func sendOtpForForgotPassword() {
+        let params: [String: Any] = [
+            "mobile": mobileNumber ?? ""
+        ]
+        
+        print("📤 Sending OTP for forgot password to: \(mobileNumber ?? "")")
+        
+        // ✅ USE SENDOTP API (same as login flow)
+        NetworkManager.shared.requestWithoutAuth(urlString: API.SENDOTP, method: .POST, parameters: params) { (result: Result<APIResponse<SendOtpInfo>, NetworkError>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if response.success {
+                        print("✅ OTP sent successfully for forgot password")
+                        self.navigateToOtpVC()
+                    } else {
+                        print("❌ OTP send failed: \(response.description)")
+                        self.showCustomAlert(message: response.description)
+                    }
+                case .failure(let error):
+                    print("❌ Network error: \(error.localizedDescription)")
+                    self.showCustomAlert(message: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    // MARK: - Navigate to OTP VC
+    func navigateToOtpVC() {
         let storyboard = UIStoryboard(name: "OTP", bundle: nil)
         if let otpVC = storyboard.instantiateViewController(withIdentifier: "OtpVC") as? OtpVC {
             otpVC.mobileNumber = mobileNumber
-            otpVC.modalPresentationStyle = .overCurrentContext
+            otpVC.modalPresentationStyle = .overFullScreen
             otpVC.modalTransitionStyle = .crossDissolve
             self.present(otpVC, animated: true)
         }
     }
     
-    // Forgot Password API Request
-    func requestForgotPassword() {
-        let params = [
-            "mobile": mobileNumber ?? ""
+    // MARK: - Login with Password API
+    func loginWithPassword() {
+        let payload: [String: Any] = [
+            "mobile": self.mobileNumber ?? "",
+            "password": self.txtFieldPassword.text ?? ""
         ]
         
-        NetworkManager.shared.request(urlString: API.FORGOT_PASSWORD,
-                                      method: .POST,
-                                      parameters: params) { (result: Result<APIResponse<EmptyResponse>, NetworkError>) in
-            switch result {
-            case .success(let response):
-                if response.success {
-                    DispatchQueue.main.async {
-                        self.goToOtpVC() // Navigate to OTP VC after OTP sent
-                    }
-                } else {
-                    DispatchQueue.main.async {
+        NetworkManager.shared.requestWithoutAuth(urlString: API.LOGIN, method: .POST, parameters: payload) { [weak self] (result: Result<APIResponse<LoginResponse>, NetworkError>) in
+            
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if response.success, let data = response.info {
+                        self.saveSessionData(data: data)
+                        self.navigateToHomeVC()
+                    } else {
                         self.showCustomAlert(message: response.description)
                     }
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
+                    
+                case .failure(let error):
                     self.showCustomAlert(message: error.localizedDescription)
                 }
             }
         }
     }
     
-    func checkLogin() {
-        let payload: [String:Any] = [
-            "mobile" : self.mobileNumber ?? "",
-            "password" : self.txtFieldPassword.text ?? ""
-        ]
+    // MARK: - Save Session Data
+    func saveSessionData(data: LoginResponse) {
+        Session.shared.isUserLoggedIn = true
+        Session.shared.mobileNumber = self.mobileNumber ?? ""
+        Session.shared.userName = data.profileDetails?.username ?? ""
+        Session.shared.accesstoken = data.accessToken
+        Session.shared.refreshtoken = data.refreshToken
+        Session.shared.userDetails = data.profileDetails
+        Session.shared.totalEarnings = data.profileDetails?.total_earnings ?? 0.0
         
-        NetworkManager.shared.request(
-            urlString: API.LOGIN,
-            method: .POST,
-            parameters: payload
-        ) { [weak self] (result: Result<APIResponse<LoginResponse>, NetworkError>) in
-            
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let response):
-                if response.success, let data = response.info {
-                    
-                    Session.shared.isUserLoggedIn = true
-                    Session.shared.mobileNumber = self.mobileNumber ?? ""
-                    Session.shared.userName = data.profileDetails?.username ?? ""
-                    Session.shared.accesstoken = data.accessToken
-                    Session.shared.refreshtoken = data.refreshToken
-                    Session.shared.userDetails = data.profileDetails
-                    
-                    Session.shared.totalEarnings = data.profileDetails?.total_earnings ?? 0.0
-
-                    // 🚀 SAVE REPORTER ID + NAME
-                    if let profile = data.profileDetails {
-                        UserSession.shared.reporterId = profile.id
-                        UserSession.shared.reporterName = profile.username ?? ""
-
-                        print("🆔 Reporter ID Saved: \(profile.id)")
-                        print("👤 Reporter Name Saved: \(profile.username ?? "")")
-                    }
-                    
-                    // Navigate
-                    DispatchQueue.main.async {
-                        self.navigateToProfileVC()
-                    }
-
-                } else {
-                    DispatchQueue.main.async {
-                        self.showCustomAlert(message: response.description)
-                    }
-                }
-                
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.showCustomAlert(message: error.localizedDescription)
-                }
-            }
+        if let roles = data.profileDetails?.user_role {
+            Session.shared.userroles = roles
+        }
+        
+        if let profile = data.profileDetails {
+            UserSession.shared.reporterId = profile.id
+            UserSession.shared.reporterName = profile.username ?? ""
         }
     }
 
-    // In EnterPasswordVC.swift
-
-    func navigateToProfileVC() {
-        DispatchQueue.main.async {
-            // Dismiss any modals
-            self.view.window?.rootViewController?.dismiss(animated: false, completion: {
+    // MARK: - Navigate to Home
+    func navigateToHomeVC() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            
+            window.rootViewController?.dismiss(animated: false) {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 
-                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                   let window = windowScene.windows.first {
+                if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
+                    tabBarVC.selectedIndex = 0
+                    window.rootViewController = tabBarVC
+                    window.makeKeyAndVisible()
                     
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    
-                    if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
-                        
-                        tabBarVC.selectedIndex = 4
-                        
-                        window.rootViewController = tabBarVC
-                        window.makeKeyAndVisible()
-                        
-                        NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
-                    }
+                    NotificationCenter.default.post(name: Notification.Name("profile_reload"), object: nil)
                 }
-            })
+            }
         }
     }
     

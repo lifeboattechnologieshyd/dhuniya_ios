@@ -12,12 +12,14 @@ struct NewsModel: Codable {
     let title: String
     let description: String
     let image: [String]?       // <-- changed to array
+    let video: [String]?
+    let youtube_url: [String]?
     let created_date: String
     var likes_count: Int
     var is_liked: Bool?
     let language: String
     var comments_count: Int
-    let is_global: Bool
+    let is_global: Bool?
 
 }
 
@@ -451,11 +453,10 @@ struct BannerModel: Decodable {
 }
 // MARK:  Send OTP Response
 struct SendOtpInfo: Codable {
-    let message: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case message
-    }
+    var message: String?
+    var is_login_with_password: Bool?
+    var profile_image: String?
+    var username: String?
 }
 
 // MARK: Login/Verify OTP Response
@@ -509,4 +510,21 @@ struct ProfileDetails: Codable {
     let updated_by: String?
     let groups: [String]?
     let user_permissions: [String]?
+}
+struct AdvertisementModel: Codable {
+    let id: Int?
+    let title: String?
+    let description: String?
+    let images: [String]?
+    let destination_url: String?
+    let whatsapp_number: String?
+    let mobile_number: String?
+    let position: Int?
+    let display_type: String?
+    let action_title: String?
+}
+
+struct AdvertisementResponse: Codable {
+    let success: Bool
+    let info: [AdvertisementModel]?
 }
